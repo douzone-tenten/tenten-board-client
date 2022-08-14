@@ -3,6 +3,8 @@ package com.douzonetenten.tentenboardclient.view;
 import com.douzonetenten.tentenboardclient.controller.UserController;
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.view.AlertView.displayError;
+
 public class MainView {
     public void start() {
         UserController userController = new UserController();
@@ -21,7 +23,7 @@ public class MainView {
              * 예외처리
              */
             if (!(selectNum.equals("9") || selectNum.equals("1") || selectNum.equals("2"))) {
-                System.out.println("번호를 잘못 입력했습니다. 다시 입력해주세요.");
+                displayError("메뉴를 잘못 입력하셨습니다.");
             }
 
             /**
@@ -31,6 +33,12 @@ public class MainView {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
+        }
+    }
+
+    public static void clearConsole(){
+        for (int i = 0; i < 100; i++) {
+            System.out.println("");
         }
     }
 }

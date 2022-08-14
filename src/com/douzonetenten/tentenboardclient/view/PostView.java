@@ -5,19 +5,37 @@ import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.view.MainView.clearConsole;
+
 public class PostView {
     private PostController postController = new PostController();
     private Scanner scanner = new Scanner(System.in);
     public void insertPost(){
+        /**
+         * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
+         */
+        clearConsole();
         PostDto postDto = new PostDto();
-        System.out.println("포스트를 생성합니다.");
-        System.out.println("포스트의 제목이 뭔가요?");
-        String postTitle = scanner.next();
-        System.out.println("포스트의 내용이 뭔가요?");
-        String postBody = scanner.next();
+        System.out.print("제목을 입력하세요 : ");
+        String postTitle = scanner.nextLine();
+        System.out.print("글 내용을 입력하세요.");
+        String postBody = scanner.nextLine();
         postDto.setPostTitle(postTitle);
         postDto.setPostBody(postBody);
-        postController.insertPost(postDto);
+        clearConsole();
+        System.out.println(postDto.getPostTitle());
+        System.out.println(postDto.getPostBody());
+        System.out.println("위 내용이 맞나요?");
+        System.out.println("Y : 등록하기");
+        System.out.println("B : 취소하기");
+
+        String select = scanner.next();
+        if (select.equals("Y")) {
+            postController.insertPost(postDto);
+        }
+        if (select.equals("B")) {
+            System.out.println("글 작성을 취소합니다.");
+        }
     }
 
     public void deletePost(){

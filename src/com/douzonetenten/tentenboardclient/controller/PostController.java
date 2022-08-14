@@ -16,18 +16,17 @@ public class PostController {
         postService.deletePost(postNo);
     }
 
-    public void findAllByPost(){
+    public void findAllByPost() {
         ArrayList<PostDto> postDtoArrayList = postService.findAllByPost();
 
-        if (postDtoArrayList.isEmpty()){
-            System.out.println("조회할 포스트가 없어용.");
+        if (postDtoArrayList.isEmpty()) {
+            System.out.println("조회할 포스트가 없습니다.");
         }
 
-        if (!(postDtoArrayList.isEmpty())){
-            for(PostDto postDto : postDtoArrayList){
+        if (!(postDtoArrayList.isEmpty())) {
+            for (PostDto postDto : postDtoArrayList) {
                 System.out.println(postDto.toString());
             }
         }
-
     }
 }

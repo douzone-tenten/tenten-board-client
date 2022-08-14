@@ -1,24 +1,25 @@
 package com.douzonetenten.tentenboardclient.dto;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class UserDto {
     /**
      * Wrapper Class Type
      */
-    private Long memberNo; // user 고유값 Auto Increment
+    private Long userNo; // user 고유값 Auto Increment
     private String username; // ID
     private String password; // 비밀번호
     private String name; // 실명
     private String department; // 부서
-    private LocalDateTime createdAt; // Date class 보다는 LocalDateTime class 사용 적극권장.
+    private Timestamp createdAt; // Date class 보다는 LocalDateTime class 사용 적극권장.
 
-    public Long getMemberNo() {
-        return memberNo;
+    public Long getUserNo() {
+        return userNo;
     }
 
-    public void setMemberNo(Long memberNo) {
-        this.memberNo = memberNo;
+    public void setUserNo(Long userNo) {
+        this.userNo = userNo;
     }
 
     public String getUsername() {
@@ -53,14 +54,14 @@ public class UserDto {
         this.department = department;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
     @Override
     public String toString() {
         return "UserDto{" +
-                "memberNo=" + memberNo +
+                "memberNo=" + userNo +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
@@ -69,7 +70,7 @@ public class UserDto {
                 '}';
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }

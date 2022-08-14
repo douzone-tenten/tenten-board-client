@@ -5,12 +5,12 @@ import com.douzonetenten.tentenboardclient.view.PostView;
 
 public class TentenBoardApplication {
     public static void main(String[] args) {
-//        MainView mainView = new MainView();
-        PostView postView = new PostView();
+        MainView mainView = new MainView();
+//        PostView postView = new PostView();
 //        postView.insertPost();
 //        postView.deletePost();
-        postView.findAllByPost();
+//        postView.findAllByPost();
 
-//        mainView.start();
+        mainView.start();
     }
 }
