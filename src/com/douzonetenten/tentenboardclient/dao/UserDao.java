@@ -1,8 +1,12 @@
 package com.douzonetenten.tentenboardclient.dao;
 
+import com.douzonetenten.tentenboardclient.dto.UserDto;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDao {
+
 
 //    public void findAll(Connection connection) {
 //        try (connection = DriverManager.getConnection(url, username, password)) {
@@ -14,32 +18,31 @@ public class UserDao {
 //            }
 //        } catch (SQLException e) {
 //            throw new RuntimeException(e);
+//    preparedStatement = connection.prepareStatement("DELETE FROM user where name = '김민준'");
 //        }
 //    }
 
-    public int createUser(Connection connection) {
-
-        PreparedStatement preparedStatement;
-
-        int resultSet;
+    public int insertUser(Connection connection, UserDto userDto) {
+        /**
+         * UTC 적용필요
+         */
         try {
-            preparedStatement = connection.prepareStatement("DELETE FROM user where name = '김민준'");
+            PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement("INSERT INTO user(username,password,department,name,created_at) values (?,?,?,?,?)");
-            preparedStatement.setString(1, "kimminjun");
-            preparedStatement.setString(2, "minjun");
-            preparedStatement.setString(3, "1반");
-            preparedStatement.setString(4, "김민준");
-            preparedStatement.setDate(5, new Date(new java.util.Date().getTime()));
+            preparedStatement.setString(1, userDto.getUsername());
+            preparedStatement.setString(2, userDto.getPassword());
+            preparedStatement.setString(3, userDto.getDepartment());
+            preparedStatement.setString(4, userDto.getName());
+            preparedStatement.setTimestamp(5, new Timestamp(new java.util.Date().getTime()));
             /**
              * executeQuery : SELECT
              * executeUpdate : INSERT INTO , CREATE, DELETE, DROP
              */
-            resultSet = preparedStatement.executeUpdate();
+            int resultSet = preparedStatement.executeUpdate();
             System.out.println(resultSet);
+            return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return resultSet;
     }
 }
-
