@@ -8,7 +8,7 @@ public class UserDao {
     String password = "1010board";
 
     public void findByUser(){
-
+        System.out.println("유저를 찾았습니다. ***");
     }
 
 //    public void findAll() {
