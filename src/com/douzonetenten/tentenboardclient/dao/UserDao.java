@@ -7,6 +7,10 @@ public class UserDao {
     String username = "tenten";
     String password = "1010board";
 
+    public void findByUser(){
+        System.out.println("유저를 찾았습니다. ***");
+    }
+
 //    public void findAll() {
 //        try (Connection connection = DriverManager.getConnection(url, username, password)) {
 //            PreparedStatement preparedStatement;
