@@ -9,10 +9,10 @@ import static com.douzonetenten.tentenboardclient.DBConnector.getConnection;
 public class UserService {
     private UserDao userDao = new UserDao();
 
-//    public void findAll(){
-////        Connection connection = getConnection();
-//        userDao.findAll();
-//    }
+    public void findAll(){
+        Connection connection = getConnection();
+        userDao.findAll(connection);
+    }
 
 //    public void createUser(){
 //        userDao.createUser();

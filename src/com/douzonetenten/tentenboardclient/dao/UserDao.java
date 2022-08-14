@@ -7,22 +7,18 @@ public class UserDao {
     String username = "tenten";
     String password = "1010board";
 
-    public void findByUser(){
-        System.out.println("유저를 찾았습니다. ***");
+    public void findAll(Connection connection) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement("SELECT * FROM user");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("username"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-//    public void findAll() {
-//        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-//            PreparedStatement preparedStatement;
-//            preparedStatement = connection.prepareStatement("SELECT * FROM user");
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//                System.out.println(resultSet.getString("username"));
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
 //    public void createUser(){
 //        try (Connection connection = DriverManager.getConnection(url, username, password)) {
