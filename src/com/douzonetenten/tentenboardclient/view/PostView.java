@@ -19,4 +19,10 @@ public class PostView {
         postDto.setPostBody(postBody);
         postController.insertPost(postDto);
     }
+
+    public void deletePost(){
+        System.out.println("삭제할 포스트 번호를 입력해주세요.");
+        String selectPost = scanner.next();
+        postController.deletePost(selectPost);
+    }
 }

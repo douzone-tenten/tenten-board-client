@@ -27,4 +27,17 @@ public class PostDao {
             throw new RuntimeException(e);
         }
     }
+
+    public int deletePost(Connection connection, String postNo){
+        PreparedStatement preparedStatement = null;
+        try {
+//            preparedStatement = connection.prepareStatement("DELETE FROM post WHERE board_board_no = ? AND user_member_no = ? AND post_id = ?");
+            preparedStatement = connection.prepareStatement("DELETE FROM post WHERE post_id = ?");
+            preparedStatement.setString(1,postNo);
+            int resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

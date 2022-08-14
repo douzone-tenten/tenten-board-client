@@ -21,4 +21,16 @@ public class PostService {
         } else rollback(connection);
         return result;
     }
+
+    public int deletePost(String postNo){
+        Connection connection = getConnection();
+        int result = postDao.deletePost(connection,postNo);
+        if (result > 0) {
+            commit(connection);
+        } else rollback(connection);
+        return result;
+    }
+
+    // TODO : 포스트 수정 기능 추가.
+
 }

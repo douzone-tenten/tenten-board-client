@@ -8,4 +8,5 @@ public class PostController {
     public void insertPost(PostDto postDto){
         postService.insertPost(postDto);
     }
+    public void deletePost(String postNo) { postService.deletePost(postNo);}
 }
