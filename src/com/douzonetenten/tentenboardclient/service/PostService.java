@@ -4,6 +4,7 @@ import com.douzonetenten.tentenboardclient.dao.PostDao;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  * wildcard import
@@ -33,4 +34,9 @@ public class PostService {
 
     // TODO : 포스트 수정 기능 추가.
 
+    public ArrayList<PostDto> findAllByPost(){
+        Connection connection = getConnection();
+        ArrayList<PostDto> postDtoArrayList = postDao.findAllByPost(connection);
+        return postDtoArrayList;
+    }
 }

@@ -8,7 +8,9 @@ public class TentenBoardApplication {
 //        MainView mainView = new MainView();
         PostView postView = new PostView();
 //        postView.insertPost();
-        postView.deletePost();
+//        postView.deletePost();
+        postView.findAllByPost();
+
 //        mainView.start();
     }
 }

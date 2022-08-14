@@ -1,6 +1,10 @@
 package com.douzonetenten.tentenboardclient.dto;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+
+/**
+ * createdAt의 타입을 TimeStamp로 변경함.
+ */
 
 public class PostDto {
     private Long boardNo;
@@ -8,19 +12,19 @@ public class PostDto {
     private Long postId;
     private String postTitle;
     private String postBody;
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     public PostDto() {
     }
 
-    public PostDto(Long postId, String postTitle, String postBody, LocalDateTime createdAt) {
+    public PostDto(Long postId, String postTitle, String postBody, Timestamp createdAt) {
         this.postId = postId;
         this.postTitle = postTitle;
         this.postBody = postBody;
         this.createdAt = createdAt;
     }
 
-    public PostDto(Long boardNo, Long memberNo, Long postId, String postTitle, String postBody, LocalDateTime createdAt) {
+    public PostDto(Long boardNo, Long memberNo, Long postId, String postTitle, String postBody, Timestamp createdAt) {
         this.boardNo = boardNo;
         this.memberNo = memberNo;
         this.postId = postId;
@@ -69,11 +73,11 @@ public class PostDto {
         this.postBody = postBody;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

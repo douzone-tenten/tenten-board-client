@@ -25,4 +25,9 @@ public class PostView {
         String selectPost = scanner.next();
         postController.deletePost(selectPost);
     }
+
+    public void findAllByPost(){
+        System.out.println("전체 포스트를 조회합니다.");
+        postController.findAllByPost();
+    }
 }
