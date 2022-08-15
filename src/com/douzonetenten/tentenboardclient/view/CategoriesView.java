@@ -10,6 +10,7 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.clearCons
 import static com.douzonetenten.tentenboardclient.view.feature.Display.displayTitle;
 
 public class CategoriesView {
+    BoardView boardView = new BoardView();
     private Scanner scanner = new Scanner(System.in);
     BoardController boardController = new BoardController();
     public void start(){
@@ -24,8 +25,9 @@ public class CategoriesView {
             String selectNum = scanner.next();
 
             if (selectNum.equals("1")){
-                //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
+                boardView.start("1");
             }
+
             if (selectNum.equals("2")){
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
             }
