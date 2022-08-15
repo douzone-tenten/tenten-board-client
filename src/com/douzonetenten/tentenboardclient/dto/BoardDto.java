@@ -4,6 +4,9 @@ public class BoardDto {
     private Long boardNo;
     private String boardName;
 
+    public BoardDto() {
+    }
+
     public Long getBoardNo() {
         return boardNo;
     }
