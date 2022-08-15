@@ -6,10 +6,20 @@ import com.douzonetenten.tentenboardclient.dao.UserDao;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
-import static com.douzonetenten.tentenboardclient.DBConnector.*;
+import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
 public class UserService {
+    /**
+     * 저희가 이제 로그인 한 객체를 사용해야 할 때.
+     * 예를 들어서, 어떤 자유게시판 접속하면,
+     * 글을 써야 하는데,
+     * user_member_no에 어떻게 값을 넣을수가 있죠?
+     */
+    public static List<UserDto> loginUserContext = new ArrayList<>();
+
     private UserDao userDao = new UserDao();
 
     public int insertUser(UserDto userDto){
@@ -19,5 +29,15 @@ public class UserService {
             commit(connection);
         } else rollback(connection);
         return result;
+    }
+
+    public UserDto login(UserDto userDto){
+        Connection connection = getConnection();
+        loginUserContext.add(userDao.login(connection,userDto));
+        return userDao.login(connection,userDto);
+    }
+
+    public void logout(){
+        loginUserContext.remove(0);
     }
 }

@@ -4,27 +4,36 @@ import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
+    public UserDto login(Connection connection, UserDto userDto) {
+        UserDto loginUserDto = new UserDto();
 
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username = ? AND password = ?");
+            preparedStatement.setString(1, userDto.getUsername());
+            preparedStatement.setString(2, userDto.getPassword());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            // 로그인한 단 하나의 아이디만 들어있다.
+            loginUserDto.setUserNo(resultSet.getLong("user_no"));
+            loginUserDto.setUsername(resultSet.getString("username"));
+            loginUserDto.setName(resultSet.getString("name"));
+            loginUserDto.setDepartment(resultSet.getString("department"));
 
-//    public void findAll(Connection connection) {
-//        try (connection = DriverManager.getConnection(url, username, password)) {
-//            PreparedStatement preparedStatement;
-//            preparedStatement = connection.prepareStatement("SELECT * FROM user");
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//                System.out.println(resultSet.getString("username"));
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//    preparedStatement = connection.prepareStatement("DELETE FROM user where name = '김민준'");
-//        }
-//    }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return loginUserDto;
+    }
+
 
     public int insertUser(Connection connection, UserDto userDto) {
         /**
          * UTC 적용필요
+         * User Unique Key 예외처리 해아함.
          */
         try {
             PreparedStatement preparedStatement;

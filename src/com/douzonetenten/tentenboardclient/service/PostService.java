@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * wildcard import
  */
-import static com.douzonetenten.tentenboardclient.DBConnector.*;
+import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
 public class PostService {
     private final PostDao postDao = new PostDao();

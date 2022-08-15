@@ -1,4 +1,4 @@
-package com.douzonetenten.tentenboardclient;
+package com.douzonetenten.tentenboardclient.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

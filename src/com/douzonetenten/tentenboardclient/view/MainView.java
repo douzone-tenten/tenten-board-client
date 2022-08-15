@@ -3,7 +3,7 @@ package com.douzonetenten.tentenboardclient.view;
 import com.douzonetenten.tentenboardclient.controller.UserController;
 import java.util.Scanner;
 
-import static com.douzonetenten.tentenboardclient.view.AlertView.displayError;
+import static com.douzonetenten.tentenboardclient.view.feature.Display.displayError;
 
 public class MainView {
     public void start() {
@@ -33,12 +33,6 @@ public class MainView {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
-        }
-    }
-
-    public static void clearConsole(){
-        for (int i = 0; i < 100; i++) {
-            System.out.println("");
         }
     }
 }
