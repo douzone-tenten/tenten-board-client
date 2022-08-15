@@ -32,7 +32,8 @@ public class PostView {
         String select = scanner.next();
         // TODO : 예외처리
         if (select.equals("Y") || select.equals("y")) {
-            postController.insertPost(postDto);
+            // TODO : 게시판 번호 조회를 어떻게 할 것인가?
+            postController.insertPost(postDto, "1");
         }
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");
