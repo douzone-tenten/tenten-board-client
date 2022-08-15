@@ -5,6 +5,8 @@ import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+
 public class UserView {
     private UserController userController = new UserController();
     private Scanner scanner = new Scanner(System.in);
@@ -31,5 +33,17 @@ public class UserView {
         System.out.println("소속을 입력하세요.");
         userDto.setDepartment(scanner.nextLine());
         userController.insertUser(userDto);
+    }
+
+    public void login(){
+        UserDto userDto = new UserDto();
+        System.out.println("아이디를 입력하세요.");
+        userDto.setUsername(scanner.nextLine());
+        System.out.println("비밀번호를 입력하세요.");
+        userDto.setPassword(scanner.nextLine());
+        userController.login(userDto);
+        System.out.println("안녕하세요. : " + loginUserContext.get(0).getName());
+        System.out.println(loginUserContext.get(0).getUsername());
+        System.out.println(loginUserContext.get(0).getDepartment());
     }
 }

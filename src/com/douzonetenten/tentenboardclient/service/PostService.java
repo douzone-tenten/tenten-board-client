@@ -1,13 +1,15 @@
 package com.douzonetenten.tentenboardclient.service;
 
-
 import com.douzonetenten.tentenboardclient.dao.PostDao;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import static com.uni.tentenProject.DBConnector.*;
+/**
+ * wildcard import
+ */
+import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
 public class PostService {
     private final PostDao postDao = new PostDao();

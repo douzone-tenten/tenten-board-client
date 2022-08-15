@@ -5,7 +5,7 @@ import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.Scanner;
 
-import static com.douzonetenten.tentenboardclient.view.MainView.clearConsole;
+import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
 
 public class PostView {
     private PostController postController = new PostController();
@@ -30,7 +30,8 @@ public class PostView {
         System.out.println("B : 취소하기");
 
         String select = scanner.next();
-        if (select.equals("Y")) {
+        // TODO : 예외처리
+        if (select.equals("Y") || select.equals("y")) {
             postController.insertPost(postDto);
         }
         if (select.equals("B")) {

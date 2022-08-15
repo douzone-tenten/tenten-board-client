@@ -7,13 +7,13 @@ import com.douzonetenten.tentenboardclient.view.UserView;
 public class TentenBoardApplication {
     public static void main(String[] args) {
         MainView mainView = new MainView();
-//        PostView postView = new PostView();
-//        postView.insertPost();
-//        postView.deletePost();
-//        postView.findAllByPost();
-        UserView userView =new UserView();
-        userView.insertUser();
-
 //        mainView.start();
+
+        UserView userView = new UserView();
+        PostView postView = new PostView();
+
+        userView.login();
+        postView.insertPost();
+
     }
 }

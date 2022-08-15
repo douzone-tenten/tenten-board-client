@@ -5,11 +5,12 @@ import com.douzonetenten.tentenboardclient.service.UserService;
 
 public class UserController {
     private UserService userService = new UserService();
-//
-//    public void findAll(){
-//        userService.findAll();
-//    }
+
     public void insertUser(UserDto userDto){
         userService.insertUser(userDto);
+    }
+
+    public void login(UserDto userDto){
+        userService.login(userDto);
     }
 }

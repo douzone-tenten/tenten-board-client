@@ -6,6 +6,8 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+
 public class PostDao {
     public int insertPost(Connection connection, PostDto postDto){
         /**
@@ -19,10 +21,10 @@ public class PostDao {
              */
             preparedStatement = connection.prepareStatement("INSERT INTO post (board_board_no, user_member_no, created_at, post_title, post_body) values (?,?,?,?,?)");
             preparedStatement.setString(1,"1"); // 현재 내가 작성하려고 하는 보드의 PK
-            preparedStatement.setString(2,"1"); // 현재 로그인한 사용자의 PK
-            preparedStatement.setTimestamp(3,new Timestamp(new java.util.Date().getTime()));
-            preparedStatement.setString(4,postDto.getPostTitle());
-            preparedStatement.setString(5,postDto.getPostBody());
+            preparedStatement.setLong(2,loginUserContext.get(0).getUserNo()); // 현재 로그인한 사용자의 PK
+            preparedStatement.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
+            preparedStatement.setString(4, postDto.getPostTitle());
+            preparedStatement.setString(5, postDto.getPostBody());
             int resultSet = preparedStatement.executeUpdate();
             return resultSet;
         } catch (SQLException e) {
@@ -59,7 +61,6 @@ public class PostDao {
                 postDto.setCreatedAt(resultSet.getTimestamp("created_at"));
                 postDto.setPostTitle(resultSet.getString("post_title"));
                 postDto.setPostBody(resultSet.getString("post_body"));
-
                 postDtoArrayList.add(postDto);
             }
         } catch (SQLException e) {
