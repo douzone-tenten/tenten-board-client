@@ -33,7 +33,8 @@ public class UserDao {
     public int insertUser(Connection connection, UserDto userDto) {
         /**
          * UTC 적용필요
-         * User Unique Key 예외처리 해아함.
+         * INSERT INTO 를 했는데, 회원이 이미 있음에도,
+         * 덮어 써져버리는 현상 발생함.
          */
         try {
             PreparedStatement preparedStatement;
@@ -48,7 +49,6 @@ public class UserDao {
              * executeUpdate : INSERT INTO , CREATE, DELETE, DROP
              */
             int resultSet = preparedStatement.executeUpdate();
-            System.out.println(resultSet);
             return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);

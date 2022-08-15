@@ -6,6 +6,14 @@ public class Display {
     }
 
     public static void clearConsole(){
-        // TODO : 콘솔창 청소기능
+        for (int i = 0; i < 100; i++) {
+            System.out.println("");
+        }
+    }
+
+    public static void displayTitle(String message){
+        System.out.printf("**********************\n" +
+                "    "+ message + "    "+ "\n" +
+                "**********************\n");
     }
 }
