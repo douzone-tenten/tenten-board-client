@@ -17,25 +17,29 @@ public class UserDao {
 //        }
 //    }
 
-    public int createUser(Connection connection){
+    public int createUser(Connection connection) {
 
-            PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement;
+
+        int resultSet;
+        try {
             preparedStatement = connection.prepareStatement("DELETE FROM user where name = '김민준'");
             preparedStatement = connection.prepareStatement("INSERT INTO user(username,password,department,name,created_at) values (?,?,?,?,?)");
-            preparedStatement.setString(1,"kimminjun");
-            preparedStatement.setString(2,"minjun");
-            preparedStatement.setString(3,"1반");
-            preparedStatement.setString(4,"김민준");
-            preparedStatement.setDate(5,new Date(new java.util.Date().getTime()));
+            preparedStatement.setString(1, "kimminjun");
+            preparedStatement.setString(2, "minjun");
+            preparedStatement.setString(3, "1반");
+            preparedStatement.setString(4, "김민준");
+            preparedStatement.setDate(5, new Date(new java.util.Date().getTime()));
             /**
              * executeQuery : SELECT
              * executeUpdate : INSERT INTO , CREATE, DELETE, DROP
              */
-            int resultSet = preparedStatement.executeUpdate();
+            resultSet = preparedStatement.executeUpdate();
             System.out.println(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return resultSet;
     }
 }
 
