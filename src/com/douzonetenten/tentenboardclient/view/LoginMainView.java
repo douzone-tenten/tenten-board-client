@@ -11,7 +11,7 @@ public class LoginMainView {
     private Scanner scanner = new Scanner(System.in);
     UserController userController = new UserController();
 
-    BoardView  boardView = new BoardView();
+    CategoriesView boardView = new CategoriesView();
     public void start(){
         while (true){
             System.out.print("안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
