@@ -6,9 +6,10 @@ import java.util.Scanner;
 import static com.douzonetenten.tentenboardclient.view.feature.Display.displayError;
 
 public class MainView {
+    private Scanner scanner = new Scanner(System.in);
+    private UserView userView = new UserView();
+
     public void start() {
-        UserController userController = new UserController();
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("텐텐보드");
             System.out.println("로그인 / 회원가입");
@@ -24,6 +25,14 @@ public class MainView {
              */
             if (!(selectNum.equals("9") || selectNum.equals("1") || selectNum.equals("2"))) {
                 displayError("메뉴를 잘못 입력하셨습니다.");
+            }
+
+            if (selectNum.equals("1")){
+                userView.login();
+            }
+
+            if (selectNum.equals("2")){
+                userView.insertUser();
             }
 
             /**

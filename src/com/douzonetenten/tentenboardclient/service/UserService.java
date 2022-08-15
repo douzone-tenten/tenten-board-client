@@ -24,6 +24,7 @@ public class UserService {
 
     public int insertUser(UserDto userDto){
         Connection connection = getConnection();
+        // TODO : unique_id 제약조건 예외처리
         int result = userDao.insertUser(connection, userDto);
         if (result > 0) {
             commit(connection);

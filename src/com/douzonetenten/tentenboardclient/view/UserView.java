@@ -6,12 +6,18 @@ import com.douzonetenten.tentenboardclient.dto.UserDto;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
+import static com.douzonetenten.tentenboardclient.view.feature.Display.displayTitle;
 
 public class UserView {
     private UserController userController = new UserController();
     private Scanner scanner = new Scanner(System.in);
+    private UserDto userDto = new UserDto();
+    private LoginMainView loginMainView = new LoginMainView();
+
     public void insertUser(){
-        UserDto userDto = new UserDto();
+        clearConsole();
+        displayTitle("회원가입");
         System.out.println("아이디를 입력하세요.");
         userDto.setUsername(scanner.nextLine());
         while (true){
@@ -32,18 +38,27 @@ public class UserView {
         userDto.setName(scanner.nextLine());
         System.out.println("소속을 입력하세요.");
         userDto.setDepartment(scanner.nextLine());
-        userController.insertUser(userDto);
+        int result = userController.insertUser(userDto);
+
+        if (result == 1){
+            System.out.println("회원가입에 성공했습니다.");
+        }
     }
 
     public void login(){
-        UserDto userDto = new UserDto();
+        clearConsole();
+        displayTitle("로그인");
         System.out.println("아이디를 입력하세요.");
         userDto.setUsername(scanner.nextLine());
         System.out.println("비밀번호를 입력하세요.");
         userDto.setPassword(scanner.nextLine());
         userController.login(userDto);
-        System.out.println("안녕하세요. : " + loginUserContext.get(0).getName());
-        System.out.println(loginUserContext.get(0).getUsername());
-        System.out.println(loginUserContext.get(0).getDepartment());
+
+        if (!loginUserContext.isEmpty() && userDto.getUsername().equals(loginUserContext.get(0).getUsername())){
+            loginMainView.start();
+        } else if (loginUserContext.isEmpty()){
+            // TODO : SQLException으로 예외처리하기.
+            System.out.println("로그인에 실패했습니다.");
+        }
     }
 }
