@@ -34,4 +34,8 @@ public class BoardDto {
                 ", boardName='" + boardName + '\'' +
                 '}';
     }
+
+    public String toStringByAll(){
+        return "번호 : [" + boardNo + "] 게시판 이름 : " + boardName;
+    }
 }
