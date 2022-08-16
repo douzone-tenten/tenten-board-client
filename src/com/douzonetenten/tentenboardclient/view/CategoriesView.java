@@ -11,6 +11,7 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.displayTi
 
 public class CategoriesView {
     BoardView boardView = new BoardView();
+    DouZoneTwoView douZoneTwoView = new DouZoneTwoView();
     private Scanner scanner = new Scanner(System.in);
     BoardController boardController = new BoardController();
     public void start(){
@@ -43,7 +44,8 @@ public class CategoriesView {
             if (selectNum.equals("6")){
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
             }
-            if (selectNum.equals("9")){
+            if (selectNum.equals("7")){
+                douZoneTwoView.dztwostart("7");
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
             }
         }
