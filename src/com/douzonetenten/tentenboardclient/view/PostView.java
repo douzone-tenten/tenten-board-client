@@ -14,6 +14,8 @@ public class PostView {
         /**
          * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
          */
+        Scanner scanner = new Scanner(System.in);
+
         clearConsole();
         PostDto postDto = new PostDto();
         System.out.print("제목을 입력하세요 : ");
