@@ -1,5 +1,6 @@
 package com.douzonetenten.tentenboardclient.dao;
 
+import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.Connection;
@@ -11,27 +12,31 @@ import java.util.ArrayList;
 import static com.douzonetenten.tentenboardclient.common.DBConnector.getConnection;
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 public class DouZoneTwoDao {
 
 
-    public ArrayList<PostDto> douZoneFindByAll(Connection connection) {
-            ArrayList<PostDto> list = null;
-            PreparedStatement preparedStatement = null;
-            String sql = "select * from post where board_board_no = 7";
+    public ArrayList<DouZoneTwoJoinDto> douZoneFindByAll(Connection connection) {
+        ArrayList<DouZoneTwoJoinDto> list = null;
+        PreparedStatement preparedStatement = null;
+//        String sql = "select * from post where board_board_no = 1";
+
+        String sql = "select board_board_no,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = 1";
+
+
         try {
-            list = new ArrayList<PostDto>();
+            list = new ArrayList<DouZoneTwoJoinDto>();
             preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
-                PostDto postDto = new PostDto();
-                postDto.setBoardNo(Long.valueOf(resultSet.getString("board_board_no")));
-                postDto.setMemberNo(Long.valueOf(resultSet.getString("user_member_no")));
-                postDto.setPostId(Long.valueOf(resultSet.getString("post_id")));
-                postDto.setCreatedAt(resultSet.getTimestamp("created_at"));
-                postDto.setPostTitle(resultSet.getString("post_title"));
-                postDto.setPostBody(resultSet.getString("post_body"));
-                list.add(postDto);
+            while (resultSet.next()) {
+                DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
+                douZoneTwoJoinDto.setBoard_board_no(Long.valueOf(resultSet.getString("board_board_no")));
+                douZoneTwoJoinDto.setPost_title(Long.valueOf(resultSet.getString("user_member_no")));
+                douZoneTwoJoinDto.setUsername(resultSet.getString("username"));
+                douZoneTwoJoinDto.setCreated_at(resultSet.getTimestamp("created_at"));
+
+                list.add(douZoneTwoJoinDto);
 
             }
             return list;
@@ -42,10 +47,56 @@ public class DouZoneTwoDao {
 
     }
 
+    public int douzoneTwoInsert(Connection connection,PostDto postDto,String BoardNum) {
+        int result =0;
+        PreparedStatement preparedStatement = null;
+        String sql = "insert into post(board_board_no, user_member_no, created_at, post_title, post_body) values (?,?,?,?,?)";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,BoardNum);
+            preparedStatement.setLong(2,loginUserContext.get(0).getUserNo());
+            preparedStatement.setTimestamp(3,postDto.getCreatedAt());
+            preparedStatement.setString(4, postDto.getPostTitle());
+            preparedStatement.setString(5, postDto.getPostBody());
+
+            result = preparedStatement.executeUpdate();
+
+            if (result > 0){
+                System.out.println("게시글 작성 성공");
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    /*
+    *
+    UPDATE [테이블명1] A INNER JOIN [테이블명2] B
+    ON A.[조인할 컬럼명] = B.[조인할 컬럼명]
+    SET [변경할 컬럼명] = 변경할값
+    * */
+    public int douzoneTwoUpdate(Connection connection,PostDto postDto,String BoardNum ){
+        int result = 0;
+        PreparedStatement preparedStatement = null;
+        String sql = "update post set postitle = ? , post_body = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,postDto.getPostTitle());
+            preparedStatement.setString(2,postDto.getPostBody());
+            result = preparedStatement.executeUpdate();
+            if (result > 0){
+                System.out.println("수정이 성공 되었습니다.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
-
-
+        return result;
+    }
 
 
 
