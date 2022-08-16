@@ -4,6 +4,9 @@ public class BoardDto {
     private Long boardNo;
     private String boardName;
 
+    public BoardDto() {
+    }
+
     public Long getBoardNo() {
         return boardNo;
     }
@@ -30,5 +33,9 @@ public class BoardDto {
                 "boardNo=" + boardNo +
                 ", boardName='" + boardName + '\'' +
                 '}';
+    }
+
+    public String toStringByAll(){
+        return "번호 : [" + boardNo + "] 게시판 이름 : " + boardName;
     }
 }

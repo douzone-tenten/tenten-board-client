@@ -2,52 +2,26 @@ package com.douzonetenten.tentenboardclient.dto;
 
 import java.sql.Timestamp;
 
-/**
- * createdAt의 타입을 TimeStamp로 변경함.
- * 상속을 통한 userDto의 join한 값을 할당할 수 있는가?
- */
-
-public class PostDto extends UserDto{
-    private Long boardNo;
-    private Long memberNo;
+public class JoinPostDto {
     private Long postId;
+    private Long boardNo;
     private String postTitle;
     private String postBody;
+    private String username;
+    private String name;
     private Timestamp createdAt;
 
-    public PostDto() {
+    public JoinPostDto() {
     }
 
-    public PostDto(Long postId, String postTitle, String postBody, Timestamp createdAt) {
+    public JoinPostDto(Long postId, Long boardNo, String postTitle, String postBody, String username, String name, Timestamp createdAt) {
         this.postId = postId;
+        this.boardNo = boardNo;
         this.postTitle = postTitle;
         this.postBody = postBody;
+        this.username = username;
+        this.name = name;
         this.createdAt = createdAt;
-    }
-
-    public PostDto(Long boardNo, Long memberNo, Long postId, String postTitle, String postBody, Timestamp createdAt) {
-        this.boardNo = boardNo;
-        this.memberNo = memberNo;
-        this.postId = postId;
-        this.postTitle = postTitle;
-        this.postBody = postBody;
-        this.createdAt = createdAt;
-    }
-
-    public Long getBoardNo() {
-        return boardNo;
-    }
-
-    public void setBoardNo(Long boardNo) {
-        this.boardNo = boardNo;
-    }
-
-    public Long getMemberNo() {
-        return memberNo;
-    }
-
-    public void setMemberNo(Long memberNo) {
-        this.memberNo = memberNo;
     }
 
     public Long getPostId() {
@@ -56,6 +30,14 @@ public class PostDto extends UserDto{
 
     public void setPostId(Long postId) {
         this.postId = postId;
+    }
+
+    public Long getBoardNo() {
+        return boardNo;
+    }
+
+    public void setBoardNo(Long boardNo) {
+        this.boardNo = boardNo;
     }
 
     public String getPostTitle() {
@@ -74,6 +56,22 @@ public class PostDto extends UserDto{
         this.postBody = postBody;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
@@ -84,15 +82,18 @@ public class PostDto extends UserDto{
 
     @Override
     public String toString() {
-        return "PostDto{" +
-                "boardNo=" + boardNo +
-                ", memberNo=" + memberNo +
-                ", postId=" + postId +
+        return "JoinPostDto{" +
+                "postId=" + postId +
+                ", boardNo=" + boardNo +
                 ", postTitle='" + postTitle + '\'' +
                 ", postBody='" + postBody + '\'' +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }
 
-
+    public String findPostToString() {
+        return postId + "    " + postTitle + "    " + "    " + name + "    " + createdAt;
+    }
 }
