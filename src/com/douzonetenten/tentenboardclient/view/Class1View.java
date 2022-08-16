@@ -39,17 +39,8 @@ public class Class1View {
             String boardNo = "2";
             postView.insertPost(boardNo);
         }
-
-
-
-        
-
-
-        
-
+        if (num == 2){
+            postView.deletePost();
+        }
     }
-
-
-
-
 }
