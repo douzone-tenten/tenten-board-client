@@ -1,9 +1,8 @@
-package com.uni.tentenProject.view;
+package com.douzonetenten.tentenboardclient.view;
 
 import java.util.Scanner;
 
-public class notice_MainView {
-
+public class notice_mainView {
     private notice_postView notice_postwiew = new notice_postView();
     private Scanner sc = new Scanner(System.in);
 
@@ -36,4 +35,3 @@ public class notice_MainView {
 
     }
 }
-

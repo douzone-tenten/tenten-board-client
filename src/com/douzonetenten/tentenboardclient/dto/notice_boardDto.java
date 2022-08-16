@@ -1,14 +1,18 @@
-package com.uni.tentenProject.model.dto;
+package com.douzonetenten.tentenboardclient.dto;
 
 public class notice_boardDto {
-    private long boardNo;
+
+    private Long boardNo;
     private String boardName;
 
-    public long getBoardNo() {
+    public notice_boardDto() {
+    }
+
+    public Long getBoardNo() {
         return boardNo;
     }
 
-    public void setBoardNo(long boardNo) {
+    public void setBoardNo(Long boardNo) {
         this.boardNo = boardNo;
     }
 

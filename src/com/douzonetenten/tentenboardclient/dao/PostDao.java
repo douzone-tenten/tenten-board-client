@@ -4,7 +4,6 @@ import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
@@ -33,7 +32,7 @@ public class PostDao {
         }
     }
 
-    public int deletePost(Connection connection, String postNo){
+    public static int deletePost(Connection connection, String postNo){
         PreparedStatement preparedStatement = null;
         try {
 //            preparedStatement = connection.prepareStatement("DELETE FROM post WHERE board_board_no = ? AND user_member_no = ? AND post_id = ?");

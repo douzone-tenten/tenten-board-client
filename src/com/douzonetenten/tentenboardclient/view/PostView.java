@@ -8,7 +8,7 @@ import java.util.Scanner;
 import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
 
 public class PostView {
-    private PostController postController = new PostController();
+    private PostController PostController = new PostController();
     private Scanner scanner = new Scanner(System.in);
     public void insertPost(){
         /**
@@ -33,7 +33,7 @@ public class PostView {
         // TODO : 예외처리
         if (select.equals("Y") || select.equals("y")) {
             // TODO : 게시판 번호 조회를 어떻게 할 것인가?
-            postController.insertPost(postDto, "1");
+            PostController.insertPost(postDto, "1");
         }
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");
@@ -43,11 +43,11 @@ public class PostView {
     public void deletePost(){
         System.out.println("삭제할 포스트 번호를 입력해주세요.");
         String selectPost = scanner.next();
-        postController.deletePost(selectPost);
+        PostController.deletePost(selectPost);
     }
 
     public void findAllByPost(){
         System.out.println("전체 포스트를 조회합니다.");
-        postController.findAllByPost();
+        PostController.findAllByPost();
     }
 }

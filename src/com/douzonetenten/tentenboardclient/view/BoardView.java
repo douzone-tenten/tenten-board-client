@@ -2,19 +2,18 @@ package com.douzonetenten.tentenboardclient.view;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
-import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardView {
-    PostController postController = new PostController();
+    PostController PostController = new PostController();
 
     public void start(String selectNum) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<JoinPostDto> getPostList = postController.findByPost(selectNum);
+        ArrayList<JoinPostDto> getPostList = PostController.findByPost(selectNum);
 
-        System.out.println("자유 게시판");
+        System.out.println("공지사항 게시판");
         System.out.printf("--------------------------------\n" +
                 "게시글 번호      제목        작성자      작성시간\n" +
                 "--------------------------------\n");

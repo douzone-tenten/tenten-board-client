@@ -7,15 +7,18 @@ import com.douzonetenten.tentenboardclient.service.PostService;
 import java.util.ArrayList;
 
 public class PostController {
-    private final PostService postService = new PostService();
+    private static final PostService postService = new PostService();
 
-    public void insertPost(PostDto postDto, String boardNumber) {
-        postService.insertPost(postDto,boardNumber);
+    public static void insertPost(PostDto postDto, String boardNumber){
+
+        postService.insertPost(postDto, boardNumber);
     }
 
-    public void deletePost(String postNo) {
-        postService.deletePost(postNo);
+    public static void deletePost(String post_id){
+
+        PostService.deletePost(post_id);
     }
+
 
     public ArrayList<PostDto> findAllByPost() {
         ArrayList<PostDto> postDtoArrayList = postService.findAllByPost();

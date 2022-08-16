@@ -24,9 +24,9 @@ public class PostService {
         return result;
     }
 
-    public int deletePost(String postNo){
+    public static int deletePost(String postNo){
         Connection connection = getConnection();
-        int result = postDao.deletePost(connection,postNo);
+        int result = PostDao.deletePost(connection,postNo);
         if (result > 0) {
             commit(connection);
         } else rollback(connection);
