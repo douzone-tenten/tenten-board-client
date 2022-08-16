@@ -2,6 +2,7 @@ package com.douzonetenten.tentenboardclient;
 
 import com.douzonetenten.tentenboardclient.view.MainView;
 import com.douzonetenten.tentenboardclient.view.PostView;
+import com.douzonetenten.tentenboardclient.view.QnAView;
 import com.douzonetenten.tentenboardclient.view.UserView;
 
 public class TentenBoardApplication {
@@ -11,9 +12,12 @@ public class TentenBoardApplication {
 //        postView.insertPost();
 //        postView.deletePost();
 //        postView.findAllByPost();
-        UserView userView =new UserView();
-        userView.insertUser();
+//        UserView userView =new UserView();
+//        userView.insertUser();
 
 //        mainView.start();
+
+        QnAView qnAView = new QnAView();
+        qnAView.findAllByPost();
     }
 }
