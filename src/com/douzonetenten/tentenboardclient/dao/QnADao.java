@@ -27,7 +27,11 @@ public class QnADao {
             while (resultSet.next()) {
                 PostDto postDto = new PostDto();
                 postDto.setBoardNo(resultSet.getLong("board_board_no"));
+                postDto.setMemberNo(resultSet.getLong("user_member_no"));
                 postDto.setPostId(resultSet.getLong("post_id"));
+                postDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+                postDto.setPostTitle(resultSet.getString("post_title"));
+                postDto.setPostBody(resultSet.getString("post_body"));
                 postDtoArrayList.add(postDto);
             }
             return postDtoArrayList;
