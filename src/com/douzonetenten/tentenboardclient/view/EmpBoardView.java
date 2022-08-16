@@ -20,7 +20,7 @@ public class EmpBoardView {
                 "게시글 번호      제목        작성자      작성시간\n" +
                 "--------------------------------------\n");
 
-        // 게시글 목록 조회
+        /*게시글 목록 조회*/
         if (getPostList.isEmpty()) {
             System.out.println("조회할 포스트가 없습니다.");
         }
@@ -32,11 +32,12 @@ public class EmpBoardView {
         }
 
         System.out.print("조회할 게시글 번호를 입력하세요 : ");
-        Long selectPost = scanner.nextLong();
-        // 6번 게시글 조회를 어떻게 할것인가? 입력받은 숫자 == post_id
+        String selectPost = scanner.next();
         // b. 뒤로가기, n. 다음 페이지, f. 이전 페이지, w. 글쓰기로 이동
+        // 6번 게시글 조회를 어떻게 할것인가? 입력받은 숫자 == post_id
+        /* 게시글 상세조회 (READ) */
         for (JoinPostDto joinPostDto : getPostList) {
-            if ( selectPost == joinPostDto.getPostId() ) {
+            if ( Long.parseLong(selectPost) == joinPostDto.getPostId() ) {
                 Display.clearConsole();
                 Display.displayTitle("게시글 상세조회");
                 System.out.println(joinPostDto.detailPostToString());
@@ -44,6 +45,27 @@ public class EmpBoardView {
                 System.out.println("선택하신 번호의 게시글은 없습니다. 다시 선택해주세요.");
             }
         }
+        // b. 뒤로가기, e. 게시글 수정, d. 게시글 삭제
+        String move = scanner.next();
+        if ( move == "b" ) {
+            start("6"); // 뒤로가기 ( start 메소드 실행 )
+        }
+        /* 게시글 삭제 (DELETE) */
+        if ( move == "d" ) {
+            System.out.println("정말 게시물을 삭제하시겠습니까? (Y/N)");
+            char ans = scanner.next().charAt();
+            if ( ans == 'y' || ans == 'Y') {
+                postController.deletePost(selectPost); // selectPost 변수 재활용
+            } else if ( ans == 'n' || ans == 'N' ) {
+                System.out.println("게시물이 삭제되지 않았습니다.");
+            } else {
+                System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요."); // 반복문으로 수정해야 질문으로 돌아갈 듯
+            }
+        }
+
+
+
+
 
 
 
