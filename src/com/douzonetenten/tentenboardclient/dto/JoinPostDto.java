@@ -96,4 +96,14 @@ public class JoinPostDto {
     public String findPostToString() {
         return postId + "    " + postTitle + "    " + "    " + name + "    " + createdAt;
     }
+
+    public String detailPostToString() {
+        return "제목 : " + postTitle +
+                "\n작성자 : " + name +
+                "\n작성시간 : " + createdAt +
+                "\n글 내용 : " + postBody +
+                "\n----------------------------------" +
+                "\ne.게시글 수정  d.게시글 삭제" +
+                "\nb.뒤로 가기";
+    }
 }
