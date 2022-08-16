@@ -34,6 +34,12 @@ public class QnAController {
 
     //QnA 게시글 작성
     public void insertQnA(PostDto postDto) {
-        qnAService.insertPost(postDto);
+        qnAService.insertQnA(postDto);
+    }
+
+
+    //QnA 게시글 삭제
+    public void deleteQnA(String postNo) {
+        this.qnAService.deleteQnA(postNo);
     }
 }

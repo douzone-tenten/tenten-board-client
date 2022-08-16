@@ -60,4 +60,20 @@ public class QnADao {
         }
     }
 
+
+    //QnA 게시글 삭제
+    public int deleteQnA(Connection connection, String postNo) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM post WHERE post_id = ?");
+            preparedStatement.setString(1, postNo);
+            int resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

@@ -19,7 +19,7 @@ public class QnAView {
     }
 
     //QnA 게시글 작성
-    public void insertPost() {
+    public void insertQnA() {
         MainView.clearConsole();
 
         PostDto postDto = new PostDto();
@@ -49,6 +49,15 @@ public class QnAView {
         if(select.equals("B")){
             System.out.println("글 작성을 취소합니다.");
         }
+    }
+
+
+    //QnA 게시글 삭제
+    public void  deleteQnA() {
+        System.out.print("삭제할 QnA 번호를 입력해주세요 : ");
+        String selectQnA = this.scanner.next();
+        this.qnAController.deleteQnA(selectQnA);
+        System.out.println("해당 QnA 게시글을 삭제했습니다.");
     }
 
 

@@ -12,6 +12,7 @@ public class TentenBoardApplication {
 
         QnAView qnAView = new QnAView();
         //qnAView.findAllByPost();
-        qnAView.insertPost();
+        //qnAView.insertPost();
+        qnAView.deleteQnA();
     }
 }

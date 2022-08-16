@@ -21,7 +21,7 @@ public class QnAService {
         return postDtoArrayList;
     }
 
-    public int insertPost(PostDto postDto) {
+    public int insertQnA(PostDto postDto) {
         Connection connection = DBConnector.getConnection();
         int result = this.qnADao.insertQnA(connection, postDto);
             if (result > 0){
@@ -31,5 +31,17 @@ public class QnAService {
                 DBConnector.rollback(connection);
             }
             return result;
+    }
+
+    public int deleteQnA(String postNo) {
+        Connection connection = DBConnector.getConnection();
+        int result = this.qnADao.deleteQnA(connection, postNo);
+        if(result > 0) {
+            DBConnector.commit(connection);
+        }
+        else {
+            DBConnector.rollback(connection);
+        }
+        return result;
     }
 }
