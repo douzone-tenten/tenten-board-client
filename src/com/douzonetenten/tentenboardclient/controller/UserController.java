@@ -1,6 +1,7 @@
 package com.douzonetenten.tentenboardclient.controller;
 
 import com.douzonetenten.tentenboardclient.dto.UserDto;
+import com.douzonetenten.tentenboardclient.exception.user.UnAuthorizationException;
 import com.douzonetenten.tentenboardclient.service.UserService;
 
 public class UserController {
@@ -10,7 +11,7 @@ public class UserController {
         return userService.insertUser(userDto);
     }
 
-    public void login(UserDto userDto){
+    public void login(UserDto userDto) throws UnAuthorizationException {
         userService.login(userDto);
     }
 

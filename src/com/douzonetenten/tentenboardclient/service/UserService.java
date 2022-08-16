@@ -4,6 +4,7 @@ package com.douzonetenten.tentenboardclient.service;
 
 import com.douzonetenten.tentenboardclient.dao.UserDao;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
+import com.douzonetenten.tentenboardclient.exception.user.UnAuthorizationException;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class UserService {
         return result;
     }
 
-    public UserDto login(UserDto userDto){
+    public UserDto login(UserDto userDto) throws UnAuthorizationException {
         Connection connection = getConnection();
         loginUserContext.add(userDao.login(connection,userDto));
         return userDao.login(connection,userDto);
