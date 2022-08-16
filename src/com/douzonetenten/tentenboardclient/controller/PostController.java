@@ -25,7 +25,7 @@ public class PostController {
         return postDtoArrayList;
     }
 
-    public ArrayList<JoinPostDto> findByPost(String boardNum){
+    public static ArrayList<JoinPostDto> findByPost(String boardNum){
         ArrayList<JoinPostDto> joinPostDtoArrayList = postService.findByPost(boardNum);
         return joinPostDtoArrayList;
     }

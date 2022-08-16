@@ -33,7 +33,7 @@ public class CategoriesView {
             }
             if (selectNum.equals("3")){
                 notice_mainView nmv = new notice_mainView();
-                nmv.start();
+                nmv.start("3");
             }
             if (selectNum.equals("4")){
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.

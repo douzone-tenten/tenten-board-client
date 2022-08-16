@@ -43,7 +43,7 @@ public class notice_postDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM post");
+            preparedStatement = connection.prepareStatement("SELECT * FROM post WHERE board_board_no = 3");
             postDtoArrayList = new ArrayList<PostDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
