@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class notice_postView {
 
 
+
     public static void insertPost(){
         postController postController = new postController();
         notice_post_dto notice_post_dto = new notice_post_dto();
@@ -29,13 +30,23 @@ public class notice_postView {
         System.out.println("N : 취소하기");
         char answer = sc.next().charAt(0);
 
-        if(answer == 'Y'){
-            postController.insertPost(notice_post_dto);
-        }else if(answer == 'N'){
+        if(answer == 'Y' || answer == 'y'){
+            postController.insertPost(notice_post_dto,"3");
+        }else if(answer == 'N' || answer == 'n'){
             System.out.println("글 작성을 취소합니다.");
         }else{
             System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
         }
+
+
+    }
+
+    public static void deletePost(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("삭제할 포스트 번호를 입력하세요 : ");
+        String pno = sc.next();
+        postController.deletePost(pno);
+
 
 
     }

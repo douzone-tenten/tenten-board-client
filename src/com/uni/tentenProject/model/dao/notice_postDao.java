@@ -26,12 +26,12 @@ public class notice_postDao {
 
     }
 
-    public int deletePost(Connection connection, String postNo){
+    public static int deletePost(Connection connection, String post_id){
         PreparedStatement preparedStatement = null;
 
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM post WHERE post_id = ? ");
-            preparedStatement.setString(1,postNo);
+            preparedStatement.setString(1,post_id);
             int resultSet = preparedStatement.executeUpdate();
             return resultSet;
         } catch (SQLException e) {
