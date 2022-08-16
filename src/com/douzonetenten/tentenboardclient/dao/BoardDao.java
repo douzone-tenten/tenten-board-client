@@ -12,12 +12,13 @@ public class BoardDao {
     /**
      * 게시판 목록 조회
      */
-    public ArrayList<BoardDto> findAllByBoard(Connection connection) {
+    public ArrayList<BoardDto> findAllByBoard(Connection connection, String selectNum) {
         ArrayList<BoardDto> boardDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM board");
+            preparedStatement = connection.prepareStatement("SELECT * FROM post WHERE board_board_no = ?");
+            preparedStatement.setString(1,"2");
             boardDtoArrayList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){

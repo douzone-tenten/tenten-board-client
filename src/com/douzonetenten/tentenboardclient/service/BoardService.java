@@ -11,7 +11,7 @@ import static com.douzonetenten.tentenboardclient.common.DBConnector.getConnecti
 public class BoardService {
     private final BoardDao boardDao = new BoardDao();
 
-    public ArrayList<BoardDto> findAllByBoard(){
+    public ArrayList<BoardDto> findAllByBoard(String Number){
         Connection connection = getConnection();
         ArrayList<BoardDto> boardDtoArrayList = boardDao.findAllByBoard(connection);
         return boardDtoArrayList;
