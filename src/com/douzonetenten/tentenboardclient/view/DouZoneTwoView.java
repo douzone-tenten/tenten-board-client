@@ -4,6 +4,7 @@ import com.douzonetenten.tentenboardclient.controller.DouZoneTwoController;
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.BoardDto;
 import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.ArrayList;
@@ -17,26 +18,41 @@ public class DouZoneTwoView {
     private DouZoneTwoController douZoneTwoController = new DouZoneTwoController();
     private PostController postController = new PostController();
     private DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
-    public void dztwostart(String boardNum) {
+
+    public void dztwostart(String selectNum) {
 
         System.out.println("더존 2반 게시판");
-        System.out.println("------------------------------");
-        ArrayList<DouZoneTwoJoinDto> boardDtoArrayList = douZoneTwoController.douzoneFindByAll();
-        for (DouZoneTwoJoinDto douZoneTwoJoinDto : boardDtoArrayList) {
-            System.out.println(douZoneTwoJoinDto.toString());
-            System.out.println("원하는 메뉴를 선택하세요");
+//        System.out.println("------------------------------");
+        System.out.printf("--------------------------------------------\n" +
+                "게시글 번호      제목        작성자      작성시간\n" +
+                "--------------------------------------------\n");
 
-            System.out.print("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지      w. 글쓰기");
-            douzoneInsert();
+        ArrayList<DouZoneTwoJoinDto> boardDtoArrayList = douZoneTwoController.douzoneFindByAll(selectNum);
+
+        if (boardDtoArrayList.isEmpty()) {
+            System.out.println("조회할 포스트가 없습니다.");
         }
 
+        if (!(boardDtoArrayList.isEmpty())) {
+            for (DouZoneTwoJoinDto douZoneTwoJoinDto : boardDtoArrayList) {
+                System.out.println(douZoneTwoJoinDto.toString());
+
+//        }
+            }
+
+
+            System.out.println("원하는 메뉴를 선택하세요");
+            System.out.println("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지      w. 글쓰기");
+            dztwoinsert();
+        }
     }
 
-    public void douzoneInsert(){
+
+    public void dztwoinsert() {
 
         char answer = sc.nextLine().charAt(0);
         PostDto postDto = new PostDto();
-        if (answer == 'w' || answer == 'W'){
+        if (answer == 'w' || answer == 'W') {
 
             System.out.print("제목을 입력하세요 : ");
             String douzone_postTitle = sc.nextLine();
@@ -57,15 +73,16 @@ public class DouZoneTwoView {
         // TODO : 예외처리
         if (select.equals("Y") || select.equals("y")) {
             // TODO : 게시판 번호 조회를 어떻게 할 것인가?
-            douZoneTwoController.dozoneTwoInsert(postDto,"7");
+            System.out.println("작성한 글이 등록되었습니다.");
+            douZoneTwoController.dozoneTwoInsert(postDto, "7");
         }
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");
         }
 
-    }
-
-
 
     }
+}
+
+
 

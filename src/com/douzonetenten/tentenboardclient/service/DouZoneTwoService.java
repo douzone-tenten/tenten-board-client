@@ -14,16 +14,16 @@ public class DouZoneTwoService {
     private final PostDao postDao = new PostDao();
     private final DouZoneTwoDao douZoneTwoDao = new DouZoneTwoDao();
 
-    public ArrayList<DouZoneTwoJoinDto> douzoneFindByAll(){
+    public ArrayList<DouZoneTwoJoinDto> douzoneFindByAll(String boardNum){
         Connection connection = getConnection();
-        ArrayList<DouZoneTwoJoinDto> douzone_List = douZoneTwoDao.douZoneFindByAll(connection);
+        ArrayList<DouZoneTwoJoinDto> douzone_List = douZoneTwoDao.douZoneFindByAll(connection,boardNum);
         return douzone_List;
     }
 
 
-    public int douZoneTwoInsert(PostDto postDto, String boardNumber) {
+    public int douZoneTwoInsert(PostDto postDto, String boardNum) {
         Connection connection = getConnection();
-        int result = douZoneTwoDao.douzoneTwoInsert(connection, postDto, boardNumber);
+        int result = postDao.insertPost(connection, postDto, boardNum);
         if (result > 0) {
             commit(connection);
         } else rollback(connection);

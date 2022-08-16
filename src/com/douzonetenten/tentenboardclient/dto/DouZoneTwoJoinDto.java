@@ -7,7 +7,7 @@ public class DouZoneTwoJoinDto {
     // 조인 할 때 feild 추가
 
     private Long board_board_no;
-    private Long post_title;
+    private String post_title;
 
     private String username;
 
@@ -16,7 +16,7 @@ public class DouZoneTwoJoinDto {
     public DouZoneTwoJoinDto() {
     }
 
-    public DouZoneTwoJoinDto(Long board_board_no, Long post_title, String username, Timestamp created_at) {
+    public DouZoneTwoJoinDto(Long board_board_no, String post_title, String username, Timestamp created_at) {
         this.board_board_no = board_board_no;
         this.post_title = post_title;
         this.username = username;
@@ -32,11 +32,11 @@ public class DouZoneTwoJoinDto {
         this.board_board_no = board_board_no;
     }
 
-    public Long getPost_title() {
+    public String getPost_title() {
         return post_title;
     }
 
-    public void setPost_title(Long post_title) {
+    public void setPost_title(String  post_title) {
         this.post_title = post_title;
     }
 

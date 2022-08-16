@@ -3,10 +3,7 @@ package com.douzonetenten.tentenboardclient.dao;
 import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 import static com.douzonetenten.tentenboardclient.common.DBConnector.getConnection;
@@ -16,35 +13,38 @@ import static com.douzonetenten.tentenboardclient.service.UserService.loginUserC
 public class DouZoneTwoDao {
 
 
-    public ArrayList<DouZoneTwoJoinDto> douZoneFindByAll(Connection connection) {
+    public ArrayList<DouZoneTwoJoinDto> douZoneFindByAll(Connection connection,String boardNum) {
         ArrayList<DouZoneTwoJoinDto> list = null;
         PreparedStatement preparedStatement = null;
 //        String sql = "select * from post where board_board_no = 1";
 
-        String sql = "select board_board_no,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = 1";
+        String sql = "select board_board_no,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = ?";
 
 
         try {
-            list = new ArrayList<DouZoneTwoJoinDto>();
+
+
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,boardNum);
+            list = new ArrayList<DouZoneTwoJoinDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
                 douZoneTwoJoinDto.setBoard_board_no(Long.valueOf(resultSet.getString("board_board_no")));
-                douZoneTwoJoinDto.setPost_title(Long.valueOf(resultSet.getString("user_member_no")));
+                douZoneTwoJoinDto.setPost_title(resultSet.getString("post_title"));
                 douZoneTwoJoinDto.setUsername(resultSet.getString("username"));
                 douZoneTwoJoinDto.setCreated_at(resultSet.getTimestamp("created_at"));
 
                 list.add(douZoneTwoJoinDto);
 
             }
-            return list;
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        return list;
     }
 
     public int douzoneTwoInsert(Connection connection,PostDto postDto,String BoardNum) {
@@ -56,7 +56,7 @@ public class DouZoneTwoDao {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,BoardNum);
             preparedStatement.setLong(2,loginUserContext.get(0).getUserNo());
-            preparedStatement.setTimestamp(3,postDto.getCreatedAt());
+            preparedStatement.setTimestamp(3,new Timestamp(new java.util.Date().getTime()));
             preparedStatement.setString(4, postDto.getPostTitle());
             preparedStatement.setString(5, postDto.getPostBody());
 

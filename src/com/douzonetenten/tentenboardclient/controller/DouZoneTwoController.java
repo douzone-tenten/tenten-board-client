@@ -12,8 +12,8 @@ public class DouZoneTwoController {
 
 
 
-    public ArrayList<DouZoneTwoJoinDto> douzoneFindByAll() {
-        ArrayList<DouZoneTwoJoinDto> douzone_List = douZoneTwoService.douzoneFindByAll();
+    public ArrayList<DouZoneTwoJoinDto> douzoneFindByAll(String boardNum) {
+        ArrayList<DouZoneTwoJoinDto> douzone_List = douZoneTwoService.douzoneFindByAll(boardNum);
         return douzone_List;
     }
 
