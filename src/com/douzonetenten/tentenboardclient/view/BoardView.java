@@ -32,6 +32,6 @@ public class BoardView {
 
         System.out.print("조회할 게시글 번호를 입력하세요 : ");
         String selectPost = scanner.next();
-        // 6번 게시글 조회를 어떻게 할것인가?
+
     }
 }
