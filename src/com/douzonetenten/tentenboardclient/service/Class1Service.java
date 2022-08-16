@@ -15,7 +15,7 @@ public class Class1Service {
     private static final PostDao postDao = new PostDao();
     public static ArrayList<JoinPostDto> findByPost(String selectNum) {
         Connection connection = getConnection();
-        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, selectNum);
+        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, "2");
         return joinPostDtoArrayList;
     }
 }

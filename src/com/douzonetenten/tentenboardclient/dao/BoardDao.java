@@ -12,7 +12,7 @@ public class BoardDao {
     /**
      * 게시판 목록 조회
      */
-    public ArrayList<BoardDto> findAllByBoard(Connection connection, String selectNum) {
+    public ArrayList<BoardDto> findAllByBoard(Connection connection) {
         ArrayList<BoardDto> boardDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
@@ -23,8 +23,7 @@ public class BoardDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 BoardDto boardDto = new BoardDto();
-                boardDto.setBoardNo(resultSet.getLong("board_no"));
-                boardDto.setBoardName(resultSet.getString("board_name"));
+                boardDto.setBoardNo(resultSet.getLong("board_board_no"));
                 boardDtoArrayList.add(boardDto);
             }
         } catch (SQLException e) {

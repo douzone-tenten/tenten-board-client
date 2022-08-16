@@ -17,7 +17,7 @@ public class CategoriesView {
     public void start(){
         clearConsole();
         displayTitle("전체 게시판 목록");
-        ArrayList< BoardDto> boardDtoArrayList = boardController.findAllByBoard();
+        ArrayList<BoardDto> boardDtoArrayList = boardController.findAllByBoard();
         for(BoardDto boardDto : boardDtoArrayList){
             System.out.println(boardDto.toStringByAll());
         }

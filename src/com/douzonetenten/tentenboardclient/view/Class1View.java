@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Class1View {
 
+    private PostView postView = new PostView();
+
     Class1Controller class1PostController = new Class1Controller();
 
     public void start(String selectNum) { //목록 조회
@@ -27,6 +29,24 @@ public class Class1View {
                 System.out.println(joinPostDto.findPostToString());
             }
         }
+
+        System.out.println("1. 게시글 작성");
+        System.out.println("2. 게시글 삭제");
+        Scanner scanner = new Scanner(System.in);
+
+        int num = scanner.nextInt();
+        if (num == 1){
+            String boardNo = "2";
+            postView.insertPost(boardNo);
+        }
+
+
+
+        
+
+
+        
+
     }
 
 

@@ -10,7 +10,7 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.clearCons
 public class PostView {
     private PostController postController = new PostController();
     private Scanner scanner = new Scanner(System.in);
-    public void insertPost(){
+    public void insertPost(String boardNo){
         /**
          * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
          */
@@ -33,7 +33,7 @@ public class PostView {
         // TODO : 예외처리
         if (select.equals("Y") || select.equals("y")) {
             // TODO : 게시판 번호 조회를 어떻게 할 것인가?
-            postController.insertPost(postDto, "1");
+            postController.insertPost(postDto, boardNo);
         }
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");
