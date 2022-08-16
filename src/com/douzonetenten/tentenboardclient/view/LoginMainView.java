@@ -10,6 +10,8 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.displayEr
 public class LoginMainView {
     private Scanner scanner = new Scanner(System.in);
     UserController userController = new UserController();
+
+    CategoriesView boardView = new CategoriesView();
     public void start(){
         while (true){
             System.out.print("안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
@@ -29,7 +31,7 @@ public class LoginMainView {
             }
 
             if (selectNum.equals("1")){
-                System.out.println("1번");
+                boardView.start();
             }
             if (selectNum.equals("2")){
                 System.out.println("2번");
