@@ -3,9 +3,11 @@ package com.douzonetenten.tentenboardclient.service;
 
 import com.douzonetenten.tentenboardclient.dao.PostDao;
 import com.douzonetenten.tentenboardclient.dao.notice_postDao;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
@@ -30,5 +32,17 @@ public class noticeService {
             rollback(connection);
         }
         return result;
+    }
+
+    public ArrayList<PostDto> findAllByPost(){
+        Connection connection = getConnection();
+        ArrayList<PostDto> postDtoArrayList = postDao.findAllByPost(connection);
+        return postDtoArrayList;
+    }
+
+    public ArrayList<JoinPostDto> findByPost(String boardNum){
+        Connection connection = getConnection();
+        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, boardNum);
+        return joinPostDtoArrayList;
     }
 }

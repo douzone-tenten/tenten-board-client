@@ -6,14 +6,14 @@ import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BoardView {
+public class notice_boardView {
     PostController PostController = new PostController();
 
     public void start(String selectNum) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         ArrayList<JoinPostDto> getPostList = PostController.findByPost(selectNum);
 
-        System.out.println("통합 게시판");
+        System.out.println("공지사항 게시판");
         System.out.printf("--------------------------------\n" +
                 "게시글 번호      제목        작성자      작성시간\n" +
                 "--------------------------------\n");
@@ -30,7 +30,7 @@ public class BoardView {
         }
 
         System.out.print("조회할 게시글 번호를 입력하세요 : ");
-        String selectPost = scanner.next();
+        String selectPost = sc.next();
         // 6번 게시글 조회를 어떻게 할것인가?
     }
 }

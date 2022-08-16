@@ -25,8 +25,10 @@ public class notice_postView {
         System.out.println("N : 취소하기");
         char answer = sc.next().charAt(0);
 
+
         if(answer == 'Y' || answer == 'y'){
             PostController.insertPost(postDto, "3");
+            System.out.println("공지사항이 정상적으로 등록되었습니다.");
         }else if(answer == 'N' || answer == 'n'){
             System.out.println("글 작성을 취소합니다.");
         }else{
