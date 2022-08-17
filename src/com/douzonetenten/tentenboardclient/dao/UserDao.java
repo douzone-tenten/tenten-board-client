@@ -1,15 +1,13 @@
 package com.douzonetenten.tentenboardclient.dao;
 
 import com.douzonetenten.tentenboardclient.dto.UserDto;
+import com.douzonetenten.tentenboardclient.exception.user.UnAuthorizationException;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDao {
-    public UserDto login(Connection connection, UserDto userDto) {
+    public UserDto login(Connection connection, UserDto userDto) throws UnAuthorizationException {
         UserDto loginUserDto = new UserDto();
-
         try {
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username = ? AND password = ?");
@@ -22,20 +20,14 @@ public class UserDao {
             loginUserDto.setUsername(resultSet.getString("username"));
             loginUserDto.setName(resultSet.getString("name"));
             loginUserDto.setDepartment(resultSet.getString("department"));
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new UnAuthorizationException();
         }
         return loginUserDto;
     }
 
 
     public int insertUser(Connection connection, UserDto userDto) {
-        /**
-         * UTC 적용필요
-         * INSERT INTO 를 했는데, 회원이 이미 있음에도,
-         * 덮어 써져버리는 현상 발생함.
-         */
         try {
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement("INSERT INTO user(username,password,department,name,created_at) values (?,?,?,?,?)");

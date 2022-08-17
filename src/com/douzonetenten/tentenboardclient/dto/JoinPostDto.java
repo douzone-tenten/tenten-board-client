@@ -2,6 +2,7 @@ package com.douzonetenten.tentenboardclient.dto;
 
 import java.sql.Timestamp;
 
+
 public class JoinPostDto {
     private Long postId;
     private Long boardNo;
