@@ -13,15 +13,16 @@ public class CategoriesView {
     BoardView boardView = new BoardView();
     Class1View class1View = new Class1View();
     DouZoneTwoView douZoneTwoView = new DouZoneTwoView();
+    AnonymousView anonymousView = new AnonymousView();
     private Scanner scanner = new Scanner(System.in);
     BoardController boardController = new BoardController();
     public void start(){
         clearConsole();
         displayTitle("전체 게시판 목록");
-        ArrayList<BoardDto> boardDtoArrayList = boardController.findAllByBoard();
+        ArrayList< BoardDto> boardDtoArrayList = boardController.findAllByBoard();
         for(BoardDto boardDto : boardDtoArrayList){
             System.out.println(boardDto.toStringByAll());
-        }
+        } //각 게시판 접근 후 뒤로가기로 CategoriesView의 start()를 호출시키면 stackoverflow 발생
         while (true){
             System.out.print("\n어느 게시판을 선택하시겠습니까? : ");
             String selectNum = scanner.next();
@@ -42,6 +43,7 @@ public class CategoriesView {
             }
             if (selectNum.equals("5")){
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
+                anonymousView.start(selectNum);
             }
             if (selectNum.equals("6")){
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
