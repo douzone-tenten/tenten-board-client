@@ -18,6 +18,8 @@ public class DouZoneTwoDao {
         PreparedStatement preparedStatement = null;
 //        String sql = "select * from post where board_board_no = 1";
 
+
+
         String sql = "select board_board_no,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = ?";
 
 
@@ -97,6 +99,17 @@ public class DouZoneTwoDao {
 
         return result;
     }
+
+    public int douzoneTwoDelete(Connection connection, String BoardNum){
+        int result = 0;
+        PreparedStatement preparedStatement = null;
+        String sql = "Delete post ";
+
+        return result;
+    }
+
+    // login index 4 = name
+
 
 
 
