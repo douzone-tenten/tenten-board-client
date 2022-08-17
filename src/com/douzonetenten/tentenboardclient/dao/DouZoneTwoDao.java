@@ -20,7 +20,7 @@ public class DouZoneTwoDao {
 
 
 
-        String sql = "select board_board_no,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = ?";
+        String sql = "select post_id,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = ?";
 
 
         try {
@@ -33,7 +33,7 @@ public class DouZoneTwoDao {
 
             while (resultSet.next()) {
                 DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
-                douZoneTwoJoinDto.setBoard_board_no(Long.valueOf(resultSet.getString("board_board_no")));
+                douZoneTwoJoinDto.setpost_id(Long.valueOf(resultSet.getString("post_id")));
                 douZoneTwoJoinDto.setPost_title(resultSet.getString("post_title"));
                 douZoneTwoJoinDto.setUsername(resultSet.getString("username"));
                 douZoneTwoJoinDto.setCreated_at(resultSet.getTimestamp("created_at"));

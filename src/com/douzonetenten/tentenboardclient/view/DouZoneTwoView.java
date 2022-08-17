@@ -42,7 +42,7 @@ public class DouZoneTwoView {
 
 
             System.out.println("원하는 메뉴를 선택하세요");
-            System.out.println("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지      w. 글쓰기");
+            System.out.println("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지   r.상세조회   w. 글쓰기");
             dztwoinsert();
         }
     }

@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class DouZoneTwoJoinDto {
     // 조인 할 때 feild 추가
 
-    private Long board_board_no;
+    private Long post_id;
     private String post_title;
 
     private String username;
@@ -16,20 +16,20 @@ public class DouZoneTwoJoinDto {
     public DouZoneTwoJoinDto() {
     }
 
-    public DouZoneTwoJoinDto(Long board_board_no, String post_title, String username, Timestamp created_at) {
-        this.board_board_no = board_board_no;
+    public DouZoneTwoJoinDto(Long post_id, String post_title, String username, Timestamp created_at) {
+        this.post_id = post_id;
         this.post_title = post_title;
         this.username = username;
         this.created_at = created_at;
     }
 
 
-    public Long getBoard_board_no() {
-        return board_board_no;
+    public Long getpost_id() {
+        return post_id;
     }
 
-    public void setBoard_board_no(Long board_board_no) {
-        this.board_board_no = board_board_no;
+    public void setpost_id(Long post_id) {
+        this.post_id = post_id;
     }
 
     public String getPost_title() {
@@ -59,10 +59,7 @@ public class DouZoneTwoJoinDto {
     @Override
     public String toString() {
 
-        return  "PostDto{" +username +
-                "boardNo=" + board_board_no +
-                ", memberNo=" + post_title +
-                ", postId=" + created_at +
-                '}';
+        return  " " + post_id + "    " + post_title +"    "+ username +"    "+ created_at;
+
     }
 }
