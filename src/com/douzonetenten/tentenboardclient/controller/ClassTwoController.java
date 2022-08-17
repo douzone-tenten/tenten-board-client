@@ -1,30 +1,32 @@
 package com.douzonetenten.tentenboardclient.controller;
 
 import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.service.ClassTwoService;
 
 import java.util.ArrayList;
 
 public class ClassTwoController {
-    private final ClassTwoService douZoneTwoService = new ClassTwoService();
+    private final ClassTwoService classTwoService = new ClassTwoService();
 
 
 
     public ArrayList<ClassTwoJoinDto> douzoneFindByAll(String boardNum) {
-        ArrayList<ClassTwoJoinDto> douzone_List = douZoneTwoService.douzoneFindByAll(boardNum);
+        ArrayList<ClassTwoJoinDto> douzone_List = classTwoService.douzoneFindByAll(boardNum);
         return douzone_List;
     }
 
-//    public ArrayList<DouZoneTwoJoinDto> douzoneTwoDetailSelect(String boardNum){
-//        ArrayList<DouZoneTwoJoinDto> dozone_List = douZoneTwoService.douzoneTwoDetailSelect(boardNum);
-//        return dozone_List;
-//    }
+    public ArrayList<JoinPostDto> douzoneTwoDetailSelect(int post_id){
+        ArrayList<JoinPostDto> dozone_List = classTwoService.douzoneTwoDetailSelect(post_id);
+        System.out.println(dozone_List);
+        return dozone_List;
+    }
 
 
 
     public void dozoneTwoInsert(PostDto postDto, String BoardNum){
-        douZoneTwoService.douZoneTwoInsert(postDto,BoardNum);
+        classTwoService.douZoneTwoInsert(postDto,BoardNum);
 
     }
 

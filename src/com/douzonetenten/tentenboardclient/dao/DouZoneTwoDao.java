@@ -1,6 +1,7 @@
 package com.douzonetenten.tentenboardclient.dao;
 
 import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.*;
@@ -47,24 +48,29 @@ public class DouZoneTwoDao {
         return list;
     }
 
-    public ArrayList<ClassTwoJoinDto> dzTwoDeTailSelect(Connection connection, String boardNum) {
-        ArrayList<ClassTwoJoinDto> list = null;
+    public ArrayList<JoinPostDto> dzTwoDeTailSelect(Connection connection, int post_id) {
+        ArrayList<JoinPostDto> list = null;
         PreparedStatement preparedStatement = null;
 
-        String sql = "select post_id,post_title,post_body,username,u.created_at from post left join user u on post.user_member_no = u.user_no where post_id = ?";
+        String sql = "select board_board_no, post_id, post_title, post_body, u.username, u.name, p.created_at from post p left join user u on p.user_member_no = u.user_no where p.post_id = ?";
         try {
-            ClassTwoJoinDto douZoneTwoJoinDto = new ClassTwoJoinDto();
+
+                JoinPostDto joinPostDto = new JoinPostDto();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, douZoneTwoJoinDto.getpost_id());
-            list = new ArrayList<ClassTwoJoinDto>();
+            preparedStatement.setLong(1, post_id);
+            list = new ArrayList<JoinPostDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                douZoneTwoJoinDto.setPost_title(resultSet.getString("post_title"));
-                douZoneTwoJoinDto.setPost_body(resultSet.getString("post_body"));
-                douZoneTwoJoinDto.setUsername(resultSet.getString("username"));
-                douZoneTwoJoinDto.setCreated_at(resultSet.getTimestamp("created_at"));
 
-                list.add(douZoneTwoJoinDto);
+                joinPostDto.setBoardNo(Long.valueOf(resultSet.getString("board_board_no")));
+                joinPostDto.setPostId(Long.valueOf(resultSet.getString("post_id")));
+                joinPostDto.setPostTitle(resultSet.getString("post_title"));
+                joinPostDto.setPostBody(resultSet.getString("post_body"));
+                joinPostDto.setUsername(resultSet.getString("username"));
+                joinPostDto.setName(resultSet.getString("name"));
+                joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+
+                list.add(joinPostDto);
 
             }
 

@@ -3,6 +3,7 @@ package com.douzonetenten.tentenboardclient.service;
 import com.douzonetenten.tentenboardclient.dao.DouZoneTwoDao;
 import com.douzonetenten.tentenboardclient.dao.PostDao;
 import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.Connection;
@@ -19,6 +20,14 @@ public class ClassTwoService {
         ArrayList<ClassTwoJoinDto> douzone_List = douZoneTwoDao.douZoneFindByAll(connection,boardNum);
         return douzone_List;
     }
+
+    public  ArrayList<JoinPostDto> douzoneTwoDetailSelect(int post_id){
+        Connection connection = getConnection();
+        ArrayList<JoinPostDto> douzone_List = douZoneTwoDao.dzTwoDeTailSelect(connection, post_id);
+        return douzone_List;
+
+    }
+
 
 
     public int douZoneTwoInsert(PostDto postDto, String boardNum) {

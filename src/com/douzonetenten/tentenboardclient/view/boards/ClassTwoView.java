@@ -3,6 +3,7 @@ package com.douzonetenten.tentenboardclient.view.boards;
 import com.douzonetenten.tentenboardclient.controller.ClassTwoController;
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.ArrayList;
@@ -46,20 +47,27 @@ public class ClassTwoView {
                 dztwoinsert();
             }
             if (answer.equals("r")  || answer.equals("R")){
-                dztwodetailselect();
+                System.out.println("상세조회할 게시글 번호를 입력하세요 : ");
+                int detail = sc.nextInt();
+                dztwodetailselect(detail);
             }
+
 
         }
 
 
+    public void dztwodetailselect(int port_id){
 
-    public void dztwodetailselect(){
-
-        System.out.println("상세조회할 게시글 번호를 입력하세요 : ");
-        int detail = sc.nextInt();
-
+        ArrayList<JoinPostDto> boardDtoArrayList = douZoneTwoController.douzoneTwoDetailSelect(port_id);
+        for (JoinPostDto joinPostDto : boardDtoArrayList){
+            System.out.println(joinPostDto.detailPostToString());
+        }
 
     }
+
+
+
+
 
 
     public void dztwoinsert() {
