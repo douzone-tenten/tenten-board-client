@@ -17,6 +17,13 @@ public class DouZoneTwoController {
         return douzone_List;
     }
 
+    public ArrayList<DouZoneTwoJoinDto> douzoneTwoDetailSelect(String boardNum){
+        ArrayList<DouZoneTwoJoinDto> dozone_List = douZoneTwoService.douzoneTwoDetailSelect(boardNum);
+        return dozone_List;
+    }
+
+
+
     public void dozoneTwoInsert(PostDto postDto, String BoardNum){
         douZoneTwoService.douZoneTwoInsert(postDto,BoardNum);
 

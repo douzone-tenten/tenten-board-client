@@ -43,8 +43,24 @@ public class DouZoneTwoView {
 
             System.out.println("원하는 메뉴를 선택하세요");
             System.out.println("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지   r.상세조회   w. 글쓰기");
-            dztwoinsert();
+            char answer = sc.nextLine().charAt(0);
+            if (answer == 'w' || answer == 'W') {
+                dztwoinsert();
+            }
+            if (answer == 'r' || answer == 'R'){
+                dztwodetailselect();
+            }
+
         }
+    }
+
+
+    public void dztwodetailselect(){
+
+        System.out.println("상세조회할 게시글 번호를 입력하세요 : ");
+        int detail = sc.nextInt();
+
+
     }
 
 
@@ -52,7 +68,7 @@ public class DouZoneTwoView {
 
         char answer = sc.nextLine().charAt(0);
         PostDto postDto = new PostDto();
-        if (answer == 'w' || answer == 'W') {
+
 
             System.out.print("제목을 입력하세요 : ");
             String douzone_postTitle = sc.nextLine();
@@ -67,7 +83,7 @@ public class DouZoneTwoView {
             System.out.println("Y : 등록하기");
             System.out.println("B : 취소하기");
 
-        }
+
 
         String select = sc.next();
         // TODO : 예외처리

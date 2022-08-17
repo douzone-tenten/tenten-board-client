@@ -49,6 +49,36 @@ public class DouZoneTwoDao {
         return list;
     }
 
+    public ArrayList<DouZoneTwoJoinDto> dzTwoDeTailSelect(Connection connection,String boardNum) {
+        ArrayList<DouZoneTwoJoinDto> list = null;
+        PreparedStatement preparedStatement = null;
+
+        String sql = "select post_id,post_title,post_body,username,u.created_at from post left join user u on post.user_member_no = u.user_no where post_id = ?";
+        try {
+            DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, douZoneTwoJoinDto.getpost_id());
+            list = new ArrayList<DouZoneTwoJoinDto>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                douZoneTwoJoinDto.setPost_title(resultSet.getString("post_title"));
+                douZoneTwoJoinDto.setPost_body(resultSet.getString("post_body"));
+                douZoneTwoJoinDto.setUsername(resultSet.getString("username"));
+                douZoneTwoJoinDto.setCreated_at(resultSet.getTimestamp("created_at"));
+
+                list.add(douZoneTwoJoinDto);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+
+    }
+
+
+
     public int douzoneTwoInsert(Connection connection,PostDto postDto,String BoardNum) {
         int result =0;
         PreparedStatement preparedStatement = null;
@@ -109,10 +139,5 @@ public class DouZoneTwoDao {
     }
 
     // login index 4 = name
-
-
-
-
-
 
 }
