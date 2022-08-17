@@ -79,12 +79,9 @@ public class notice_postDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 JoinPostDto joinPostDto = new JoinPostDto();
-                joinPostDto.setBoardNo(Long.valueOf(resultSet.getString("board_board_no")));
                 joinPostDto.setPostId(Long.valueOf(resultSet.getString("post_id")));
                 joinPostDto.setPostTitle(resultSet.getString("post_title"));
-                joinPostDto.setPostBody(resultSet.getString("post_body"));
                 joinPostDto.setUsername(resultSet.getString("username"));
-                joinPostDto.setName(resultSet.getString("name"));
                 joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
                 joinPostDtoArrayList.add(joinPostDto);
             }
