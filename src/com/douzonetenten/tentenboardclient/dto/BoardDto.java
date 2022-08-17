@@ -20,7 +20,7 @@ public class BoardDto {
         this.boardName = boardName;
     }
 
-    public BoardDto(String boardName) {
+    public BoardDto() {
         this.boardName = boardName;
     }
 

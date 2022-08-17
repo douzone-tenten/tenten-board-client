@@ -1,6 +1,5 @@
 package com.douzonetenten.tentenboardclient.view;
 
-import com.douzonetenten.tentenboardclient.controller.UserController;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.view.feature.Display.displayError;
@@ -8,6 +7,9 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.displayEr
 public class MainView {
     private Scanner scanner = new Scanner(System.in);
     private UserView userView = new UserView();
+
+    public static void clearConsole() {
+    }
 
     public void start() {
         while (true) {
