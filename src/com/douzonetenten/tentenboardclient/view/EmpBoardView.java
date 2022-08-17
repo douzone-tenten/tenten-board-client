@@ -44,7 +44,7 @@ public class EmpBoardView {
         String selectPost = scanner.next();
         // b. 뒤로가기, n. 다음 페이지, f. 이전 페이지, w. 글쓰기로 이동
         if (selectPost == "w") { /* 게시글 쓰기 (CREATE) */
-            insertPost(PostDto postDto); // ??
+            insertPost(); // ??
         }
         // 6번 게시글 조회를 어떻게 할것인가? 입력받은 숫자 == post_id
         /* 게시글 상세조회 (READ) */
@@ -76,7 +76,7 @@ public class EmpBoardView {
         }
 
         // 메소드 선언 및 호출에서 모르겠음
-        public static void insertPost(PostDto postDto) { /* 글쓰기 메소드 */
+        public static void insertPost() { /* 글쓰기 메소드 */
             Display.clearConsole();
             Display.displayTitle("글쓰기");
             postDto.setUserNo(userDto.getUserNo()); // 로그인한 회원의 넘버 가져옴
