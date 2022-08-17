@@ -21,7 +21,7 @@ public class CategoriesView {
         ArrayList< BoardDto> boardDtoArrayList = boardController.findAllByBoard();
         for(BoardDto boardDto : boardDtoArrayList){
             System.out.println(boardDto.toStringByAll());
-        }
+        } //각 게시판 접근 후 뒤로가기로 CategoriesView의 start()를 호출시키면 stackoverflow 발생
         while (true){
             System.out.print("\n어느 게시판을 선택하시겠습니까? : ");
             String selectNum = scanner.next();
