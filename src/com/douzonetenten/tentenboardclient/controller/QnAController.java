@@ -21,8 +21,8 @@ public class QnAController {
 
 
     //QnA 게시글 작성
-    public void insertQnA(PostDto postDto, UserDto userDto, String selectNum) {
-        qnAService.insertQnA(postDto, userDto, selectNum);
+    public void insertQnA(PostDto postDto, Long userId, String selectNum) {
+        qnAService.insertQnA(postDto, userId, selectNum);
     }
 
 

@@ -19,8 +19,6 @@ public class ClassTwoService {
         ArrayList<ClassTwoJoinDto> douzone_List = douZoneTwoDao.douZoneFindByAll(connection,boardNum);
         return douzone_List;
     }
-
-
     public int douZoneTwoInsert(PostDto postDto, String boardNum) {
         Connection connection = getConnection();
         int result = postDao.insertPost(connection, postDto, boardNum);

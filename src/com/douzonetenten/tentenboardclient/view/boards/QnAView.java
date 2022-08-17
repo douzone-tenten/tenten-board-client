@@ -2,20 +2,21 @@ package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.QnAController;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
-import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 
 public class QnAView {
 
+
     static QnAController qnAController = new QnAController();
 
     public static void start(String selectNum) {
-
         Scanner scanner = new Scanner(System.in);
+
 
         ArrayList<PostDto> getPostList = qnAController.findAllByQnA(selectNum);
 
@@ -69,14 +70,6 @@ public class QnAView {
 
 
 
-
-
-
-
-
-
-
-
     //QnA 목록 조회
 //    public void findAllByPost() {
 //        System.out.println("전체 QnA의 목록을 조회합니다.");
@@ -85,13 +78,10 @@ public class QnAView {
 
     //QnA 게시글 작성
     public static void insertQnA(String selectNum) {
-
         Scanner scanner = new Scanner(System.in);
-
         clearConsole();
 
         PostDto postDto = new PostDto();
-
         System.out.print("QnA 제목을 입력하세요 : ");
         String qnaTitle = scanner.nextLine();
 
@@ -110,27 +100,21 @@ public class QnAView {
         System.out.println("Y : 등록하기");
         System.out.println("B : 취소하기");
         String select = scanner.next();
+        Long userId = loginUserContext.get(0).getUserNo();
 
         if(select.equals("Y")){
-            qnAController.insertQnA(new PostDto(), new UserDto(), selectNum);
+            qnAController.insertQnA(postDto, userId, selectNum);
         }
         if(select.equals("B")){
             System.out.println("글 작성을 취소합니다.");
         }
     }
-
-
     //QnA 게시글 삭제
-    public void  deleteQnA() {
-
+    public void deleteQnA() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("삭제할 QnA 번호를 입력해주세요 : ");
         String selectQnA = scanner.next();
         qnAController.deleteQnA(selectQnA);
         System.out.println("해당 QnA 게시글을 삭제했습니다.");
     }
-
-
-
 }

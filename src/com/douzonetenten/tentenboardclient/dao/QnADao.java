@@ -41,12 +41,12 @@ public class QnADao {
 
 
     //QnA 게시글 작성
-    public int insertQnA(Connection connection, PostDto postDto, UserDto userDto, String selectNum){
+    public int insertQnA(Connection connection, PostDto postDto, Long userId, String selectNum){
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO post (board_board_no, user_member_no, created_at, post_title, post_body) values (?,?,?,?,?)");
             preparedStatement.setString(1, selectNum);
-            preparedStatement.setLong(2, userDto.getUserNo());
+            preparedStatement.setLong(2, userId);
             preparedStatement.setTimestamp(3, new Timestamp((new Date()).getTime()));
             preparedStatement.setString(4, postDto.getPostTitle());
             preparedStatement.setString(5, postDto.getPostBody());
