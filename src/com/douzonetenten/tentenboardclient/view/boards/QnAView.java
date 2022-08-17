@@ -10,6 +10,8 @@ import java.util.Scanner;
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSelectMenu;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
 public class QnAView {
 
@@ -23,7 +25,7 @@ public class QnAView {
         while(true) {
             ArrayList<JoinPostDto> getPostList = qnAController.findAllByQnA(selectNum);
 
-            System.out.println("QnA 게시판");
+            uiTitle("QnA 게시판");
             System.out.printf("-------------------------------------------\n" +
                               "게시글 번호\t\t제목\t\t작성자\t\t작성시간\n" +
                               "-------------------------------------------\n");
@@ -38,7 +40,7 @@ public class QnAView {
             }
 
             System.out.println("b. 뒤로가기\t\tw. 글쓰기\t\td. 상세보기");
-            System.out.print("메뉴를 입력하세요 : ");
+            uiSelectMenu();
             String selectPost = scanner.next();
 
 
@@ -116,7 +118,7 @@ public class QnAView {
             qnAController.insertQnA(postDto, userId, selectNum);
         }
         if(select.equals("B")){
-            System.out.println("글 작성을 취소합니다.");
+            logInfo("글 작성을 취소합니다.");
         }
     }
 
@@ -137,7 +139,7 @@ public class QnAView {
     public static void deleteQnA(String selectDetailNum) {
         qnAController.deleteQnA(selectDetailNum);
         clearConsole();
-        System.out.println("해당 QnA 게시글을 삭제했습니다.\n\n");
+        logInfo("해당 QnA 게시글을 삭제했습니다.\n\n");
     }
 
 
@@ -171,10 +173,10 @@ public class QnAView {
             qnAController.updateQnA(postDto, selectDetailNum);
         }
         if(select.equals("B")){
-            System.out.println("글 작성을 취소합니다.");
+            logInfo("글 작성을 취소합니다.");
         }
 
         clearConsole();
-        System.out.println("해당 QnA 게시글을 수정하였습니다.\n\n");
+        logInfo("해당 QnA 게시글을 수정하였습니다.\n\n");
     }
 }

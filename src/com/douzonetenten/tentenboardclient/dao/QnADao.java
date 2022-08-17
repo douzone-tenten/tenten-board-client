@@ -18,7 +18,7 @@ public class QnADao {
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT post_id, post_title, username FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
+                    "SELECT post_id, post_title, username, p.created_at FROM post p LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
 
             joinPostDtoArrayList = new ArrayList();
             preparedStatement.setString(1, selectNum);
@@ -29,7 +29,7 @@ public class QnADao {
                 joinPostDto.setPostId(resultSet.getLong("post_id"));
                 joinPostDto.setPostTitle(resultSet.getString("post_title"));
                 joinPostDto.setUsername(resultSet.getString("username"));
-               // joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+                joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
 
                 joinPostDtoArrayList.add(joinPostDto);
             }
@@ -66,7 +66,7 @@ public class QnADao {
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT post_title, username, post_body FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE post_id = ?");
+                    "SELECT post_title, username, p.created_at, post_body FROM post p LEFT JOIN user u ON user_member_no = u.user_no WHERE post_id = ?");
 
             joinPostDtoListDetail = new ArrayList<>();
             preparedStatement.setString(1, selectDetailNum);
@@ -76,7 +76,7 @@ public class QnADao {
                 JoinPostDto joinPostDto = new JoinPostDto();
                 joinPostDto.setPostTitle(resultSet.getString("post_title"));
                 joinPostDto.setUsername(resultSet.getString("username"));
-               // joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+                joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
                 joinPostDto.setPostBody(resultSet.getString("post_body"));
 
                 joinPostDtoListDetail.add(joinPostDto);
