@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBConnector {
     private static Connection connection = null;
     public static Connection getConnection() {
-        String url = "jdbc:mysql://43.200.9.118:52867/tentenboard";
+        String url = "jdbc:mysql://218.239.207.244:52867/tentenboard";
         String username = "tenten";
         String password = "1010board";
         if (connection == null) {

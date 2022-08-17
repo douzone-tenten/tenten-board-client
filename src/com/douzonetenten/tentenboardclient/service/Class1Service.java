@@ -35,4 +35,10 @@ public class Class1Service {
         } else rollback(connection);
         return result;
     }
+
+    public static ArrayList<JoinPostDto> detailPost(String selectPost) {//선택 포스팅 보기
+        Connection connection = getConnection();
+        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPostDetail(connection, selectPost);
+        return joinPostDtoArrayList;
+    }
 }

@@ -38,16 +38,12 @@ public class Class1View {
 
         System.out.println("1. 게시글 작성");
         System.out.println("2. 게시글 삭제");
-
+        System.out.println("3. 게시글 수정");
+        System.out.println("4. 게시글 상세 조회"); //구현 예정.
+        System.out.println("9. 프로그램 종료");
+        System.out.println("999. 메인 메뉴로");
 
         int num = scanner.nextInt();
-//        if (num == 1){
-//            String boardNo = "2";
-//            postView.insertPost(boardNo);
-//        }
-//        if (num == 2){
-//            postView.deletePost();
-//        }
         String boardNo = selectNum;
         if (num == 1){//게시글 작성
             insertPost(boardNo);
@@ -55,14 +51,26 @@ public class Class1View {
         if (num == 2){
             deletePost(boardNo);
         }
-        
-        
+        if(num == 3){
+            editPost(boardNo);
+        }
+        if(num == 4){
+            detailPost(boardNo);
+        }
+        if (num == 9){
+            System.out.println("프로그램을 종료합니다.");
+            System.exit(0);
+        }
+        if(num == 999){
+            LoginMainView loginMainView = new LoginMainView();
+            loginMainView.start();
+        }
+
+        scanner.close();
     }
-    public void insertPost(String boardNo){
+
+    public void insertPost(String boardNo){ //게시글 작성
         Scanner scanner = new Scanner(System.in);
-        /*
-         * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
-         */
         clearConsole();
         PostDto postDto = new PostDto();
         System.out.println("제목을 입력하세요 : ");
@@ -87,12 +95,45 @@ public class Class1View {
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");
         }
+        scanner.close();
     }
 
-    public void deletePost(String boardNo){
+    public void deletePost(String boardNo){ //게시글 삭제
         Scanner scanner = new Scanner(System.in);
         System.out.println("삭제할 포스트 번호를 입력해주세요.");
         String selectPost = scanner.next();
         Class1Controller.deletePost(selectPost);
+
+        scanner.close();
     }
+
+    private void editPost(String boardNo) { //TODO : 상세보기 후 수정하기
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("수정할 포스트 번호를 입력해주세요.");
+        String selectPost = scanner.next();
+        Class1Controller.editPost(selectPost);
+
+        scanner.close();
+    }
+
+    private void detailPost(String boardNo) {//게시글 상세 보기
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("글 내용을 보고싶은 포스트 번호를 입력해주세요.");
+        String selectPost = scanner.next();
+        //Class1Controller.detailPost(selectPost);
+        ArrayList<JoinPostDto> getClass1SelectPost = Class1Controller.detailPost(selectPost);
+
+
+        if (getClass1SelectPost.isEmpty()) {
+            System.out.println("포스트가 삭제되었거나 존재하지않습니다.");
+        }
+        if (!(getClass1SelectPost.isEmpty())) {
+            for (JoinPostDto joinPostDto : getClass1SelectPost) {
+                System.out.println(joinPostDto.findSelectDetailPostToString());
+            }
+        }
+
+        scanner.close();
+    }
+
 }
