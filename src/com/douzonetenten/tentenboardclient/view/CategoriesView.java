@@ -14,7 +14,7 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTit
 public class CategoriesView {
     FreeBoardView boardView = new FreeBoardView();
     ClassOneVIew class1View = new ClassOneVIew();
-    ClassTwoView douZoneTwoView = new ClassTwoView();
+    ClassTwoView classTwoView = new ClassTwoView();
     AnonymousView anonymousView = new AnonymousView();
     BoardController boardController = new BoardController();
 
@@ -43,13 +43,15 @@ public class CategoriesView {
                 QnAView.start("4");
             }
             if (selectNum.equals("5")) {
-                anonymousView.start(selectNum);
+                classTwoView.dztwostart(selectNum);
             }
             if (selectNum.equals("6")) {
-                boardView.start("6");
+
+                anonymousView.start(selectNum);
             }
             if (selectNum.equals("7")) {
-                douZoneTwoView.dztwostart(selectNum);
+                boardView.start("6");
+
             }
             if (selectNum.equals("9")) {
                 logInfo("이전 메뉴로 돌아갑니다.");

@@ -24,9 +24,9 @@ public class PostView {
          */
         clearConsole();
         PostDto postDto = new PostDto();
-        System.out.print("제목을 입력하세요 : ");
+        System.out.println("제목을 입력하세요 : ");
         String postTitle = scanner.nextLine();
-        System.out.print("글 내용을 입력하세요.");
+        System.out.println("글 내용을 입력하세요.");
         String postBody = scanner.nextLine();
         postDto.setPostTitle(postTitle);
         postDto.setPostBody(postBody);

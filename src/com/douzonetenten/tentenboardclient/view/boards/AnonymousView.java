@@ -48,11 +48,9 @@ public class AnonymousView {
             }
 
 
-
             // 상세조회
             //            System.out.print("조회할 게시글 번호를 입력하세요(없을 시 x ) : ");
             //            String selectPost = scanner.next();
-
 
             uiSelectMenu();
             // TODO : 메뉴 선택 공통컴포넌트
