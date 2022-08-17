@@ -6,7 +6,7 @@ import com.douzonetenten.tentenboardclient.service.PostService;
 
 import java.util.ArrayList;
 
-public class notice_Controller {
+public class NoticeController {
 
     private static final PostService postService = new PostService();
 

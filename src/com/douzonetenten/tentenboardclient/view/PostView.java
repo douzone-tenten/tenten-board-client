@@ -13,15 +13,13 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.clearCons
 public class PostView {
 
    UserService userService = new UserService();
-
-   ;
     private PostController postController = new PostController();
     private Scanner scanner = new Scanner(System.in);
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // insertPost()  함수에  접속한 게시판의 번호를 전달하는 파라미터(selectNum) 추가
+
     public void insertPost(String selecctNum){
-    public void insertPost(String boardNo){
         /**
          * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
          */

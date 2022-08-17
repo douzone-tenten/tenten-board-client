@@ -2,13 +2,13 @@ package com.douzonetenten.tentenboardclient.controller;
 
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
-import com.douzonetenten.tentenboardclient.service.Class1Service;
+import com.douzonetenten.tentenboardclient.service.ClassOneService;
 
 import java.util.ArrayList;
 
-public class Class1Controller {
+public class ClassOneController {
 
-    private static final Class1Service class1Service = new Class1Service();
+    private static final ClassOneService class1Service = new ClassOneService();
 
     public void insertPost(PostDto postDto, String boardNumber)
     {
@@ -16,7 +16,7 @@ public class Class1Controller {
     }
 
     public static ArrayList<JoinPostDto> findByClass1(String selectNum) {
-        ArrayList<JoinPostDto> joinPostDtoArrayList = Class1Service.findByPost(selectNum);
+        ArrayList<JoinPostDto> joinPostDtoArrayList = ClassOneService.findByPost(selectNum);
         return joinPostDtoArrayList;
     }
 
@@ -29,7 +29,7 @@ public class Class1Controller {
     }
 
     public static ArrayList<JoinPostDto> detailPost(String selectPost) {
-        ArrayList<JoinPostDto> joinPostDtoArrayList = Class1Service.detailPost(selectPost);
+        ArrayList<JoinPostDto> joinPostDtoArrayList = ClassOneService.detailPost(selectPost);
         return joinPostDtoArrayList;
     }
 }

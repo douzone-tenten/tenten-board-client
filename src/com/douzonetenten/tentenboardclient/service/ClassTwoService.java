@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
-public class DouZoneTwoService {
+public class ClassTwoService {
     private final PostDao postDao = new PostDao();
     private final DouZoneTwoDao douZoneTwoDao = new DouZoneTwoDao();
 

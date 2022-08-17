@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BoardDao {
-
-
     /**
      * 게시판 목록 조회
      */
@@ -19,13 +17,13 @@ public class BoardDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM post WHERE board_board_no = ?");
-            preparedStatement.setString(1,"2");
+            preparedStatement = connection.prepareStatement("SELECT * FROM board");
             boardDtoArrayList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 BoardDto boardDto = new BoardDto();
-                boardDto.setBoardNo(resultSet.getLong("board_board_no"));
+                boardDto.setBoardNo(resultSet.getLong("board_no"));
+                boardDto.setBoardName(resultSet.getString("board_name"));
                 boardDtoArrayList.add(boardDto);
             }
         } catch (SQLException e) {

@@ -7,7 +7,7 @@ import com.douzonetenten.tentenboardclient.dto.PostDto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class notice_mainView {
+public class NoticeView {
     private PostView postwiew = new PostView();
     private Scanner sc = new Scanner(System.in);
 
@@ -15,7 +15,10 @@ public class notice_mainView {
         Scanner sc = new Scanner(System.in);
         ArrayList<JoinPostDto> getPostList = PostController.findByPost(selectNum);
 
+
+        // TODO
         System.out.println("공지사항 게시판");
+        // TODO
         System.out.printf("-----------------------------------------------\n" +
                 "게시글 번호       제목          작성자        작성시간\n" +
                 "-----------------------------------------------\n");
@@ -30,8 +33,12 @@ public class notice_mainView {
                 System.out.println(joinPostDto.findPostToString());
             }
         }
+        // TODO : 메뉴 선택 공통처리
+
         System.out.println("b.뒤로가기  n.다음 페이지  f.이전 페이지   s.공지사항 상세 조회    w.글쓰기  d.공지사항 삭제");
+
         char a = sc.next().charAt(0);
+
         if (a == 'w' || a == 'W') {
             insertAll();
         }else if(a == 'd' || a == 'D' ){

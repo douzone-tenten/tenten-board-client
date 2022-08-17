@@ -12,11 +12,8 @@ public class BoardView {
     public void start(String selectNum) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<JoinPostDto> getPostList = PostController.findByPost(selectNum);
-
         System.out.println("통합 게시판");
-        System.out.printf("--------------------------------\n" +
-                "게시글 번호      제목        작성자      작성시간\n" +
-                "--------------------------------\n");
+        System.out.printf("--------------------------------\n" + "게시글 번호      제목        작성자      작성시간\n" + "--------------------------------\n");
 
         // 게시글 목록 조회
         if (getPostList.isEmpty()) {
@@ -31,6 +28,8 @@ public class BoardView {
 
         System.out.print("조회할 게시글 번호를 입력하세요 : ");
         String selectPost = scanner.next();
+
+        // TODO : 뒤로가기 및 상세보기 및 글작성 ...
 
     }
 }

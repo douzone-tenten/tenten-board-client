@@ -1,6 +1,6 @@
 package com.douzonetenten.tentenboardclient.view;
 
-import com.douzonetenten.tentenboardclient.controller.Class1Controller;
+import com.douzonetenten.tentenboardclient.controller.ClassOneController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
@@ -9,17 +9,17 @@ import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
 
-public class Class1View {
+public class ClassOneVIew {
 
     //private PostView postView = new PostView();
     //private Class1View class1View = new Class1View();
-    Class1Controller class1Controller = new Class1Controller();
+    ClassOneController class1Controller = new ClassOneController();
 
     //private  Scanner scanner = new Scanner(System.in);
 
     public void start(String selectNum) { //목록 조회
         Scanner scanner = new Scanner(System.in);
-        ArrayList<JoinPostDto> getClass1List = Class1Controller.findByClass1(selectNum);
+        ArrayList<JoinPostDto> getClass1List = ClassOneController.findByClass1(selectNum);
 
         System.out.println("더존 1반 게시판");
         System.out.printf("--------------------------------\n" +
@@ -102,7 +102,7 @@ public class Class1View {
         Scanner scanner = new Scanner(System.in);
         System.out.println("삭제할 포스트 번호를 입력해주세요.");
         String selectPost = scanner.next();
-        Class1Controller.deletePost(selectPost);
+        ClassOneController.deletePost(selectPost);
 
         scanner.close();
     }
@@ -111,7 +111,7 @@ public class Class1View {
         Scanner scanner = new Scanner(System.in);
         System.out.println("수정할 포스트 번호를 입력해주세요.");
         String selectPost = scanner.next();
-        Class1Controller.editPost(selectPost);
+        ClassOneController.editPost(selectPost);
 
         scanner.close();
     }
@@ -121,7 +121,7 @@ public class Class1View {
         System.out.println("글 내용을 보고싶은 포스트 번호를 입력해주세요.");
         String selectPost = scanner.next();
         //Class1Controller.detailPost(selectPost);
-        ArrayList<JoinPostDto> getClass1SelectPost = Class1Controller.detailPost(selectPost);
+        ArrayList<JoinPostDto> getClass1SelectPost = ClassOneController.detailPost(selectPost);
 
 
         if (getClass1SelectPost.isEmpty()) {

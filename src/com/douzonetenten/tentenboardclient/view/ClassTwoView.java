@@ -1,10 +1,8 @@
 package com.douzonetenten.tentenboardclient.view;
 
-import com.douzonetenten.tentenboardclient.controller.DouZoneTwoController;
+import com.douzonetenten.tentenboardclient.controller.ClassTwoController;
 import com.douzonetenten.tentenboardclient.controller.PostController;
-import com.douzonetenten.tentenboardclient.dto.BoardDto;
 import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
-import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.ArrayList;
@@ -12,10 +10,10 @@ import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
 
-public class DouZoneTwoView {
+public class ClassTwoView {
 
     private Scanner sc = new Scanner(System.in);
-    private DouZoneTwoController douZoneTwoController = new DouZoneTwoController();
+    private ClassTwoController douZoneTwoController = new ClassTwoController();
     private PostController postController = new PostController();
     private DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
 

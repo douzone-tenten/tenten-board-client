@@ -7,7 +7,8 @@ import java.sql.Timestamp;
  * 상속을 통한 userDto의 join한 값을 할당할 수 있는가?
  */
 
-public class PostDto{
+public class PostDto {
+
     private Long boardNo;
     private Long memberNo;
     private Long postId;
@@ -74,12 +75,12 @@ public class PostDto{
         this.postBody = postBody;
     }
 
-    @Override
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    @Override
+
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
