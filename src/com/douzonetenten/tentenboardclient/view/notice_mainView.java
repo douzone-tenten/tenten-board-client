@@ -68,9 +68,8 @@ public class notice_mainView {
             String postBody = sc.nextLine();
             postDto.setPostTitle(postTitle);
             postDto.setPostBody(postBody);
-            System.out.println(postDto.getPostTitle());
-            System.out.println(postDto.getPostBody());
-            sc.nextLine();
+            System.out.println("제목 : " + postDto.getPostTitle());
+            System.out.println("내용 : " + postDto.getPostBody());
             System.out.println("위 내용이 맞나요?");
             System.out.println("Y : 등록하기");
             System.out.println("N : 취소하기");
