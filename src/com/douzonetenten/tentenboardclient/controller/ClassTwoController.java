@@ -1,6 +1,6 @@
 package com.douzonetenten.tentenboardclient.controller;
 
-import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.service.ClassTwoService;
 
@@ -11,8 +11,8 @@ public class ClassTwoController {
 
 
 
-    public ArrayList<DouZoneTwoJoinDto> douzoneFindByAll(String boardNum) {
-        ArrayList<DouZoneTwoJoinDto> douzone_List = douZoneTwoService.douzoneFindByAll(boardNum);
+    public ArrayList<ClassTwoJoinDto> douzoneFindByAll(String boardNum) {
+        ArrayList<ClassTwoJoinDto> douzone_List = douZoneTwoService.douzoneFindByAll(boardNum);
         return douzone_List;
     }
 

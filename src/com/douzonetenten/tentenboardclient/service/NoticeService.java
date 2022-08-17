@@ -2,7 +2,7 @@ package com.douzonetenten.tentenboardclient.service;
 
 
 import com.douzonetenten.tentenboardclient.dao.PostDao;
-import com.douzonetenten.tentenboardclient.dao.notice_postDao;
+import com.douzonetenten.tentenboardclient.dao.NoticePostDao;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
@@ -25,7 +25,7 @@ public class NoticeService {
 
     public int deletePost(String post_id){
         Connection connection = getConnection();
-        int result = notice_postDao.deletePost(connection, post_id);
+        int result = NoticePostDao.deletePost(connection, post_id);
         if(result > 0){
             commit(connection);
         }else {

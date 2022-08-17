@@ -3,7 +3,7 @@ package com.douzonetenten.tentenboardclient.dto;
 
 import java.sql.Timestamp;
 
-public class DouZoneTwoJoinDto {
+public class ClassTwoJoinDto {
     // 조인 할 때 feild 추가
 
     private Long post_id;
@@ -13,17 +13,17 @@ public class DouZoneTwoJoinDto {
 
     private Timestamp created_at;
 
-    public DouZoneTwoJoinDto() {
+    public ClassTwoJoinDto() {
     }
 
-    public DouZoneTwoJoinDto(Long post_id, String post_title, String username, Timestamp created_at) {
+    public ClassTwoJoinDto(Long post_id, String post_title, String username, Timestamp created_at) {
         this.post_id = post_id;
         this.post_title = post_title;
         this.username = username;
         this.created_at = created_at;
     }
 
-    public DouZoneTwoJoinDto(Long post_id, String post_title, String post_body, String username, Timestamp created_at) {
+    public ClassTwoJoinDto(Long post_id, String post_title, String post_body, String username, Timestamp created_at) {
         this.post_id = post_id;
         this.post_title = post_title;
         this.post_body = post_body;

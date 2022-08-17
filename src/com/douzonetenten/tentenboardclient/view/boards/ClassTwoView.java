@@ -1,21 +1,21 @@
-package com.douzonetenten.tentenboardclient.view;
+package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.ClassTwoController;
 import com.douzonetenten.tentenboardclient.controller.PostController;
-import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 
 public class ClassTwoView {
 
     private Scanner sc = new Scanner(System.in);
     private ClassTwoController douZoneTwoController = new ClassTwoController();
     private PostController postController = new PostController();
-    private DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
+    private ClassTwoJoinDto douZoneTwoJoinDto = new ClassTwoJoinDto();
 
     public void dztwostart(String selectNum) {
 
@@ -25,14 +25,14 @@ public class ClassTwoView {
                 "게시글 번호      제목        작성자      작성시간\n" +
                 "--------------------------------------------\n");
 
-        ArrayList<DouZoneTwoJoinDto> boardDtoArrayList = douZoneTwoController.douzoneFindByAll(selectNum);
+        ArrayList<ClassTwoJoinDto> boardDtoArrayList = douZoneTwoController.douzoneFindByAll(selectNum);
 
         if (boardDtoArrayList.isEmpty()) {
             System.out.println("조회할 포스트가 없습니다.");
         }
 
         if (!(boardDtoArrayList.isEmpty())) {
-            for (DouZoneTwoJoinDto douZoneTwoJoinDto : boardDtoArrayList) {
+            for (ClassTwoJoinDto douZoneTwoJoinDto : boardDtoArrayList) {
                 System.out.println(douZoneTwoJoinDto.toString());
 
 //        }

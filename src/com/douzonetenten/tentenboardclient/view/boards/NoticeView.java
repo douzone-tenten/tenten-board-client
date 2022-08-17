@@ -1,8 +1,9 @@
-package com.douzonetenten.tentenboardclient.view;
+package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
+import com.douzonetenten.tentenboardclient.view.PostView;
 
 import java.util.ArrayList;
 import java.util.Scanner;

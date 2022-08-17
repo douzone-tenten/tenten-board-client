@@ -1,13 +1,17 @@
-package com.douzonetenten.tentenboardclient.view;
+package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
+import com.douzonetenten.tentenboardclient.view.PostView;
 
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.douzonetenten.tentenboardclient.view.feature.Display.displayError;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logError;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logWarn;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSelectMenu;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
 /**
  * 익명 게시판 클래스입니다.
@@ -24,8 +28,7 @@ public class AnonymousView {
             // 게시글 등록 후 게시글 목록 최산화를 위해 while문 안으로 이동함
             ArrayList<JoinPostDto> getPostList = postController.findByPost(selectNum);
 
-            // FIXME : 타이틀 스테틱 메소드 사용
-            System.out.println("익명 게시판");
+            uiTitle("익명게시판");
 
             // TODO : 게시판 목차 공통 메소드 작성
             System.out.print("--------------------------------\n"
@@ -35,7 +38,7 @@ public class AnonymousView {
             // 게시글 목록 조회
             // 접속한 게시판번호와 일치하는 게시글이 없을 시
             if (getPostList.isEmpty()) {
-                System.out.println("조회할 포스트가 없습니다.");
+                logWarn("조회할 포스트가 없습니다.");
             }
             // 접속한 게시판번호와 일치하는 게시글이 있을 시
             if (!(getPostList.isEmpty())) {
@@ -43,7 +46,7 @@ public class AnonymousView {
                     System.out.println(joinPostDto.findPostToString());
                 }
             }
-            System.out.println("");
+
 
 
             // 상세조회
@@ -51,7 +54,8 @@ public class AnonymousView {
             //            String selectPost = scanner.next();
 
 
-            // 하단메뉴
+            uiSelectMenu();
+            // TODO : 메뉴 선택 공통컴포넌트
             System.out.println("b. 뒤로가기  n. 다음페이지   f. 이전 페이지   w. 글쓰기  d: 상세조회");
             String selectPost2 = scanner.next();
 
@@ -59,7 +63,7 @@ public class AnonymousView {
              * 예외처리
              */
             if (!(selectPost2.equals("b") || selectPost2.equals("n") || selectPost2.equals("f") || selectPost2.equals("w") || selectPost2.equals("d"))) {
-                displayError("메뉴를 잘못 입력하셨습니다.");
+                logError("메뉴를 잘못 입력하셨습니다.");
             }
             /**
              * 뒤로가기

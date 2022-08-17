@@ -2,15 +2,17 @@ package com.douzonetenten.tentenboardclient.view;
 
 import com.douzonetenten.tentenboardclient.controller.BoardController;
 import com.douzonetenten.tentenboardclient.dto.BoardDto;
+import com.douzonetenten.tentenboardclient.view.boards.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
-import static com.douzonetenten.tentenboardclient.view.feature.Display.displayTitle;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
 public class CategoriesView {
-    BoardView boardView = new BoardView();
+    FreeBoardView boardView = new FreeBoardView();
     ClassOneVIew class1View = new ClassOneVIew();
     ClassTwoView douZoneTwoView = new ClassTwoView();
     AnonymousView anonymousView = new AnonymousView();
@@ -19,7 +21,7 @@ public class CategoriesView {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         clearConsole();
-        displayTitle("전체 게시판 목록");
+        uiTitle("전체 게시판 목록");
         ArrayList<BoardDto> boardDtoArrayList = boardController.findAllByBoard();
         for (BoardDto boardDto : boardDtoArrayList) {
             System.out.println(boardDto.toStringByAll());
@@ -50,7 +52,7 @@ public class CategoriesView {
                 douZoneTwoView.dztwostart(selectNum);
             }
             if (selectNum.equals("9")) {
-                System.out.println("뒤로가기");
+                logInfo("이전 메뉴로 돌아갑니다.");
                 break;
             }
         }

@@ -35,11 +35,35 @@ public class UserDao {
             preparedStatement.setString(3, userDto.getDepartment());
             preparedStatement.setString(4, userDto.getName());
             preparedStatement.setTimestamp(5, new Timestamp(new java.util.Date().getTime()));
+
+            System.out.println(userDto.getUsername());
+
             /**
              * executeQuery : SELECT
              * executeUpdate : INSERT INTO , CREATE, DELETE, DROP
              */
             int resultSet = preparedStatement.executeUpdate();
+
+
+            /**
+             * 생성된 유저 PK 찾기
+             */
+            PreparedStatement selectPreparedStatement;
+            selectPreparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username = ?");
+            selectPreparedStatement.setString(1, userDto.getUsername());
+
+            ResultSet selectResultSet = selectPreparedStatement.executeQuery();
+            selectResultSet.next();
+
+
+            /**
+             * 일반 권한 권한 부여
+             */
+            PreparedStatement rolesPreparedStatement;
+            rolesPreparedStatement = connection.prepareStatement("INSERT INTO user_roles(user_user_no) values (?)");
+            rolesPreparedStatement.setLong(1,selectResultSet.getLong("user_no"));
+            rolesPreparedStatement.executeUpdate();
+
             return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);

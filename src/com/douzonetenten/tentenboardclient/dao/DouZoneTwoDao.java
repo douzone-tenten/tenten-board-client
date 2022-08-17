@@ -1,20 +1,18 @@
 package com.douzonetenten.tentenboardclient.dao;
 
-import com.douzonetenten.tentenboardclient.dto.DouZoneTwoJoinDto;
+import com.douzonetenten.tentenboardclient.dto.ClassTwoJoinDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import static com.douzonetenten.tentenboardclient.common.DBConnector.getConnection;
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+
 public class DouZoneTwoDao {
 
 
-    public ArrayList<DouZoneTwoJoinDto> douZoneFindByAll(Connection connection,String boardNum) {
-        ArrayList<DouZoneTwoJoinDto> list = null;
+    public ArrayList<ClassTwoJoinDto> douZoneFindByAll(Connection connection, String boardNum) {
+        ArrayList<ClassTwoJoinDto> list = null;
         PreparedStatement preparedStatement = null;
 //        String sql = "select * from post where board_board_no = 1";
 
@@ -28,11 +26,11 @@ public class DouZoneTwoDao {
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,boardNum);
-            list = new ArrayList<DouZoneTwoJoinDto>();
+            list = new ArrayList<ClassTwoJoinDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
+                ClassTwoJoinDto douZoneTwoJoinDto = new ClassTwoJoinDto();
                 douZoneTwoJoinDto.setpost_id(Long.valueOf(resultSet.getString("post_id")));
                 douZoneTwoJoinDto.setPost_title(resultSet.getString("post_title"));
                 douZoneTwoJoinDto.setUsername(resultSet.getString("username"));
@@ -49,16 +47,16 @@ public class DouZoneTwoDao {
         return list;
     }
 
-    public ArrayList<DouZoneTwoJoinDto> dzTwoDeTailSelect(Connection connection,String boardNum) {
-        ArrayList<DouZoneTwoJoinDto> list = null;
+    public ArrayList<ClassTwoJoinDto> dzTwoDeTailSelect(Connection connection, String boardNum) {
+        ArrayList<ClassTwoJoinDto> list = null;
         PreparedStatement preparedStatement = null;
 
         String sql = "select post_id,post_title,post_body,username,u.created_at from post left join user u on post.user_member_no = u.user_no where post_id = ?";
         try {
-            DouZoneTwoJoinDto douZoneTwoJoinDto = new DouZoneTwoJoinDto();
+            ClassTwoJoinDto douZoneTwoJoinDto = new ClassTwoJoinDto();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, douZoneTwoJoinDto.getpost_id());
-            list = new ArrayList<DouZoneTwoJoinDto>();
+            list = new ArrayList<ClassTwoJoinDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 douZoneTwoJoinDto.setPost_title(resultSet.getString("post_title"));

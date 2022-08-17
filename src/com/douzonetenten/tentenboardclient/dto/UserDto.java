@@ -4,9 +4,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class UserDto {
-    /**
-     * Wrapper Class Type
-     */
     private Long userNo; // user 고유값 Auto Increment
     private String username; // ID
     private String password; // 비밀번호

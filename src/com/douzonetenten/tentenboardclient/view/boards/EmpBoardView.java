@@ -5,7 +5,7 @@
 //import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 //import com.douzonetenten.tentenboardclient.dto.PostDto;
 //import com.douzonetenten.tentenboardclient.dto.UserDto;
-//import com.douzonetenten.tentenboardclient.view.feature.Display;
+//import com.douzonetenten.tentenboardclient.utils.Display;
 //
 //import java.util.ArrayList;
 //import java.util.Scanner;

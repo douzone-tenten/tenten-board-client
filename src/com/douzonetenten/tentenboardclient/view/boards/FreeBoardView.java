@@ -1,4 +1,4 @@
-package com.douzonetenten.tentenboardclient.view;
+package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
@@ -6,18 +6,22 @@ import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BoardView {
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logWarn;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
+
+public class FreeBoardView {
     PostController PostController = new PostController();
 
     public void start(String selectNum) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<JoinPostDto> getPostList = PostController.findByPost(selectNum);
-        System.out.println("통합 게시판");
+        uiTitle("자유게시판");
+        // TODO : 게시판 공통 컴포넌트
         System.out.printf("--------------------------------\n" + "게시글 번호      제목        작성자      작성시간\n" + "--------------------------------\n");
 
         // 게시글 목록 조회
         if (getPostList.isEmpty()) {
-            System.out.println("조회할 포스트가 없습니다.");
+            logWarn("조회할 포스트가 없습니다.");
         }
 
         if (!(getPostList.isEmpty())) {

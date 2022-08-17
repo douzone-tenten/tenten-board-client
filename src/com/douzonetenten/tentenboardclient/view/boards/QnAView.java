@@ -1,4 +1,4 @@
-package com.douzonetenten.tentenboardclient.view;
+package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.QnAController;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
@@ -6,6 +6,8 @@ import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 
 public class QnAView {
 
@@ -86,7 +88,7 @@ public class QnAView {
 
         Scanner scanner = new Scanner(System.in);
 
-        MainView.clearConsole();
+        clearConsole();
 
         PostDto postDto = new PostDto();
 
@@ -99,7 +101,7 @@ public class QnAView {
         postDto.setPostTitle(qnaTitle);
         postDto.setPostBody(qnaBody);
 
-        MainView.clearConsole();
+        clearConsole();
 
         System.out.println(postDto.getPostTitle());
         System.out.println(postDto.getPostBody());

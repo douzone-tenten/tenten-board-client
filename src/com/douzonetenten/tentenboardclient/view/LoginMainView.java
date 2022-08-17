@@ -5,7 +5,7 @@ import com.douzonetenten.tentenboardclient.controller.UserController;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.view.feature.Display.displayError;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logError;
 
 public class LoginMainView {
     private Scanner scanner = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class LoginMainView {
              * 예외처리
              */
             if (!(selectNum.equals("1") || selectNum.equals("2") || selectNum.equals("3") || selectNum.equals("8") || selectNum.equals("9"))) {
-                displayError("메뉴를 잘못 입력하셨습니다.");
+                logError("메뉴를 잘못 입력하셨습니다.");
             }
 
             if (selectNum.equals("1")){

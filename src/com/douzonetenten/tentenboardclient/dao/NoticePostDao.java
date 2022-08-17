@@ -7,7 +7,7 @@ import com.douzonetenten.tentenboardclient.dto.PostDto;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class notice_postDao {
+public class NoticePostDao {
 
     public static int insertPost(Connection connection,PostDto postDto, BoardDto boardDto){
         PreparedStatement preparedStatement = null;

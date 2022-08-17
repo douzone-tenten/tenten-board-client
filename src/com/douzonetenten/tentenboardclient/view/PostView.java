@@ -1,14 +1,13 @@
 package com.douzonetenten.tentenboardclient.view;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
-import com.douzonetenten.tentenboardclient.controller.UserController;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.service.UserService;
 
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 
 public class PostView {
 

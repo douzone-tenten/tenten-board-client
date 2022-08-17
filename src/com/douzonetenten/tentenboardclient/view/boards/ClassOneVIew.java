@@ -1,22 +1,17 @@
-package com.douzonetenten.tentenboardclient.view;
+package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.ClassOneController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
+import com.douzonetenten.tentenboardclient.view.LoginMainView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 
 public class ClassOneVIew {
-
-    //private PostView postView = new PostView();
-    //private Class1View class1View = new Class1View();
     ClassOneController class1Controller = new ClassOneController();
-
-    //private  Scanner scanner = new Scanner(System.in);
-
     public void start(String selectNum) { //목록 조회
         Scanner scanner = new Scanner(System.in);
         ArrayList<JoinPostDto> getClass1List = ClassOneController.findByClass1(selectNum);
