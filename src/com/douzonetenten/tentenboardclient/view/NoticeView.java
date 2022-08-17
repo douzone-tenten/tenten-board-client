@@ -7,6 +7,10 @@ import com.douzonetenten.tentenboardclient.dto.PostDto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 공지사항 게시판 클래스입니다.
+ * Author : 김승혁
+ */
 public class NoticeView {
     private PostView postwiew = new PostView();
     private Scanner sc = new Scanner(System.in);
@@ -35,40 +39,42 @@ public class NoticeView {
         }
         // TODO : 메뉴 선택 공통처리
 
-        System.out.println("b.뒤로가기  n.다음 페이지  f.이전 페이지   s.공지사항 상세 조회    w.글쓰기  d.공지사항 삭제");
+        System.out.println("b.뒤로가기  n.다음 페이지  f.이전 페이지   s.공지사항 상세 조회    w.글쓰기");
 
         char a = sc.next().charAt(0);
 
         if (a == 'w' || a == 'W') {
             insertAll();
         }else if(a == 'd' || a == 'D' ){
-            delete();}
-//        } else if (a == 's' || a == 'S') {
-//            selectAll();
-//        }
+            delete();
+        } else if(a == 's' || a == 'S' ){
+            select();
+        }
+
     }
     // TODO: 2022-08-17 게시글 상세 조회
-//    public void select() {
-//        System.out.print("조회할 게시글 번호를 입력하세요 : ");
-//        String selectPost = sc.next();
-//            PostDto postDto = new PostDto();
-//
-//                System.out.println("조회할 공지사항 번호를 입력하세요.");
-//            int select = sc.nextInt();
-//
-//                if (select == select) {
-//                System.out.println("공지사항 제목 : " + postDto.getPostTitle());
-//                System.out.println("공지사항 번호 : " + postDto.getPostId());
-//                System.out.println("공지사항 내용 : " + postDto.getPostBody());
-//            }else {
-//                System.out.println("입력하신 번호의 공지사항이 존재하지 않습니다.");
-//            }
-//    }
+    public void select() {
+        System.out.print("조회할 게시글 번호를 입력하세요 : ");
+        String selectPost = sc.next();
+            PostDto postDto = new PostDto();
+
+                System.out.println("조회할 공지사항 번호를 입력하세요.");
+            int select = sc.nextInt();
+
+                if (select == select) {
+                    System.out.println("제목 " + postDto.getPostTitle());
+                    System.out.println("작성자 " + postDto.getPostId());
+                    System.out.println("작성 시간 " + postDto.getCreatedAt());
+                    System.out.println("내용 " + postDto.getPostBody());
+            }else {
+                System.out.println("입력하신 번호의 공지사항이 존재하지 않습니다.");
+            }
+    }
 
 
     public void insertAll() {
 
-        PostDto postDto = new PostDto();
+            PostDto postDto = new PostDto();
             System.out.println("공지사항의 제목을 입력하세요 : ");
             String postTitle = sc.nextLine();
             System.out.println("공지사항의 내용을 입력하세요 : ");
@@ -84,7 +90,7 @@ public class NoticeView {
 
 
             if (answer == 'Y' || answer == 'y') {
-                PostController.insertPost(postDto, "3");
+                PostController.insertPost(postDto, "2");
                 System.out.println("공지사항이 정상적으로 등록되었습니다.");
             } else if (answer == 'N' || answer == 'n') {
                 System.out.println("글 작성을 취소합니다.");

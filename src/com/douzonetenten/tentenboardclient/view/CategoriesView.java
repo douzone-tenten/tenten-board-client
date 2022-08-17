@@ -31,11 +31,11 @@ public class CategoriesView {
                 boardView.start("1");
             }
             if (selectNum.equals("2")) {
-                class1View.start("2");
+                NoticeView nmv = new NoticeView();
+                nmv.start("2");
             }
             if (selectNum.equals("3")) {
-                NoticeView nmv = new NoticeView();
-                nmv.start("3");
+
             }
             if (selectNum.equals("4")) {
                 QnAView.start("4");
