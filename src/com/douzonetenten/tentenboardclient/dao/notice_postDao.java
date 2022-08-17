@@ -67,7 +67,7 @@ public class notice_postDao {
         ArrayList<JoinPostDto> joinPostDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
-
+// TODO: 2022-08-17  
 
         try {
             /**

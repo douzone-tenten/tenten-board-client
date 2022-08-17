@@ -30,47 +30,49 @@ public class notice_mainView {
                 System.out.println(joinPostDto.findPostToString());
             }
         }
-    }
-        public static void insertPost() {
-            Scanner sc = new Scanner(System.in);
-            System.out.print("조회할 게시글 번호를 입력하세요 : ");
-            String selectPost = sc.next();
-            System.out.println("b.뒤로가기  n.다음 페이지  f.이전 페이지  w.글쓰기");
-            char c = sc.next().charAt(0);
-
-            PostDto postDto = new PostDto();
-            if (c == 'w' || c == 'W') {
-                System.out.println("공지사항의 제목을 입력하세요 : ");
-                String postTitle = sc.next();
-                System.out.println("공지사항의 내용을 입력하세요 : ");
-                String postBody = sc.next();
-                postDto.setPostTitle(postTitle);
-                postDto.setPostBody(postBody);
-                System.out.println(postDto.getPostTitle());
-                System.out.println(postDto.getPostBody());
-                System.out.println("위 내용이 맞나요?");
-                System.out.println("Y : 등록하기");
-                System.out.println("N : 취소하기");
-                char answer = sc.next().charAt(0);
-
-
-                if (answer == 'Y' || answer == 'y') {
-                    PostController.insertPost(postDto, "3");
-                    System.out.println("공지사항이 정상적으로 등록되었습니다.");
-                } else if (answer == 'N' || answer == 'n') {
-                    System.out.println("글 작성을 취소합니다.");
-                } else {
-                    System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
-                }
-            }
+        System.out.println("b.뒤로가기  n.다음 페이지  f.이전 페이지  w.글쓰기  d.공지사항 삭제");
+        char a = sc.next().charAt(0);
+        if (a == 'w' || a == 'W') {
+            insertAll();
+        }else if(a == 'd' || a == 'D' ){
+            delete();
         }
-    public static void deletePost() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("삭제할 포스트 번호를 입력하세요 : ");
-        String pno = sc.next();
-        PostController.deletePost(pno);
     }
+//    public void select() {
+//        System.out.print("조회할 게시글 번호를 입력하세요 : ");
+//        String selectPost = sc.next();
+//    }
+    public void insertAll() {
+
+        PostDto postDto = new PostDto();
+            System.out.println("공지사항의 제목을 입력하세요 : ");
+            String postTitle = sc.next();
+            System.out.println("공지사항의 내용을 입력하세요 : ");
+            String postBody = sc.next();
+            postDto.setPostTitle(postTitle);
+            postDto.setPostBody(postBody);
+            System.out.println(postDto.getPostTitle());
+            System.out.println(postDto.getPostBody());
+            System.out.println("위 내용이 맞나요?");
+            System.out.println("Y : 등록하기");
+            System.out.println("N : 취소하기");
+            char answer = sc.next().charAt(0);
 
 
+            if (answer == 'Y' || answer == 'y') {
+                PostController.insertPost(postDto, "3");
+                System.out.println("공지사항이 정상적으로 등록되었습니다.");
+            } else if (answer == 'N' || answer == 'n') {
+                System.out.println("글 작성을 취소합니다.");
+            } else {
+                System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+            }
+
+        }
+
+     public void delete() {
+         System.out.println("삭제할 포스트 번호를 입력하세요 : ");
+         String pno = sc.next();
+         PostController.deletePost(pno);
+     }
 }
-
