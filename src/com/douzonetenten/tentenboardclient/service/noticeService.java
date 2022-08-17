@@ -1,18 +1,17 @@
 package com.douzonetenten.tentenboardclient.service;
 
+
 import com.douzonetenten.tentenboardclient.dao.PostDao;
+import com.douzonetenten.tentenboardclient.dao.notice_postDao;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-/**
- * wildcard import
- */
 import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
-public class PostService {
+public class noticeService {
     private final PostDao postDao = new PostDao();
 
     public int insertPost(PostDto postDto, String boardNumber) {
@@ -24,16 +23,16 @@ public class PostService {
         return result;
     }
 
-    public static int deletePost(String postNo){
+    public int deletePost(String post_id){
         Connection connection = getConnection();
-        int result = PostDao.deletePost(connection,postNo);
-        if (result > 0) {
+        int result = notice_postDao.deletePost(connection, post_id);
+        if(result > 0){
             commit(connection);
-        } else rollback(connection);
+        }else {
+            rollback(connection);
+        }
         return result;
     }
-
-    // TODO : 포스트 수정 기능 추가.
 
     public ArrayList<PostDto> findAllByPost(){
         Connection connection = getConnection();

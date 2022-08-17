@@ -5,23 +5,17 @@ import java.sql.Timestamp;
 
 public class JoinPostDto {
     private Long postId;
-    private Long boardNo;
     private String postTitle;
-    private String postBody;
-    private String username;
-    private String name;
+    private String userName;
     private Timestamp createdAt;
 
     public JoinPostDto() {
     }
 
-    public JoinPostDto(Long postId, Long boardNo, String postTitle, String postBody, String username, String name, Timestamp createdAt) {
+    public JoinPostDto(Long postId, String postTitle, String username, Timestamp createdAt) {
         this.postId = postId;
-        this.boardNo = boardNo;
         this.postTitle = postTitle;
-        this.postBody = postBody;
-        this.username = username;
-        this.name = name;
+        this.userName = username;
         this.createdAt = createdAt;
     }
 
@@ -33,14 +27,6 @@ public class JoinPostDto {
         this.postId = postId;
     }
 
-    public Long getBoardNo() {
-        return boardNo;
-    }
-
-    public void setBoardNo(Long boardNo) {
-        this.boardNo = boardNo;
-    }
-
     public String getPostTitle() {
         return postTitle;
     }
@@ -49,28 +35,12 @@ public class JoinPostDto {
         this.postTitle = postTitle;
     }
 
-    public String getPostBody() {
-        return postBody;
-    }
-
-    public void setPostBody(String postBody) {
-        this.postBody = postBody;
-    }
-
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.userName = username;
     }
 
     public Timestamp getCreatedAt() {
@@ -85,17 +55,14 @@ public class JoinPostDto {
     public String toString() {
         return "JoinPostDto{" +
                 "postId=" + postId +
-                ", boardNo=" + boardNo +
                 ", postTitle='" + postTitle + '\'' +
-                ", postBody='" + postBody + '\'' +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
+                ", username='" + userName + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }
 
     public String findPostToString() {
-        return postId + "    " + postTitle + "    " + "    " + name + "    " + createdAt;
+        return postId + "         " + postTitle + "          " +  userName + "         " + createdAt;
     }
 
     //수연 게시글 상세보기 테스트 TODO : 개행이 요상하다.

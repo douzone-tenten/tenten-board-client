@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BoardDao {
+
+
     /**
      * 게시판 목록 조회
      */

@@ -35,7 +35,8 @@ public class CategoriesView {
                 class1View.start("2");
             }
             if (selectNum.equals("3")){
-                //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
+                notice_mainView nmv = new notice_mainView();
+                nmv.start("3");
             }
             if (selectNum.equals("4")){
                 QnAView.start("4");

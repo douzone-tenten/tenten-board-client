@@ -74,10 +74,12 @@ public class PostDto{
         this.postBody = postBody;
     }
 
+    @Override
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
+    @Override
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
