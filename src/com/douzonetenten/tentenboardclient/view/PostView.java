@@ -1,13 +1,20 @@
 package com.douzonetenten.tentenboardclient.view;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
+import com.douzonetenten.tentenboardclient.controller.UserController;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
+import com.douzonetenten.tentenboardclient.service.UserService;
 
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.view.feature.Display.clearConsole;
 
 public class PostView {
+
+   UserService userService = new UserService();
+
+   ;
     private PostController postController = new PostController();
     private Scanner scanner = new Scanner(System.in);
 
@@ -53,4 +60,23 @@ public class PostView {
         System.out.println("전체 포스트를 조회합니다.");
         postController.findAllByPost();
     }
+
+    public void findDetailByPost(){
+        System.out.println("게시글 상세조회");
+        System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
+        long post_id= scanner.nextLong();
+
+        System.out.println("현재 로그인한 객체 : "+loginUserContext);
+
+        // 로그인한 객체정보와 게시글 작성자 & 권한 여부 체크
+
+
+
+
+
+    }
+
+
+
+
 }
