@@ -2,7 +2,6 @@ package com.douzonetenten.tentenboardclient.view;
 
 import com.douzonetenten.tentenboardclient.controller.UserController;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
-import com.douzonetenten.tentenboardclient.exception.user.UnAuthorizationException;
 
 import java.util.Scanner;
 
@@ -53,11 +52,13 @@ public class UserView {
         userDto.setUsername(scanner.nextLine());
         System.out.println("비밀번호를 입력하세요.");
         userDto.setPassword(scanner.nextLine());
+
         try {
             userController.login(userDto);
-        } catch (UnAuthorizationException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
 
         if (!loginUserContext.isEmpty() && userDto.getUsername().equals(loginUserContext.get(0).getUsername())){
             loginMainView.start();

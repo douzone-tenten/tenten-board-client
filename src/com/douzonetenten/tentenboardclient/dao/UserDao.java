@@ -1,12 +1,11 @@
 package com.douzonetenten.tentenboardclient.dao;
 
 import com.douzonetenten.tentenboardclient.dto.UserDto;
-import com.douzonetenten.tentenboardclient.exception.user.UnAuthorizationException;
 
 import java.sql.*;
 
 public class UserDao {
-    public UserDto login(Connection connection, UserDto userDto) throws UnAuthorizationException {
+    public UserDto login(Connection connection, UserDto userDto) {
         UserDto loginUserDto = new UserDto();
         try {
             PreparedStatement preparedStatement;
@@ -21,7 +20,7 @@ public class UserDao {
             loginUserDto.setName(resultSet.getString("name"));
             loginUserDto.setDepartment(resultSet.getString("department"));
         } catch (SQLException e) {
-            throw new UnAuthorizationException();
+            throw new RuntimeException();
         }
         return loginUserDto;
     }
