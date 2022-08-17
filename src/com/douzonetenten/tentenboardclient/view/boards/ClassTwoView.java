@@ -32,25 +32,25 @@ public class ClassTwoView {
         }
 
         if (!(boardDtoArrayList.isEmpty())) {
-            for (ClassTwoJoinDto douZoneTwoJoinDto : boardDtoArrayList) {
+            for (ClassTwoJoinDto douZoneTwoJoinDto : boardDtoArrayList)
                 System.out.println(douZoneTwoJoinDto.toString());
 
 //        }
-            }
 
+        }
 
             System.out.println("원하는 메뉴를 선택하세요");
-            System.out.println("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지   r.상세조회   w. 글쓰기");
-            char answer = sc.nextLine().charAt(0);
-            if (answer == 'w' || answer == 'W') {
+            System.out.print("b. 뒤로 가기    n. 다음 페이지     f. 이전 페이지   r.상세조회   w. 글쓰기");
+            String answer = sc.nextLine();
+            if (answer.equals("w") || answer.equals("W")) {
                 dztwoinsert();
             }
-            if (answer == 'r' || answer == 'R'){
+            if (answer.equals("r")  || answer.equals("R")){
                 dztwodetailselect();
             }
 
         }
-    }
+
 
 
     public void dztwodetailselect(){
@@ -64,10 +64,8 @@ public class ClassTwoView {
 
     public void dztwoinsert() {
 
-        char answer = sc.nextLine().charAt(0);
+//        char answer = sc.nextLine().charAt(0);
         PostDto postDto = new PostDto();
-
-
             System.out.print("제목을 입력하세요 : ");
             String douzone_postTitle = sc.nextLine();
             System.out.print("글 내용을 입력하세요.");
@@ -88,7 +86,7 @@ public class ClassTwoView {
         if (select.equals("Y") || select.equals("y")) {
             // TODO : 게시판 번호 조회를 어떻게 할 것인가?
             System.out.println("작성한 글이 등록되었습니다.");
-            douZoneTwoController.dozoneTwoInsert(postDto, "7");
+            douZoneTwoController.dozoneTwoInsert(postDto, "5");
         }
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");

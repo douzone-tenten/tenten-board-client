@@ -7,4 +7,5 @@ public class TentenBoardApplication {
         MainView mainView = new MainView();
         mainView.start();
     }
+
 }
