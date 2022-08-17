@@ -11,12 +11,13 @@ import static com.douzonetenten.tentenboardclient.view.feature.Display.displayTi
 
 public class CategoriesView {
     BoardView boardView = new BoardView();
+    Class1View class1View = new Class1View();
     private Scanner scanner = new Scanner(System.in);
     BoardController boardController = new BoardController();
     public void start(){
         clearConsole();
         displayTitle("전체 게시판 목록");
-        ArrayList< BoardDto> boardDtoArrayList = boardController.findAllByBoard();
+        ArrayList<BoardDto> boardDtoArrayList = boardController.findAllByBoard();
         for(BoardDto boardDto : boardDtoArrayList){
             System.out.println(boardDto.toStringByAll());
         }
@@ -29,7 +30,7 @@ public class CategoriesView {
             }
 
             if (selectNum.equals("2")){
-                //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
+                class1View.start("2");
             }
             if (selectNum.equals("3")){
                 //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.

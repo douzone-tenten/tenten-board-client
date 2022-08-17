@@ -96,4 +96,12 @@ public class JoinPostDto {
     public String findPostToString() {
         return postId + "    " + postTitle + "    " + "    " + name + "    " + createdAt;
     }
+
+    //수연 게시글 상세보기 테스트 TODO : 개행이 요상하다.
+    public String findSelectDetailPostToString(){
+        return "게시글 번호 : " + postId + "\n" + "제         목 : " + postTitle + "\n"
+                + "작   성   자 : " + name + " (" +  username + ") " + "\n"
+                + "작 성 시 간 : " + createdAt + "\n\n"
+                + "글    내  용 : " + postBody;
+    }
 }

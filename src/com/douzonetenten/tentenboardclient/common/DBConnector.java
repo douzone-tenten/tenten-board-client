@@ -1,41 +1,35 @@
 package com.douzonetenten.tentenboardclient.common;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DBConnector {
     private static Connection connection = null;
     public static Connection getConnection() {
+        String url = "jdbc:mysql://218.239.207.244:52867/tentenboard";
+        String username = "tenten";
+        String password = "1010board";
         if (connection == null) {
-
+            /**
+             * try-with-resources 문법을 통해,
+             * close를 하지 않아도 된다.
+             */
 //            try (connection = DriverManager.getConnection(url, username, password)) {
 //                /**
-//                 * Class.forName = JDBC 4 버전 이후부터는 사용을 안해도 됩니다.
-//                 * https://kyun2.tistory.com/23
+//                 * Class.forName = JDBC 6 버전 이후부터는 사용을 안해도 됩니다.
 //                 */
 //                connection.setAutoCommit(false);
 //            } catch (SQLException e) {
 //                throw new RuntimeException(e);
 //            }
-
+            /**
+             * try-with-resources 문법으로 사용이 안됨.
+             */
             try {
-                Properties properties = new Properties();
-                properties.load(new FileReader("resources/driver.properties"));
-                connection = DriverManager.getConnection(
-                        properties.getProperty("JDBC.ConnectionURL"),
-                        properties.getProperty("JDBC.Username"),
-                        properties.getProperty("JDBC.Password"));
+                connection = DriverManager.getConnection(url,username,password);
                 connection.setAutoCommit(false);
             } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }

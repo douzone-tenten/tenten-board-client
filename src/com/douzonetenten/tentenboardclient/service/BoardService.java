@@ -12,8 +12,8 @@ public class BoardService {
     private final BoardDao boardDao = new BoardDao();
 
     public ArrayList<BoardDto> findAllByBoard(){
-        Connection connection = getConnection();
-        ArrayList<BoardDto> boardDtoArrayList = boardDao.findAllByBoard(connection);
+       Connection connection = getConnection();
+       ArrayList<BoardDto> boardDtoArrayList = boardDao.findAllByBoard(connection);
         return boardDtoArrayList;
     }
 }

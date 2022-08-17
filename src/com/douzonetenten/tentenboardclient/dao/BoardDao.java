@@ -17,13 +17,13 @@ public class BoardDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM board");
+            preparedStatement = connection.prepareStatement("SELECT * FROM post WHERE board_board_no = ?");
+            preparedStatement.setString(1,"2");
             boardDtoArrayList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 BoardDto boardDto = new BoardDto();
-                boardDto.setBoardNo(resultSet.getLong("board_no"));
-                boardDto.setBoardName(resultSet.getString("board_name"));
+                boardDto.setBoardNo(resultSet.getLong("board_board_no"));
                 boardDtoArrayList.add(boardDto);
             }
         } catch (SQLException e) {
