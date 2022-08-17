@@ -15,13 +15,15 @@ public class QnAService {
     public QnAService() {}
 
 
-    //QnA 목록조회
+    //QnA 게시글 목록조회
     public ArrayList<JoinPostDto> findAllByQnA(String selectNum) {
         Connection connection = DBConnector.getConnection();
         ArrayList<JoinPostDto> joinPostDtoArrayList = this.qnADao.findAllByQnA(connection, selectNum);
         return joinPostDtoArrayList;
     }
 
+
+    //QnA 게시글 작성
     public int insertQnA(PostDto postDto, Long userId, String selectNum) {
         Connection connection = DBConnector.getConnection();
         int result = this.qnADao.insertQnA(connection, postDto, userId, selectNum);
@@ -34,6 +36,17 @@ public class QnAService {
             return result;
     }
 
+
+    //QnA 게시글 상세조회
+    public ArrayList<JoinPostDto> detailQnA(String selectDetailNum) {
+        Connection connection = DBConnector.getConnection();
+        ArrayList<JoinPostDto> joinPostDtoListDetail = this.qnADao.detailQnA(connection, selectDetailNum);
+
+        return joinPostDtoListDetail;
+    }
+    
+    
+    //QnA 게시글 삭제
     public int deleteQnA(String postNo) {
         Connection connection = DBConnector.getConnection();
         int result = this.qnADao.deleteQnA(connection, postNo);
@@ -45,4 +58,6 @@ public class QnAService {
         }
         return result;
     }
+
+
 }

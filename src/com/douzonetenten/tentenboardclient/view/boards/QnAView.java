@@ -29,7 +29,7 @@ public class QnAView {
                               "-------------------------------------------\n");
 
             if (getPostList.isEmpty()) {
-                System.out.println("조회할 포스트가 없습니다.\n");
+                logInfo("조회할 포스트가 없습니다.\n");
             }
             if (!(getPostList.isEmpty())) {
                 for (JoinPostDto joinPostDto : getPostList) {
@@ -37,39 +37,54 @@ public class QnAView {
                 }
             }
 
-            System.out.println("b. 뒤로가기\t\tw. 글쓰기");
+            System.out.println("b. 뒤로가기\t\tw. 글쓰기\t\td. 상세보기");
             System.out.print("메뉴를 입력하세요 : ");
             String selectPost = scanner.next();
 
 
             //뒤로가기
-            if (selectPost.equals("b")) {
+            if (selectPost.equals("b") || selectPost.equals("B")) {
                 logInfo("뒤로 이동합니다.");
                 break;
             }
 
 
             //글쓰기
-            if (selectPost.equals("w")) {
+            if (selectPost.equals("w") || selectPost.equals("W")) {
                 insertQnA(selectNum);
-
+                clearConsole();
             }
 
-            if (selectPost.equals("d")) {
-                System.out.print("삭제할 게시글 번호를 입력해주세요 : ");
-                String postNo = scanner.next();
-                qnAController.deleteQnA(postNo);
+
+            //상세보기
+            if(selectPost.equals("d") || selectPost.equals("D")){
+                System.out.print("상세보기할 게시판의 번호를 입력해주세요. : ");
+                String selectDetailNum = scanner.next();
+                detailQnA(selectDetailNum);
+                while(true) {
+                    System.out.println("b. 뒤로가기\t\tu. 수정하기\t\te. 삭제하기");
+                    System.out.print("해당 게시글에 대한 메뉴를 선택하세요 : ");
+                    String selectUENum = scanner.next();
+
+                    if(selectUENum.equals("u") || selectUENum.equals("U")) {
+                        updateQnA();
+                        break;
+                    }
+                    if(selectUENum.equals("e") || selectUENum.equals("E")) {
+                        deleteQnA(selectDetailNum);
+                        break;
+                    }
+
+                    if(selectUENum.equals("b") || selectUENum.equals("B")) {
+                        clearConsole();
+                        break;
+                    }
+
+                }
             }
         }
     }
 
-
-
-    //QnA 목록 조회
-//    public void findAllByPost() {
-//        System.out.println("전체 QnA의 목록을 조회합니다.");
-//        this.qnAController.findAllByQnA();
-//    }
 
     //QnA 게시글 작성
     public static void insertQnA(String selectNum) {
@@ -104,12 +119,29 @@ public class QnAView {
             System.out.println("글 작성을 취소합니다.");
         }
     }
+
+    //글제목 작성자 작성시간 글내용
+    //QnA 게시글 상세조회
+    public static void detailQnA(String selectDetailNum) {
+        clearConsole();
+        System.out.printf("--------------------------------------------------------------------------\n" +
+                        "[제\t\t목]\t" + qnAController.detailQnA(selectDetailNum).get(0).getPostTitle() + "\n" +
+                        "[작\t성\t자]\t" + qnAController.detailQnA(selectDetailNum).get(0).getUsername() + "\n" +
+                        //"[작성시간]\t" + qnAController.detailQnA(selectDetailNum).get(0).getCreatedAt() + "\n" +
+                        "[내\t\t용]\n" + qnAController.detailQnA(selectDetailNum).get(0).getPostBody() + "\n" +
+                        "----------------------------------------------------------------------------\n\n");
+    }
+
+
     //QnA 게시글 삭제
-    public void deleteQnA() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("삭제할 QnA 번호를 입력해주세요 : ");
-        String selectQnA = scanner.next();
-        qnAController.deleteQnA(selectQnA);
-        System.out.println("해당 QnA 게시글을 삭제했습니다.");
+    public static void deleteQnA(String selectDetailNum) {
+        qnAController.deleteQnA(selectDetailNum);
+        clearConsole();
+        System.out.println("해당 QnA 게시글을 삭제했습니다.\n\n");
+    }
+
+
+    //QnA 게시글 수정
+    public static void updateQnA() {
     }
 }

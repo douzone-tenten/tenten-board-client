@@ -11,13 +11,13 @@ public class QnADao {
     public QnADao() {
     }
 
-    //QnA 목록조회
+    //QnA 게시글 목록조회
     public ArrayList<JoinPostDto> findAllByQnA(Connection connection, String selectNum) {
         ArrayList<JoinPostDto> joinPostDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT post_id, post_title, username, created_at FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
+            preparedStatement = connection.prepareStatement("SELECT post_id, post_title, username FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
 
             joinPostDtoArrayList = new ArrayList();
             preparedStatement.setString(1, selectNum);
@@ -28,7 +28,7 @@ public class QnADao {
                 joinPostDto.setPostId(resultSet.getLong("post_id"));
                 joinPostDto.setPostTitle(resultSet.getString("post_title"));
                 joinPostDto.setUsername(resultSet.getString("username"));
-                joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+               // joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
 
                 joinPostDtoArrayList.add(joinPostDto);
             }
@@ -58,6 +58,34 @@ public class QnADao {
     }
 
 
+    //QnA 게시글 상세조회
+    public ArrayList<JoinPostDto> detailQnA(Connection connection, String selectDetailNum) {
+        ArrayList<JoinPostDto> joinPostDtoListDetail = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement("SELECT post_title, username, post_body FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE post_id = ?");
+
+            joinPostDtoListDetail = new ArrayList<>();
+            preparedStatement.setString(1, selectDetailNum);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                JoinPostDto joinPostDto = new JoinPostDto();
+                joinPostDto.setPostTitle(resultSet.getString("post_title"));
+                joinPostDto.setUsername(resultSet.getString("username"));
+               // joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+                joinPostDto.setPostBody(resultSet.getString("post_body"));
+
+                joinPostDtoListDetail.add(joinPostDto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return joinPostDtoListDetail;
+    }
+
+
     //QnA 게시글 삭제
     public int deleteQnA(Connection connection, String postNo) {
         PreparedStatement preparedStatement = null;
@@ -72,5 +100,6 @@ public class QnADao {
         }
 
     }
+
 
 }

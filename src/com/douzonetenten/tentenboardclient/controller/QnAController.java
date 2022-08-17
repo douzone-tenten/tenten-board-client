@@ -12,7 +12,7 @@ public class QnAController {
 
     public QnAController() {}
 
-    //QnA 목록조회
+    //QnA 게시글 목록조회
     public ArrayList<JoinPostDto> findAllByQnA(String selectNum) {
         ArrayList<JoinPostDto> joinPostDtoArrayList = this.qnAService.findAllByQnA(selectNum);
 
@@ -23,6 +23,14 @@ public class QnAController {
     //QnA 게시글 작성
     public void insertQnA(PostDto postDto, Long userId, String selectNum) {
         qnAService.insertQnA(postDto, userId, selectNum);
+    }
+
+
+    //QnA 게시글 상세조회
+    public ArrayList<JoinPostDto> detailQnA(String selectDetailNum) {
+        ArrayList<JoinPostDto> joinPostDtoListDetail = this.qnAService.detailQnA(selectDetailNum);
+
+        return joinPostDtoListDetail;
     }
 
 
