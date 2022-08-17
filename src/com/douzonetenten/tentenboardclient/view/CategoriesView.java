@@ -47,7 +47,7 @@ public class CategoriesView {
                 anonymousView.start(selectNum);
             }
             if (selectNum.equals("6")){
-                //TODO : 각자 게시판 클래스 작성해서 분기문 터서 사용할수 있도록.
+                boardView.start("6");
             }
             if (selectNum.equals("7")){
                 douZoneTwoView.dztwostart(selectNum);

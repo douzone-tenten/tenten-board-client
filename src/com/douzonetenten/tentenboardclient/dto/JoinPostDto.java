@@ -72,4 +72,14 @@ public class JoinPostDto {
                 + "작 성 시 간 : " + createdAt + "\n\n"
                 + "글    내  용 : " + postBody;
     }
+
+    public String detailPostToString() {
+        return "제목 : " + postTitle +
+                "\n작성자 : " + name +
+                "\n작성시간 : " + createdAt +
+                "\n글 내용 : " + postBody +
+                "\n----------------------------------" +
+                "\ne.게시글 수정  d.게시글 삭제" +
+                "\nb.뒤로 가기";
+    }
 }
