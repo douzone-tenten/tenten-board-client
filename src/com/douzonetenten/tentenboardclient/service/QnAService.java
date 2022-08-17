@@ -60,4 +60,17 @@ public class QnAService {
     }
 
 
+    //QnA 게시글 수정
+    public int updateQnA(PostDto postDto, String selectDetailNum) {
+        Connection connection = DBConnector.getConnection();
+        int resultUpdate = this.qnADao.updateQnA(connection, postDto, selectDetailNum);
+
+        if(resultUpdate > 0) {
+            DBConnector.commit(connection);
+        }
+        else {
+            DBConnector.rollback(connection);
+        }
+        return resultUpdate;
+    }
 }

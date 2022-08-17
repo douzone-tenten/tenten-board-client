@@ -17,7 +17,8 @@ public class QnADao {
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT post_id, post_title, username FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
+            preparedStatement = connection.prepareStatement(
+                    "SELECT post_id, post_title, username FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
 
             joinPostDtoArrayList = new ArrayList();
             preparedStatement.setString(1, selectNum);
@@ -64,7 +65,8 @@ public class QnADao {
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT post_title, username, post_body FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE post_id = ?");
+            preparedStatement = connection.prepareStatement(
+                    "SELECT post_title, username, post_body FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE post_id = ?");
 
             joinPostDtoListDetail = new ArrayList<>();
             preparedStatement.setString(1, selectDetailNum);
@@ -98,8 +100,24 @@ public class QnADao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
+    //QnA 게시글 수정
+    public int updateQnA(Connection connection, PostDto postDto, String selectDetailNum) {
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "UPDATE post p LEFT JOIN user u ON p.user_member_no = u.user_no SET post_title = ?, post_body =? WHERE post_id = ?");
+            preparedStatement.setString(1, postDto.getPostTitle());
+            preparedStatement.setString(2, postDto.getPostBody());
+            preparedStatement.setString(3, selectDetailNum);
+            int resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

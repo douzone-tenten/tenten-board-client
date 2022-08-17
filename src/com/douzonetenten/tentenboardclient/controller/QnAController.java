@@ -38,4 +38,10 @@ public class QnAController {
     public void deleteQnA(String postNo) {
         this.qnAService.deleteQnA(postNo);
     }
+
+    
+    //QnA 게시글 수정
+    public void updateQnA(PostDto postDto, String selectDetailNum) {
+        this.qnAService.updateQnA(postDto, selectDetailNum);
+    }
 }

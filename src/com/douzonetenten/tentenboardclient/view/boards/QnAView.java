@@ -67,7 +67,7 @@ public class QnAView {
                     String selectUENum = scanner.next();
 
                     if(selectUENum.equals("u") || selectUENum.equals("U")) {
-                        updateQnA();
+                        updateQnA(selectDetailNum);
                         break;
                     }
                     if(selectUENum.equals("e") || selectUENum.equals("E")) {
@@ -142,6 +142,39 @@ public class QnAView {
 
 
     //QnA 게시글 수정
-    public static void updateQnA() {
+    public static void updateQnA(String selectDetailNum) {
+        Scanner scanner = new Scanner(System.in);
+        clearConsole();
+
+        PostDto postDto = new PostDto();
+        System.out.print("수정할 QnA 제목을 입력하세요 : ");
+        String qnaTitleUpdate = scanner.nextLine();
+
+        System.out.print("수정할 QnA 글 내용을 입력하세요 : ");
+        String qnaBodyUpdate = scanner.nextLine();
+
+        postDto.setPostTitle(qnaTitleUpdate);
+        postDto.setPostBody(qnaBodyUpdate);
+
+        clearConsole();
+
+        System.out.println(postDto.getPostTitle());
+        System.out.println(postDto.getPostBody());
+
+        System.out.println("작성한 내용이 위와 같나요?");
+        System.out.println("Y : 등록하기");
+        System.out.println("B : 취소하기");
+        String select = scanner.next();
+        Long userId = loginUserContext.get(0).getUserNo();
+
+        if(select.equals("Y")){
+            qnAController.updateQnA(postDto, selectDetailNum);
+        }
+        if(select.equals("B")){
+            System.out.println("글 작성을 취소합니다.");
+        }
+
+        clearConsole();
+        System.out.println("해당 QnA 게시글을 수정하였습니다.\n\n");
     }
 }
