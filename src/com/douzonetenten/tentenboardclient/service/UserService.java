@@ -1,6 +1,7 @@
 package com.douzonetenten.tentenboardclient.service;
 
 
+
 import com.douzonetenten.tentenboardclient.dao.UserDao;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
 
@@ -30,7 +31,7 @@ public class UserService {
         return result;
     }
 
-    public UserDto login(UserDto userDto) {
+    public UserDto login(UserDto userDto) throws Exception {
         Connection connection = getConnection();
         loginUserContext.add(userDao.login(connection,userDto));
         return userDao.login(connection,userDto);
