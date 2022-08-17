@@ -36,11 +36,12 @@ public class CategoriesView {
                 class1View.start("2");
             }
             if (selectNum.equals("3")) {
-                NoticeView nmv = new NoticeView();
-                nmv.start("3");
+//                NoticeView nmv = new NoticeView();
+//                nmv.start("3");
+                QnAView.start(selectNum);
             }
             if (selectNum.equals("4")) {
-                QnAView.start("4");
+
             }
             if (selectNum.equals("5")) {
                 anonymousView.start(selectNum);

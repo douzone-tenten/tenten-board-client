@@ -1,7 +1,7 @@
 package com.douzonetenten.tentenboardclient.controller;
 
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
-import com.douzonetenten.tentenboardclient.dto.UserDto;
 import com.douzonetenten.tentenboardclient.service.QnAService;
 
 
@@ -13,10 +13,10 @@ public class QnAController {
     public QnAController() {}
 
     //QnA 목록조회
-    public ArrayList<PostDto> findAllByQnA(String selectNum) {
-        ArrayList<PostDto> postDtoArrayList = this.qnAService.findAllByQnA();
+    public ArrayList<JoinPostDto> findAllByQnA(String selectNum) {
+        ArrayList<JoinPostDto> joinPostDtoArrayList = this.qnAService.findAllByQnA(selectNum);
 
-        return postDtoArrayList;
+        return joinPostDtoArrayList;
     }
 
 

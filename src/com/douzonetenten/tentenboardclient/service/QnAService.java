@@ -2,6 +2,7 @@ package com.douzonetenten.tentenboardclient.service;
 
 import com.douzonetenten.tentenboardclient.common.DBConnector;
 import com.douzonetenten.tentenboardclient.dao.QnADao;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 
@@ -15,10 +16,10 @@ public class QnAService {
 
 
     //QnA 목록조회
-    public ArrayList<PostDto> findAllByQnA() {
+    public ArrayList<JoinPostDto> findAllByQnA(String selectNum) {
         Connection connection = DBConnector.getConnection();
-        ArrayList<PostDto> postDtoArrayList = this.qnADao.findAllByQnA(connection);
-        return postDtoArrayList;
+        ArrayList<JoinPostDto> joinPostDtoArrayList = this.qnADao.findAllByQnA(connection, selectNum);
+        return joinPostDtoArrayList;
     }
 
     public int insertQnA(PostDto postDto, Long userId, String selectNum) {

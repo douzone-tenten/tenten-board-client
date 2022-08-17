@@ -1,6 +1,7 @@
 package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.QnAController;
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
 
 public class QnAView {
 
@@ -18,54 +20,47 @@ public class QnAView {
         Scanner scanner = new Scanner(System.in);
 
 
-        ArrayList<PostDto> getPostList = qnAController.findAllByQnA(selectNum);
+        while(true) {
+            ArrayList<JoinPostDto> getPostList = qnAController.findAllByQnA(selectNum);
 
-        System.out.println("QnA 게시판");
-        System.out.printf("-------------------------------------------\n" +
-                          "게시글 번호\t\t제목\t\t작성자\t\t작성시간\n" +
-                          "-------------------------------------------\n");
+            System.out.println("QnA 게시판");
+            System.out.printf("-------------------------------------------\n" +
+                              "게시글 번호\t\t제목\t\t작성자\t\t작성시간\n" +
+                              "-------------------------------------------\n");
 
-        if (getPostList.isEmpty()) {
-            System.out.println("조회할 포스트가 없습니다.\n");
-        }
-        if (!(getPostList.isEmpty())) {
-            for (PostDto postDto : getPostList) {
-                System.out.println(postDto.toString());
+            if (getPostList.isEmpty()) {
+                System.out.println("조회할 포스트가 없습니다.\n");
+            }
+            if (!(getPostList.isEmpty())) {
+                for (JoinPostDto joinPostDto : getPostList) {
+                    System.out.println(joinPostDto.findPostToString());
+                }
+            }
+
+            System.out.println("b. 뒤로가기\t\tw. 글쓰기");
+            System.out.print("메뉴를 입력하세요 : ");
+            String selectPost = scanner.next();
+
+
+            //뒤로가기
+            if (selectPost.equals("b")) {
+                logInfo("뒤로 이동합니다.");
+                break;
+            }
+
+
+            //글쓰기
+            if (selectPost.equals("w")) {
+                insertQnA(selectNum);
+
+            }
+
+            if (selectPost.equals("d")) {
+                System.out.print("삭제할 게시글 번호를 입력해주세요 : ");
+                String postNo = scanner.next();
+                qnAController.deleteQnA(postNo);
             }
         }
-
-        System.out.println("b. 뒤로가기\t\tn. 다음페이지\t\tf. 이전페이지\t\tw.글쓰기\t\td. 게시글삭제");
-        System.out.print("메뉴를 입력하세요 : ");
-        String selectPost = scanner.next();
-
-
-        //뒤로가기
-        if(selectPost.equals("b")) {
-
-        }
-
-        //다음페이지
-        if(selectPost.equals("b")) {
-
-        }
-
-        //이전페이지
-        if(selectPost.equals("b")) {
-
-        }
-
-        //글쓰기
-        if(selectPost.equals("w")) {
-            insertQnA(selectNum);
-
-        }
-
-        if(selectPost.equals("d")) {
-            System.out.print("삭제할 게시글 번호를 입력해주세요 : ");
-            String postNo = scanner.next();
-            qnAController.deleteQnA(postNo);
-        }
-
     }
 
 

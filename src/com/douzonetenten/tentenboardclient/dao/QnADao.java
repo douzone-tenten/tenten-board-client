@@ -1,8 +1,7 @@
 package com.douzonetenten.tentenboardclient.dao;
 
+import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
-
-import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,30 +12,30 @@ public class QnADao {
     }
 
     //QnA 목록조회
-    public ArrayList<PostDto> findAllByQnA(Connection connection) {
-        ArrayList<PostDto> postDtoArrayList = null;
+    public ArrayList<JoinPostDto> findAllByQnA(Connection connection, String selectNum) {
+        ArrayList<JoinPostDto> joinPostDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM post WHERE board_board_no = ?");
-            postDtoArrayList = new ArrayList();
-            preparedStatement.setString(1, "4");
+            preparedStatement = connection.prepareStatement("SELECT post_id, post_title, username, created_at FROM post LEFT JOIN user u ON user_member_no = u.user_no WHERE board_board_no = ?");
+
+            joinPostDtoArrayList = new ArrayList();
+            preparedStatement.setString(1, selectNum);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                PostDto postDto = new PostDto();
-                postDto.setBoardNo(resultSet.getLong("board_board_no"));
-                postDto.setMemberNo(resultSet.getLong("user_member_no"));
-                postDto.setPostId(resultSet.getLong("post_id"));
-                postDto.setCreatedAt(resultSet.getTimestamp("created_at"));
-                postDto.setPostTitle(resultSet.getString("post_title"));
-                postDto.setPostBody(resultSet.getString("post_body"));
-                postDtoArrayList.add(postDto);
+                JoinPostDto joinPostDto = new JoinPostDto();
+                joinPostDto.setPostId(resultSet.getLong("post_id"));
+                joinPostDto.setPostTitle(resultSet.getString("post_title"));
+                joinPostDto.setUsername(resultSet.getString("username"));
+                joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+
+                joinPostDtoArrayList.add(joinPostDto);
             }
-            return postDtoArrayList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return joinPostDtoArrayList;
     }
 
 
