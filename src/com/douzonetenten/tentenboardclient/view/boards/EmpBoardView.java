@@ -52,7 +52,11 @@ public class EmpBoardView {
                     + "게시글 번호      제목        작성자      작성시간\n"
                     + "--------------------------------\n");
 
-            /*게시글 목록 조회*/
+            /**
+             * 게시글 목록 조회 기능입니다.
+             *
+             * @author 성필
+             */
             if (getPostList.isEmpty()) {
                 System.out.println("조회할 포스트가 없습니다.");
             }
@@ -67,25 +71,41 @@ public class EmpBoardView {
             System.out.println("b.뒤로가기\t\tw.글쓰기\t\td.상세보기");
             uiSelectMenu();
             String selectPost = scanner.next();
-            //뒤로가기
+            /**
+             * 뒤로가기 기능입니다.
+             *
+             * CategoriesView 클래스의 start 메소드를 실행합니다.
+             * @author 성필
+             */
             if (selectPost.equals("b") || selectPost.equals("B")) {
                 logInfo("뒤로 이동합니다.");
                 categoriesView.start(); // 게시판 목록으로 돌아가기 (성필)
                 //break;
             }
-            //글쓰기
+            /**
+             * 게시글 쓰기 기능입니다.
+             *
+             * @author 성필
+             */
             if (selectPost.equals("w") || selectPost.equals("W")) {
                 insertQnA(selectNum);
                 clearConsole();
             }
-            //상세보기
+            /**
+             * 게시글 상세 조회 기능입니다.
+             *
+             * @author 성필
+             */
             if (selectPost.equals("d") || selectPost.equals("D")) {
 
                 System.out.print("상세보기할 게시판의 번호를 입력해주세요. : ");
                 String selectDetailNum = scanner.next();
 
                 /**
-                 * 로그인 한 객체가 작성한 게시글만 수정 및 삭제 가능하도록 상세조회에 나와있는 사용자 이름을 변수(ComLoginId)에 저장
+                 * 로그인 한 객체가 작성한 게시글만 수정 및 삭제 가능하도록
+                 * 상세조회에 나와있는 사용자 이름을 변수(ComLoginId)에 저장
+                 *
+                 * @author 성필
                  * */
                 String loginID = loginUserContext.get(0).getUsername();
                 String ComLoginId = qnAController.detailQnA(selectDetailNum).get(0).getUsername();
