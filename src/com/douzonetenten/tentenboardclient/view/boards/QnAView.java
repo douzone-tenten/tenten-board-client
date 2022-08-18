@@ -14,13 +14,10 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSel
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
 public class QnAView {
-
-
     static QnAController qnAController = new QnAController();
 
-    public static void start(String selectNum) {
+    public static void qnaViewStart(String selectNum) {
         Scanner scanner = new Scanner(System.in);
-
 
         while(true) {
             ArrayList<JoinPostDto> getPostList = qnAController.findAllByQnA(selectNum);
