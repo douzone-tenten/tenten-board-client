@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.*;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
 public class CategoriesView {
@@ -22,8 +22,10 @@ public class CategoriesView {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         clearConsole();
+
         uiTitle("전체 게시판 목록");
         ArrayList<BoardDto> boardDtoArrayList = boardController.findAllByBoard();
+
         for (BoardDto boardDto : boardDtoArrayList) {
             System.out.println(boardDto.toStringByAll());
         }
@@ -44,7 +46,9 @@ public class CategoriesView {
                 classOneVIew.start("4");
             }
             if (selectNum.equals("5")) {
-                douZoneTwoView.dztwostart(selectNum);
+                    douZoneTwoView.dztwostart(selectNum);
+
+
             }
             if (selectNum.equals("6")) {
                 anonymousView.start(selectNum);

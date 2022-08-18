@@ -12,10 +12,24 @@ import static com.douzonetenten.tentenboardclient.service.UserService.loginUserC
 public class DouZoneTwoDao {
 
     public ArrayList<ClassTwoJoinDto> douZoneFindByAll(Connection connection, String boardNum) {
+        /**
+         * douZoneFindByAll() = 선택한 게시판에 게시글을 모두 조회할 수 있는 메소드
+         * detailPostToString() = joinPostDto 에 있는 값 출력 메소드
+         * @param connection - DB 연결하는 매개변수
+         * @param boardNum - 게시판 번호
+         * @author 황명수
+         */
+
         ArrayList<ClassTwoJoinDto> list = null;
         PreparedStatement preparedStatement = null;
 //        String sql = "select * from post where board_board_no = 1";
 
+        /**
+         * post table(게시글) 에 없는 columns 을 user 테이블과 join을 통해 username 가져옴
+         * select post_id,post_title,username,u.created_at
+         * from post
+         * left join user u on post.user_member_no = u.user_no where board_board_no = ?
+         */
 
         String sql = "select post_id,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = ?";
 
@@ -45,7 +59,14 @@ public class DouZoneTwoDao {
         return list;
     }
 
-    public ArrayList<JoinPostDto> dzTwoDeTailSelect(Connection connection, int post_id) {
+    public ArrayList<JoinPostDto> dzTwoDeTailSelect(Connection connection, int postId) {
+        /**
+         * dzTwoDeTailSelect() = 사용자가 선택한 게시판에 게시글을 상세조회할 수 있는 메소드
+         * detailPostToString() = joinPostDto 에 있는 값 출력 메소드
+         * @param connection - DB와 연결하는 매개변수
+         * @param postId - 게시글 번호
+         * @author 황명수
+         */
         ArrayList<JoinPostDto> list = null;
         PreparedStatement preparedStatement = null;
 
@@ -54,7 +75,7 @@ public class DouZoneTwoDao {
 
             JoinPostDto joinPostDto = new JoinPostDto();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, post_id);
+            preparedStatement.setLong(1, postId);
             list = new ArrayList<JoinPostDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -77,31 +98,6 @@ public class DouZoneTwoDao {
 
     }
 
-    public int douzoneTwoInsert(Connection connection, PostDto postDto, String BoardNum) {
-        int result = 0;
-        PreparedStatement preparedStatement = null;
-        String sql = "insert into post(board_board_no, user_member_no, created_at, post_title, post_body) values (?,?,?,?,?)";
-
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, BoardNum);
-            preparedStatement.setLong(2, loginUserContext.get(0).getUserNo());
-            preparedStatement.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
-            preparedStatement.setString(4, postDto.getPostTitle());
-            preparedStatement.setString(5, postDto.getPostBody());
-
-            result = preparedStatement.executeUpdate();
-
-            if (result > 0) {
-                System.out.println("게시글 작성 성공");
-            }
-            return result;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
     /*
     *
     UPDATE [테이블명1] A INNER JOIN [테이블명2] B
@@ -110,14 +106,26 @@ public class DouZoneTwoDao {
     * */
 
 
-    public int douzoneTwoDelete(Connection connection, int port_id) {
+    public int douzoneTwoDelete(Connection connection, int postId) {
+        /**
+         * douzoneTwoDelete() = 사용자가 선택한 게시판에 게시글을 삭제할 수 있는 메소드
+         * (단, 본인이 작성한 글만 삭제할 수 있다)
+         * @param connection - DB와 연결하는 매개변수
+         * @param postId - 게시글 번호
+         * @author 황명수
+         */
+
+        /**
+         * delete
+         * from post where post_id = ? and user_member_no=(select user_no from user where username= ?
+         * */
         int result = 0;
         PreparedStatement preparedStatement = null;
         String sql = "delete from post where post_id = ? and user_member_no=(select user_no from user where username= ?)";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,port_id);
+            preparedStatement.setInt(1,postId);
             preparedStatement.setString(2,loginUserContext.get(0).getUsername());
             result = preparedStatement.executeUpdate();
             return result;
@@ -127,16 +135,22 @@ public class DouZoneTwoDao {
 
     }
 
-    // login index 4 = name
+    public int dzTwoUpdate(Connection connection,int postId,String title, String body) {
+        /**
+         * dzTwoUpdate() = 사용자가 선택한 게시판에 게시글을 수정할 수 있는 메소드
+         * @param connection - DB와 연결하는 매개변수
+         * @param postId - 게시글 번호
+         * @param title - 게시글 제목
+         * @param body - 게시글 내용
+         * @author 황명수
+         */
 
-
-
-
-
-
-
-
-    public int dzTwoUpdate(Connection connection,int port,String title, String body) {
+        /**
+         * update
+         * post p
+         * Left Join user u on p.user_member_no = u.user_no
+         * set post_title  = ?, post_body =? where username = ? AND post_id = ?
+         * */
         int result = 0;
 
         PreparedStatement preparedStatement = null;
@@ -148,7 +162,7 @@ public class DouZoneTwoDao {
             preparedStatement.setString(1,title);
             preparedStatement.setString(2,body);
             preparedStatement.setString(3,loginUserContext.get(0).getUsername());
-            preparedStatement.setInt(4,port);
+            preparedStatement.setInt(4,postId);
             result = preparedStatement.executeUpdate();
 
             if(result > 0){
@@ -159,8 +173,6 @@ public class DouZoneTwoDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
         return result;
 
     }
