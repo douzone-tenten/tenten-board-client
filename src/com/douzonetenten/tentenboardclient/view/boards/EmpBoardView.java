@@ -16,13 +16,24 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSel
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 import static com.douzonetenten.tentenboardclient.view.boards.QnAView.qnAController;
 
+/**
+ * EmpBoard 뷰 클래스입니다.
+ *
+ * 직원용 게시판의 CRUD를 담고 있습니다.
+ * @author 성필
+ */
 public class EmpBoardView {
     static PostController postController = new PostController();
     PostDto postDto = new PostDto();
     UserDto userDto = new UserDto();
     BoardDto boardDto = new BoardDto();
     static CategoriesView categoriesView = new CategoriesView();
-
+    /**
+     * EmpBoard 뷰 호출기능 입니다.
+     *
+     * @param selectNum - 조회할 게시판의 카테고리 넘버입니다.
+     * @author 성필
+     */
     public static void start(String selectNum) {
         Scanner scanner = new Scanner(System.in);
         Long getUserRoles = loginUserContext.get(0).getRoleNo();
@@ -130,7 +141,12 @@ public class EmpBoardView {
 
         }
     }
-
+    /**
+     * 게시글 생성 기능 입니다.
+     *
+     * @param selectNum - 조회할 게시판의 카테고리 넘버입니다.
+     * @author 성필
+     */
     public static void insertQnA(String selectNum) {
         Scanner scanner = new Scanner(System.in);
         clearConsole();
@@ -164,8 +180,12 @@ public class EmpBoardView {
         }
     }
 
-    //글제목 작성자 작성시간 글내용
-    //게시글 상세조회
+    /**
+     * 게시글 상세 조회 기능 입니다.
+     *
+     * @param selectDetailNum - 상세 조회할 게시글 넘버입니다.
+     * @author 성필
+     */
     public static void detailQnA(String selectDetailNum) {
         System.out.printf("--------------------------------------------------------------------------\n" +
                 "[제\t\t목]\t" + qnAController.detailQnA(selectDetailNum).get(0).getPostTitle() + "\n" +
@@ -176,7 +196,12 @@ public class EmpBoardView {
     }
 
 
-    //게시글 삭제
+    /**
+     * 게시글 삭제 기능 입니다.
+     *
+     * @param selectDetailNum - 상세 조회할 게시글 넘버입니다.
+     * @author 성필
+     */
     public static void deleteQnA(String selectDetailNum) { // 한번 더 물어보기 추가
         Scanner scanner = new Scanner(System.in);
         System.out.println("정말로 삭제하시겠습니까? (Y/N)");
@@ -198,7 +223,12 @@ public class EmpBoardView {
     }
 
 
-    //게시글 수정
+    /**
+     * 게시글 수정 기능 입니다.
+     *
+     * @param selectDetailNum - 상세 조회할 게시글 넘버입니다.
+     * @author 성필
+     */
     public static void updateQnA(String selectDetailNum) {
         Scanner scanner = new Scanner(System.in);
         clearConsole();
