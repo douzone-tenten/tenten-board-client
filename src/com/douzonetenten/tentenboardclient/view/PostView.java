@@ -24,7 +24,10 @@ public class PostView {
         /**
          * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
          */
-        clearConsole();
+        // 글쓰기를 연속으로 진행 시 메뉴 선택 후 엔터가 제목으로 입력되는 것 방지
+        scanner.nextLine();
+
+        //clearConsole();  // 제목이 자동입력되는 오류 추측
         PostDto postDto = new PostDto();
         System.out.println("제목을 입력하세요 : ");
         String postTitle = scanner.nextLine();
