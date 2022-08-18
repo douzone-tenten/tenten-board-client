@@ -10,6 +10,8 @@ import com.douzonetenten.tentenboardclient.view.PostView;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
+
 /**
  * 공지사항 게시판 클래스입니다.
  * Author : 김승혁
@@ -46,37 +48,64 @@ public class NoticeView {
 
             if (a == 'w' || a == 'W') {
                 insertPost();
+                break;
             }
             if (a == 's' || a == 'S') {
-                detail();
+                detail(selectNum);
+                break;
             }
-            if(a == 'b' || a == 'B'){
+            if (a == 'b' || a == 'B') {
                 break;
             }
         }
     }
 
 
-
-
     // TODO: 2022-08-17 게시글 상세 조회
 
-        public void detail(){
-            NoticeController noticeController = new NoticeController();
-            System.out.println("상세조회할 게시글 번호를 입력하세요 : ");
-            long select = sc.nextLong();
-            ArrayList<Notice_JoinPostDto> notice_list = noticeController.FindByAll(select);
+    public void detail(String selectNum) {
+        NoticeController noticeController = new NoticeController();
+        System.out.println("상세조회할 게시글 번호를 입력하세요 : ");
+        int select = sc.nextInt();
+        ArrayList<Notice_JoinPostDto> notice_list = noticeController.FindByAll(select);
 
-            // ArrayList<Notice_JoinPostDto> notice = noticeController.FindByAll(select);
+        // ArrayList<Notice_JoinPostDto> notice = noticeController.FindByAll(select);
 
-                    for(Notice_JoinPostDto njp :  notice_list ){
-                        System.out.println(njp.toString());
-                    }
+        for (Notice_JoinPostDto njp : notice_list) {
+            System.out.println(njp.toString());
+        }
 
-            System.out.println(" b.뒤로 가기       u.게시글 수정       d.게시글 삭제 ");
-            char answer2 = sc.next().charAt(0);
+        System.out.println(" b.뒤로 가기       u.게시글 수정       d.게시글 삭제 ");
 
-            if (answer2 == 'u' || answer2 == 'U'){
+        update(select);
+ /*           if (answer2 == 'u' || answer2 == 'U'){
+
+                Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
+
+                System.out.print("제목을 입력하세요 : ");
+                String postTitle = sc.nextLine();
+                sc.nextLine();
+                System.out.print("글 내용을 입력하세요.");
+                String postBody = sc.nextLine();
+                noticeJoinPostDto.setPost_title(postTitle);
+                noticeJoinPostDto.setPost_body(postBody);
+                clearConsole();
+                System.out.println(noticeJoinPostDto.getPost_title());
+                System.out.println(noticeJoinPostDto.getPost_body());
+                System.out.println("위 내용이 맞나요?");
+                System.out.println("Y : 등록하기");
+                System.out.println("B : 취소하기");
+
+                char ch = sc.next().charAt(0);
+                // TODO : 예외처리
+                if (ch == 'Y' || ch == 'y') {
+
+                    System.out.println("작성한 글이 등록되었습니다.");
+                    noticeController.update(selectNum);
+                }
+                if (ch == 'B' ) {
+                    System.out.println("글 작성을 취소합니다.");
+                }
 
             }
 
@@ -98,13 +127,13 @@ public class NoticeView {
                 }
 
 
-            }
+            }*/
 
         }
 
 
         //글쓰기 기능 구현
-        public void insertPost() {
+        public void insertPost () {
 
             PostDto postDto = new PostDto();
             System.out.println("공지사항의 제목을 입력하세요 : ");
@@ -133,8 +162,65 @@ public class NoticeView {
 
         }
 
-}
+        public void SubDelete(int postId){
+            NoticeController noticeController = new NoticeController();
+            System.out.println("선택한 게시글을 삭제하겠습니까? (y/n)");
+            String a = sc.nextLine();
+            if (a.equals("y") || a.equals("Y")) {
+                int result = noticeController.SubDelete(postId);
+                if (result > 0) {
+                    System.out.println("선택한 게시글 삭제가 완료 되었습니다.");
+
+                } else {
+                    System.out.println("본인이 작성한 게시글만 삭제할 수 있습니다.");
+                }
+
+            } else if (a.equals("N") || a.equals("n")) {
+                System.out.println("게시글 삭제 취소");
+            }
+        }
+
+        public void update(int postId) {
+            NoticeController noticeController = new NoticeController();
+            String up = sc.nextLine();
+            System.out.println("====================================================");
+            Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
+
+            ArrayList<Notice_JoinPostDto> notice_joinPostDtoArrayList = new ArrayList<Notice_JoinPostDto>();
+            //if (noticeJoinPostDto.getUsername().equals(loginUserContext.get(0).getUsername())) {
+            System.out.println("제목을 수정해주세요 : ");
+            String test = sc.nextLine();
+            System.out.println("글 내용을 수정해주세요 : ");
+            String body = sc.nextLine();
+//            notice_joinPostDtoArrayList.get(1).setPost_title(test);
+            noticeJoinPostDto.setPost_title(test);
+            noticeJoinPostDto.setPost_body(body);
+            int result = noticeController.update(postId,test,body);
+            if (result > 0) {
+                System.out.println("게시글 수정을 성공했습니다.");
+            } else {
+                System.out.println("본인이 작성한 게시글만 수정할 수 있습니다.");
+            }
+        //}
+
+                clearConsole();
+                System.out.println(noticeJoinPostDto.getPost_title());
+                System.out.println(noticeJoinPostDto.getPost_body());
+                System.out.println("위 내용이 맞나요?");
+                System.out.println("Y : 등록하기");
+                System.out.println("B : 취소하기");
 
 
-//    String pno = sc.next();
-//                PostController.deletePost(pno);
+                String num = sc.next();
+                // TODO : 예외처리
+                if (num.equals("Y") || num.equals("y")) {
+
+                    System.out.println("작성한 글이 등록되었습니다.");
+                }
+                if (num.equals("B")) {
+                    System.out.println("글 작성을 취소합니다.");
+                }
+
+            }
+        }
+

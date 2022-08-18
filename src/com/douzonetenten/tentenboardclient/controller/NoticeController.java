@@ -1,7 +1,6 @@
 package com.douzonetenten.tentenboardclient.controller;
 
 import com.douzonetenten.tentenboardclient.dto.Notice_JoinPostDto;
-import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.service.NoticeService;
 
 import java.util.ArrayList;
@@ -14,14 +13,21 @@ public class NoticeController {
         ArrayList<Notice_JoinPostDto> notice_list = noticeService.FindByAll(post_id);
         return notice_list;
     }
-    public void insertPost(PostDto postDto, String boardNumber) {
+    public void insertPost(Notice_JoinPostDto noticeJoinPostDto, String boardNumber) {
 
-        noticeService.insertPost(postDto, boardNumber);
+        noticeService.insertPost(noticeJoinPostDto, boardNumber);
     }
 
-    public static void deletePost(String post_id) {
+    public int SubDelete(int postId) {
+        return noticeService.SubDelete(postId);
+    }
 
-        NoticeService.deletePost(post_id);
+    public int update(int postId,String test, String body) {
+
+        int result = noticeService.update(postId,test, body);
+        System.out.println(result);
+        return result;
     }
 }
+
 

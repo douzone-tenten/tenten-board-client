@@ -1,23 +1,23 @@
 package com.douzonetenten.tentenboardclient.dao;
 
-import com.douzonetenten.tentenboardclient.dto.BoardDto;
-import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.dto.Notice_JoinPostDto;
 
 import java.sql.*;
 import java.util.ArrayList;
 
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
+
 public class Notice_postDao {
 
-    public static int insertPost(Connection connection, PostDto postDto, BoardDto boardDto) {
+    public static int insertPost(Connection connection, Notice_JoinPostDto noticeJoinPostDto, String boardNumber) {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement("INSERT  INTO  post (board_board_no, user_member_no, created_at, post_title, post_body) values (?,?,?,?,?)");
             preparedStatement.setString(1, "1");
             preparedStatement.setString(2, "1");
             preparedStatement.setString(3, String.valueOf(new Timestamp(new java.util.Date().getTime())));
-            preparedStatement.setString(4, postDto.getPostTitle());
-            preparedStatement.setString(5, postDto.getPostBody());
+            preparedStatement.setString(4, noticeJoinPostDto.getPost_title());
+            preparedStatement.setString(5, noticeJoinPostDto.getPost_body());
             int resultSet = preparedStatement.executeUpdate();
             return resultSet;
         } catch (SQLException e) {
@@ -67,27 +67,46 @@ public class Notice_postDao {
             return List;
     }
 
-    public static ArrayList<Notice_JoinPostDto> SubDelete(Connection connection, long post_id) {
+    public static int SubDelete(Connection connection, int postId) {
         ArrayList<Notice_JoinPostDto> List = null;
         PreparedStatement preparedStatement = null;
+        int result = 0;
 
-
-        String sql = "delete from post (select userName from user where username = ?)";
+        String sql = "delete from post where post_id = ? and user_member_no=(select user_no from user where username= ?)";
         try {
-            Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
+
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, post_id);
-            List = new ArrayList<Notice_JoinPostDto>();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Notice_JoinPostDto njp = new Notice_JoinPostDto();
-                njp.setUsername(resultSet.getString("username"));
-                List.add(njp);
-            }
+            preparedStatement.setLong(1, postId);
+            preparedStatement.setString(2,loginUserContext.get(0).getUsername());
+            result = preparedStatement.executeUpdate();
+            return result;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return List;
+    }
+
+    public int update(Connection connection,int postId,String title, String body) {
+        int result = 0;
+
+        PreparedStatement preparedStatement = null;
+        String sql = "update post p Left Join user u on p.user_member_no = u.user_no set post_title  = ?, post_body =? where post_id = ?";
+
+        try {
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,title);
+            preparedStatement.setString(2,body);
+            preparedStatement.setInt(3,postId);
+            result = preparedStatement.executeUpdate();
+            return result;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 }

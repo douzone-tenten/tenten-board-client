@@ -3,7 +3,7 @@ package com.douzonetenten.tentenboardclient.dto;
 import java.sql.Timestamp;
 
 public class Notice_JoinPostDto {
-    private long post_id;
+    private Long post_id;
     private String post_title;
     private String post_body;
     private String username;
@@ -13,14 +13,14 @@ public class Notice_JoinPostDto {
 
     }
 
-    public Notice_JoinPostDto(long post_id, String post_title, String username, Timestamp created_at) {
+    public Notice_JoinPostDto(Long post_id, String post_title, String username, Timestamp created_at) {
         this.post_id = post_id;
         this.post_title = post_title;
         this.username = username;
         this.created_at = created_at;
     }
 
-    public Notice_JoinPostDto(long post_id, String post_title, String post_body, String username, Timestamp created_at) {
+    public Notice_JoinPostDto(Long post_id, String post_title, String post_body, String username, Timestamp created_at) {
         this.post_id = post_id;
         this.post_title = post_title;
         this.post_body = post_body;
