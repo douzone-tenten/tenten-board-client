@@ -1,6 +1,7 @@
 package com.douzonetenten.tentenboardclient.dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 
 public class JoinPostDto {
@@ -95,7 +96,12 @@ public class JoinPostDto {
     }
 
     public String findPostToString() {
-        return postId + "         " + postTitle + "          " +  username + "         " + createdAt;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분 ss초");
+        String createdStr = simpleDateFormat.format(createdAt);
+
+        return String.format("%-15s", postId) + String.format("%-15s", postTitle)
+                + String.format("%-15s", username) + createdStr;
+
     }
 
     //수연 게시글 상세보기 테스트 TODO : 개행이 요상하다.

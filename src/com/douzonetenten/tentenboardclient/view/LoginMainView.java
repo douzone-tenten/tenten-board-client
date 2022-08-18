@@ -14,13 +14,14 @@ public class LoginMainView {
     CategoriesView boardView = new CategoriesView();
     public void start(){
         while (true){
-            System.out.print("안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
+            System.out.print("\n\n안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
 
             System.out.println("1. 게시판 목록조회");
             System.out.println("2. 내 정보 수정하기");
             System.out.println("3. 익명 소리함 작성하기");
             System.out.println("8. 로그아웃");
             System.out.println("9. 프로그램 종료");
+            System.out.print("\n메뉴를 입력하세요 : ");
             String selectNum = scanner.next();
 
             /**
