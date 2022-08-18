@@ -52,6 +52,8 @@ public class NoticeView {
 
             /**
              * 게시글 목록 조회
+             * 만약 getPostList가 Empty이면 조회할 포스터가 없습니다 라는 문구를 출력합니다.
+             * 반대로 noEmpty이면 for문을 이용해 포스터를 모두 출력해줍니다.
              * @author 김승혁
              */
             if (getPostList.isEmpty()) {
@@ -90,6 +92,11 @@ public class NoticeView {
 
 
 
+    /**
+     * start에서 스캐너러 받은 변수 s로 호출됨
+     * 호췰되면 detail 메서드를 실행
+     * @author 김승혁
+     */
     //상세 조회 기능 구현
     public void detail(String selectNum) {
         NoticeController noticeController = new NoticeController();
