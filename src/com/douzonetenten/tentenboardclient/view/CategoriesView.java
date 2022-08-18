@@ -17,6 +17,8 @@ public class CategoriesView {
     ClassOneVIew classOneVIew = new ClassOneVIew();
     ClassTwoView douZoneTwoView = new ClassTwoView();
     AnonymousView anonymousView = new AnonymousView();
+
+    EmpBoardView empBoardView = new EmpBoardView();
     BoardController boardController = new BoardController();
 
     public void start() {
@@ -50,7 +52,7 @@ public class CategoriesView {
                 anonymousView.start(selectNum);
             }
             if (selectNum.equals("7")) {
-                // empboard
+                empBoardView.start("7");
             }
             if (selectNum.equals("9")) {
                 System.out.println("뒤로가기");
