@@ -74,9 +74,6 @@ public class PostDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            /**
-             * Board 테이블도 join 해서, 보드의 이름도 가지고 오면 좋을듯.
-             */
             preparedStatement = connection.prepareStatement("select board_board_no, post_id, post_title, post_body, u.username, u.name, p.created_at from post p left join user u on p.user_member_no = u.user_no where p.board_board_no = ?");
             preparedStatement.setString(1,boardNum);
             joinPostDtoArrayList = new ArrayList<JoinPostDto>();
@@ -101,7 +98,8 @@ public class PostDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            preparedStatement = connection.prepareStatement("select board_board_no, post_id, post_title, post_body, u.username, u.name, p.created_at from post p left join user u on p.user_member_no = u.user_no where p.post_id = ?");
+            preparedStatement = connection.prepareStatement("select board_board_no, post_id, post_title, post_body, u.username, u.name, p.created_at " +
+                                                                "from post p left join user u on p.user_member_no = u.user_no where p.post_id = ?");
             preparedStatement.setString(1,boardNum);
             joinPostDtoArrayList = new ArrayList<JoinPostDto>();
             ResultSet resultSet = preparedStatement.executeQuery();

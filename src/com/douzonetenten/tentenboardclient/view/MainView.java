@@ -13,7 +13,14 @@ public class MainView {
 
     public void start() {
         while (true) {
-            uiTitle("텐텐보드");
+            //uiTitle("텐텐보드");
+
+            System.out.println("\n" +
+                    " _____   ___   _  __ _____   ___   _  __        ___    _     _    ___    __ \n" +
+                    "/_  _/  / _/  / |/ //_  _/  / _/  / |/ /       / o.) ,' \\  .' \\  / o |  /  \\\n" +
+                    " / /   / _/  / || /  / /   / _/  / || /       / o \\ / o | / o / /  ,'  / o |\n" +
+                    "/_/   /___/ /_/|_/  /_/   /___/ /_/|_/       /___,' |_,' /_n_/ /_/`_\\ /__,' \n" +
+                    "                                                                            \n");
 
             System.out.println("로그인 / 회원가입");
             System.out.println("1. 로그인");
