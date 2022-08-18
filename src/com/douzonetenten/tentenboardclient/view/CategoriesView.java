@@ -42,7 +42,7 @@ public class CategoriesView {
                     System.out.println(boardDto.toStringByAll());
                 }
 
-                System.out.print("\n어느 게시판을 선택하시겠습니까? : (뒤로가기 : 9)");
+                System.out.print("\n어느 게시판을 선택하시겠습니까?(뒤로가기 : 9) : ");
                 String selectNum = scanner.next();
                 if (selectNum.equals("1")) {
                     boardView.start("1");

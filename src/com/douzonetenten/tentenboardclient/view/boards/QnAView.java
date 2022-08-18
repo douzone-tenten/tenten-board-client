@@ -48,9 +48,9 @@ public class QnAView {
             String selectPost = scanner.next();
 
             //메뉴에 해당하지 않는 선택을 하였을 때 에러메세지 출력
-            if(!selectPost.equals("w") || !selectPost.equals("W") || !selectPost.equals("d") || !selectPost.equals("D") ||
-                    !selectPost.equals("b") || !selectPost.equals("B")) {
-                logError("해당하는 메뉴가 없습니다. 다시 입력해주세요.");
+            if(!selectPost.equals("w") && !selectPost.equals("W") && !selectPost.equals("d") && !selectPost.equals("D") &&
+                    !selectPost.equals("b") && !selectPost.equals("B")) {
+                logWarn("해당하는 메뉴가 없습니다. 다시 입력해주세요.");
             }
 
 
@@ -88,9 +88,10 @@ public class QnAView {
                     String selectUENum = scanner.next();
 
                     //메뉴에 해당하지 않는 선택을 하였을 때 에러메세지 출력
-                    if(!selectUENum.equals("u") || !selectUENum.equals("U") || !selectUENum.equals("e") || !selectUENum.equals("E") ||
-                            !selectUENum.equals("b") || !selectUENum.equals("B")) {
-                        logError("해당하는 메뉴가 없습니다. 다시 입력해주세요.");
+                    if(!selectUENum.equals("u") && !selectUENum.equals("U") && !selectUENum.equals("e") && !selectUENum.equals("E") &&
+                            !selectUENum.equals("b") && !selectUENum.equals("B")) {
+                        clearConsole();
+                        logWarn("해당하는 메뉴가 없습니다. 다시 입력해주세요.");
                     }
 
 
@@ -116,8 +117,6 @@ public class QnAView {
                     if(selectUENum.equals("e") || selectUENum.equals("E")) {
                         if(loginID.equals(ComLoginId)) {
                             deleteQnA(selectDetailNum);
-                            clearConsole();
-                            logInfo("해당 QnA 게시글을 삭제했습니다.\n");
                             break;
                         }
                         else {
@@ -171,13 +170,14 @@ public class QnAView {
         System.out.println("B : 취소하기");
         String select = scanner.next();
         Long userId = loginUserContext.get(0).getUserNo();
+        Long userRole = loginUserContext.get(0).getRoleNo();
 
         if(select.equals("Y")){
-            if(loginUserContext.get(0).getRoleNo().equals(1)){
+            if(userRole == 1){
                 postDto.setPostTitle("[질문] "+postDto.getPostTitle());
                 qnAController.insertQnA(postDto, userId, selectNum);
             }
-            if(loginUserContext.get(0).getRoleNo().equals(2)){
+            if(userRole == 2){
                 postDto.setPostTitle("[답변] "+postDto.getPostTitle());
                 qnAController.insertQnA(postDto, userId, selectNum);
             }
@@ -212,9 +212,22 @@ public class QnAView {
      * @author 강도영
      */
     public static void deleteQnA(String selectDetailNum) {
-        qnAController.deleteQnA(selectDetailNum);
-        clearConsole();
-        logInfo("해당 QnA 게시글을 삭제했습니다.\n\n");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("해당 게시글을 삭제하시겠습니까?(Y/N) : ");
+        String deleteYN = scanner.next();
+
+        if(deleteYN.equals("Y") || deleteYN.equals("y")) {
+            clearConsole();
+            logInfo("해당 QnA 게시글을 삭제했습니다.\n\n");
+        }
+
+        if(deleteYN.equals("N") || deleteYN.equals("n")) {
+            clearConsole();
+            logInfo("해당 게시글을 삭제하지 않았습니다\n\n");
+        }
+
     }
 
 
@@ -249,13 +262,14 @@ public class QnAView {
         String select = scanner.next();
 
         Long userId = loginUserContext.get(0).getUserNo();
+        Long userRole = loginUserContext.get(0).getRoleNo();
 
         if(select.equals("Y")){
-            if(loginUserContext.get(0).getRoleNo().equals(1)){
+            if(userRole == 1){
                 postDto.setPostTitle("[질문] "+postDto.getPostTitle());
                 qnAController.updateQnA(postDto, selectDetailNum);
             }
-            if(loginUserContext.get(0).getRoleNo().equals(2)) {
+            if(userRole == 2) {
                 postDto.setPostTitle("[답변] " + postDto.getPostTitle());
                 qnAController.updateQnA(postDto, selectDetailNum);
             }
