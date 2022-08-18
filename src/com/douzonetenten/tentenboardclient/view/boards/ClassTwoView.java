@@ -97,11 +97,11 @@ public class ClassTwoView {
              */
 
             if (answer.equals("r") || answer.equals("R")) {
-//                clearConsole();
+
                 logInfo("상세조회할 게시글 번호를 입력하세요 : ");
                 int detail = sc.nextInt();
                 dztwodetailselect(detail);
-//                sc.nextLine();
+
                 break;
             }
 
@@ -122,10 +122,6 @@ public class ClassTwoView {
         }
 
         while (true) {
-//            ArrayList<JoinPostDto> boardDtoArrayList = douZoneTwoController.douzoneTwoDetailSelect(postId);
-//            for (JoinPostDto joinPostDto : boardDtoArrayList) {
-//                System.out.println(joinPostDto.detailPostToString());
-//            }
 
 
             String answer = sc.nextLine();
@@ -154,7 +150,7 @@ public class ClassTwoView {
                  * clearConsole() = 콘솔 창 정리하는 메소드
                  * @author 황명수
                  */
-//                clearConsole();
+
                 break;
             }
 
@@ -208,7 +204,7 @@ public class ClassTwoView {
          * dztwoinsert() = 사용자가 더존 2반 게시판에 글을 작성할 수 있는 메소드
          * @author 황명수
          */
-        sc.nextLine();
+
         PostDto postDto = new PostDto();
         logInfo("제목을 입력하세요 : ");
         String douzone_postTitle = sc.nextLine();
