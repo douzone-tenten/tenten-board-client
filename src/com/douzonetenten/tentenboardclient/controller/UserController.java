@@ -3,6 +3,10 @@ package com.douzonetenten.tentenboardclient.controller;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
 import com.douzonetenten.tentenboardclient.service.UserService;
 
+/**
+ * UserDto를 전달하기 위한 UserController 입니다.
+ * @author : 김민준
+ */
 public class UserController {
     private UserService userService = new UserService();
 

@@ -1,14 +1,22 @@
 package com.douzonetenten.tentenboardclient.dto;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 public class UserDto {
-    private Long userNo; // user 고유값 Auto Increment
+    private Long userNo;
     private String username; // ID
     private String password; // 비밀번호
     private String name; // 실명
     private String department; // 반
+    private Long roleNo; // 권한번호
+
+    public void setRoleNo(Long roleNo) {
+        this.roleNo = roleNo;
+    }
+
+    public Long getRoleNo() {
+        return roleNo;
+    }
+
     private Timestamp createdAt;
 
     public Long getUserNo() {
