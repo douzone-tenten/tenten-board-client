@@ -7,6 +7,7 @@ import com.douzonetenten.tentenboardclient.view.boards.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
@@ -36,21 +37,22 @@ public class CategoriesView {
                 class1View.start("2");
             }
             if (selectNum.equals("3")) {
-//                NoticeView nmv = new NoticeView();
-//                nmv.start("3");
-                QnAView.start(selectNum);
+                NoticeView nmv = new NoticeView();
+                nmv.start("3");
             }
             if (selectNum.equals("4")) {
-
+                QnAView.start("4");
             }
             if (selectNum.equals("5")) {
-                anonymousView.start(selectNum);
+                douZoneTwoView.dztwostart(selectNum);
+
             }
             if (selectNum.equals("6")) {
+                // FIXME
                 boardView.start("6");
             }
             if (selectNum.equals("7")) {
-                douZoneTwoView.dztwostart(selectNum);
+                // empboard
             }
             if (selectNum.equals("9")) {
                 logInfo("이전 메뉴로 돌아갑니다.");

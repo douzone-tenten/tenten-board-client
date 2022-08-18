@@ -9,9 +9,12 @@ public class ClassTwoJoinDto {
     private Long post_id;
     private String post_title;
     private String post_body;
+
+    private String name;
     private String username;
 
     private Timestamp created_at;
+
 
     public ClassTwoJoinDto() {
     }
@@ -23,13 +26,16 @@ public class ClassTwoJoinDto {
         this.created_at = created_at;
     }
 
-    public ClassTwoJoinDto(Long post_id, String post_title, String post_body, String username, Timestamp created_at) {
+
+
+    public ClassTwoJoinDto(Long post_id, String post_title, String post_body, String name, Timestamp created_at) {
         this.post_id = post_id;
         this.post_title = post_title;
         this.post_body = post_body;
-        this.username = username;
+        this.username = name;
         this.created_at = created_at;
     }
+
 
 
     public String getPost_body() {
@@ -71,6 +77,15 @@ public class ClassTwoJoinDto {
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     @Override
     public String toString() {
