@@ -15,32 +15,41 @@ public class UserView {
     private UserDto userDto = new UserDto();
     private LoginMainView loginMainView = new LoginMainView();
 
-    public void insertUser(){
+    public void insertUser() {
         clearConsole();
         uiTitle("회원가입");
 
         System.out.println("아이디를 입력하세요.");
         userDto.setUsername(scanner.nextLine());
 
-        while (true){
+        while (true) {
             System.out.println("비밀번호를 입력하세요.");
             String password = scanner.nextLine();
             System.out.println("비밀번호를 다시 입력하세요.");
             String passwordCheck = scanner.nextLine();
 
-            if (password.equals(passwordCheck)){
+            if (password.equals(passwordCheck)) {
                 userDto.setPassword(password);
                 break;
             }
-            if (!password.equals(passwordCheck)){
+            if (!password.equals(passwordCheck)) {
                 System.out.println("비밀번호가 일치하지 않습니다.");
             }
         }
 
         System.out.println("이름을 입력하세요.");
         userDto.setName(scanner.nextLine());
-        System.out.println("소속을 입력하세요.");
-        userDto.setDepartment(scanner.nextLine());
+        while (true) {
+            System.out.println("반을 입력하세요. (1반이면 1, 2반이면 2)");
+            String department = scanner.nextLine();
+            if (!(department.equals("1") || department.equals("2"))) {
+                System.out.println("1 또는 2만 입력해주세요.");
+            }
+            if ((department.equals("1") || department.equals("2"))) {
+                userDto.setDepartment(department);
+                break;
+            }
+        }
         int result = userController.insertUser(userDto);
         if (result == 1){
             System.out.println("회원가입에 성공했습니다.");
@@ -62,11 +71,11 @@ public class UserView {
             logError("로그인에 실패하였습니다.");
         }
 
-        if (!loginUserContext.isEmpty() && userDto.getUsername().equals(loginUserContext.get(0).getUsername())){
+        if (!loginUserContext.isEmpty() && userDto.getUsername().equals(loginUserContext.get(0).getUsername())) {
             loginMainView.start();
-        } else if (loginUserContext.isEmpty()){
-            // TODO : SQLException으로 예외처리하기.
-            System.out.println("로그인에 실패했습니다.");
+        } else if (loginUserContext.isEmpty()) {
+            // TODO : Exception 처리
+            logError("로그인에 실패하였습니다.");
         }
     }
 }

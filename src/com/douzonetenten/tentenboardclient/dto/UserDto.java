@@ -8,8 +8,8 @@ public class UserDto {
     private String username; // ID
     private String password; // 비밀번호
     private String name; // 실명
-    private String department; // 부서
-    private Timestamp createdAt; // Date class 보다는 LocalDateTime class 사용 적극권장.
+    private String department; // 반
+    private Timestamp createdAt;
 
     public Long getUserNo() {
         return userNo;
