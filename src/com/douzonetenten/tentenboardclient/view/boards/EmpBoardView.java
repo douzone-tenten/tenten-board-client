@@ -17,6 +17,12 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSel
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 import static com.douzonetenten.tentenboardclient.view.boards.QnAView.qnAController;
 
+/**
+ * EmpBoard 뷰 클래스입니다.
+ *
+ * 직원용 게시판의 CRUD를 담고 있습니다.
+ * @author 성필
+ */
 public class EmpBoardView {
     static PostController postController = new PostController();
     PostDto postDto = new PostDto();
