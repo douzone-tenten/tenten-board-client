@@ -51,13 +51,14 @@ public class AnonymousView {
                     + "--------------------------------------------\n");
 
             // 게시글 목록 조회
+            // 접속한 게시판번호와 일치하는 게시글이 없을 시
             if (getPostList.isEmpty()) {
                 logWarn("익명게시판에 작성된 게시글이 없습니다.");
             }
             // 접속한 게시판번호와 일치하는 게시글이 있을 시
             if (!(getPostList.isEmpty())) {
                 for (JoinPostDto joinPostDto : getPostList) {
-                    System.out.println(joinPostDto.findPostToString());
+                    System.out.println(joinPostDto.findAnonymousToString());
                 }
             }
             System.out.println("");
@@ -67,7 +68,7 @@ public class AnonymousView {
                     + "게시글 번호      제목        작성자      작성시간\n"
                     + "--------------------------------------------\n");
 
-            // 접속한 게시판번호와 일치하는 게시글이 없을 시
+
             String login_userName = loginUserContext.get(0).getUsername().toString();
 
             if (getPostList2.isEmpty()) {
@@ -86,37 +87,25 @@ public class AnonymousView {
             //TODO 하단 메뉴 공통 컨포넌트화
             //postView.footerMenu(selectNum);   // => 뒤로가기 기능 다시 구상 필요 break;
 
-            System.out.println("b. 뒤로가기  n. 다음페이지   f. 이전 페이지   w. 글쓰기  d: 상세조회");
-            String selectPost2 = scanner.next();
+            System.out.println("b. 뒤로가기  w. 글쓰기  d: 상세조회");
+            String selectPostMenu1 = scanner.next();
 
             /**
              * 예외처리
              */
-            if (!(selectPost2.equals("b") || selectPost2.equals("n") || selectPost2.equals("f") || selectPost2.equals("w") || selectPost2.equals("d"))) {
+            if (!(selectPostMenu1.equals("b") || selectPostMenu1.equals("w") || selectPostMenu1.equals("d"))) {
                 logError("메뉴를 잘못 입력하셨습니다.");
             }
             /**
              * 뒤로가기
              */
-            if (selectPost2.equals("b") || selectPost2.equals("B")) {
+            if (selectPostMenu1.equals("b") || selectPostMenu1.equals("B")) {
                 break;
             }
-            /**
-             * 다음페이지
-             */
-            if (selectPost2.equals("n") || selectPost2.equals("N")) {
-                // TODO : 다음페이지 기능구현
-            }
-            /**
-             * 이전페이지
-             */
-            if (selectPost2.equals("f") || selectPost2.equals("F")) {
-                // TODO : 이전페이지 기능구현
-            }
-            if (selectPost2.equals("w") || selectPost2.equals("W")) {
+            if (selectPostMenu1.equals("w") || selectPostMenu1.equals("W")) {
                 postView.insertPost(selectNum);
             }
-            if (selectPost2.equals("d") || selectPost2.equals("D")) {
+            if (selectPostMenu1.equals("d") || selectPostMenu1.equals("D")) {
                 findAnonymousByPost(selectNum, login_user_no);   //익명게시판 전용 상세조회
             }
         }
@@ -135,7 +124,7 @@ public class AnonymousView {
 
         System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
         String post_id = scanner.next();
-        // 해당 게시판의 게시글들
+        // 익명 게시판의 게시글들
         ArrayList<JoinPostDto> getArrayList =  postController.findByPost(selectNum);
 
         //String post_user_id= getArrayList.get(0). ;
@@ -144,14 +133,53 @@ public class AnonymousView {
 
         String user_member_no = String.valueOf(Id_list.get(0).getMemberNo());
 
-        //게시글 조회자가 게시글 작성자이면 상세조회가능
-        if(login_user_no.equals(user_member_no)){
-            // 상세조회
-            ArrayList<JoinPostDto> getPostList3 = anonymousController.findDetailByPost(selectNum, post_id, login_user_no);
-            System.out.println(getPostList3.get(0).DetailPostToString());
+        while (true) {
+            //게시글 조회자가 게시글 작성자이면 상세조회가능
+            if (login_user_no.equals(user_member_no)) {
+                // 상세조회
+                ArrayList<JoinPostDto> getPostList3 = anonymousController.findDetailByPost(selectNum, post_id, login_user_no);
+                System.out.println(getPostList3.get(0).DetailPostToString());
+            } else {
+                logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
+            }
 
-        }else{
-            logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
+            System.out.println("\n u.게시글 수정  d.게시글 삭제" +
+                               "\n b.뒤로 가기");
+            uiSelectMenu();
+
+            String selectPostMenu2 = scanner.next();
+
+            if (!(selectPostMenu2.equals("u")||selectPostMenu2.equals("d")||selectPostMenu2.equals("b"))){
+                logError("메뉴를 잘못 입력하셨습니다.");
+            }
+            //게시글 조회자가 게시글 작성자이면 수정가능
+            if (selectPostMenu2.equals("u")||selectPostMenu2.equals("U")){
+                // 수정기능
+                if(login_user_no.equals(user_member_no)){
+
+                    logInfo("해당 게시글이 수정되었습니다.");
+                }else{
+                    logWarn("본인이 작성한 게시글만 수정 가능합니다.");
+                }
+            }
+            //게시글 조회자가 게시글 작성자이면 상세조회가능
+            if (selectPostMenu2.equals("d")||selectPostMenu2.equals("D")){
+                // 삭제기능
+                if(login_user_no.equals(user_member_no)){
+                    postController.deleteIdByPost(selectNum,login_user_no,post_id);
+                    logInfo("해당 게시글이 삭제되었습니다.");
+                    break;  //java.lang.IndexOutOfBoundsException: Index: 0, Size: 0 에러 해결
+
+
+
+                }else{
+                    logWarn("본인이 작성한 게시글만 삭제 가능합니다.");
+                }
+            }
+            if (selectPostMenu2.equals("b")||selectPostMenu2.equals("B")) {
+                // 뒤로가기
+                break;
+            }
         }
     }
 }

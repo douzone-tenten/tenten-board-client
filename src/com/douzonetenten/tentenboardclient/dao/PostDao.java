@@ -150,7 +150,7 @@ public class PostDao {
 
 
 
-    // 익명게시판에서 사용
+    // 익명게시판 조회자 게시글만 조회
     // 로그인한 유저가 작성한 게시글만 보일 수 있도록 조회
     public ArrayList<JoinPostDto> findSameUserByPost(Connection connection, String user_no, String board_no){
         ArrayList<JoinPostDto> joinPostDtoArrayList = null;
@@ -183,7 +183,7 @@ public class PostDao {
     }
 
 
-    // 익명게시판에서의 게시글번호를 통해 게시글의 user_id 추출
+    // 익명게시판 게시글번호를 통해 게시글의 user_id 추출
     public ArrayList<PostDto> findIdByPost(Connection connection, String boardNum, String postId){
         ArrayList<PostDto> postDtoArrayList = null;
         PreparedStatement preparedStatement = null;
@@ -210,7 +210,7 @@ public class PostDao {
         return postDtoArrayList;
     }
 
-    // 익명게시판
+    // 익명게시판의 상세조회
     public ArrayList<JoinPostDto> findDetailByPost(Connection connection, String boardNum, String postId, String userNo){
         ArrayList<JoinPostDto> joinPostDtoArrayList= null;
         PreparedStatement preparedStatement =null;
@@ -233,6 +233,7 @@ public class PostDao {
                 joinPostDto.setPostTitle(resultSet.getString("post_title"));
                 joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
                 joinPostDto.setUsername(resultSet.getString("username"));
+
                 joinPostDtoArrayList.add(joinPostDto);
 
             }
@@ -241,5 +242,31 @@ public class PostDao {
         }
         return joinPostDtoArrayList;
     }
+
+    // 익명게시판 게시글 삭제
+    // 로그인한 유저가 본인글만 삭제 가능
+    public int deleteIdByPost(Connection connection, String boardNo, String userNo, String postNo){
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM post WHERE board_board_no = ? AND user_member_no = ? AND post_id = ?");
+
+            preparedStatement.setString(1,boardNo);
+            preparedStatement.setString(2,userNo);
+            preparedStatement.setString(3,postNo);
+            int resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 익명게시판 게시글 수정
+    // 로그인한 유저가 본인글만 수정 가능
+
+
+
+
+
+
 
 }
