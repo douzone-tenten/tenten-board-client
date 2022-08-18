@@ -11,7 +11,6 @@ import static com.douzonetenten.tentenboardclient.service.UserService.loginUserC
 
 public class DouZoneTwoDao {
 
-
     public ArrayList<ClassTwoJoinDto> douZoneFindByAll(Connection connection, String boardNum) {
         ArrayList<ClassTwoJoinDto> list = null;
         PreparedStatement preparedStatement = null;
@@ -22,7 +21,6 @@ public class DouZoneTwoDao {
 
 
         try {
-
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, boardNum);
@@ -70,7 +68,6 @@ public class DouZoneTwoDao {
                 joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
 
                 list.add(joinPostDto);
-
             }
 
         } catch (SQLException e) {
@@ -79,7 +76,6 @@ public class DouZoneTwoDao {
         return list;
 
     }
-
 
     public int douzoneTwoInsert(Connection connection, PostDto postDto, String BoardNum) {
         int result = 0;

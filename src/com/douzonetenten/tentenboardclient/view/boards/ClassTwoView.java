@@ -67,9 +67,11 @@ public class ClassTwoView {
             String answer = sc.nextLine();
             if (answer.equals("e") || answer.equals("E")) {
                 dztwoUpdate(port_id);
+                break;
             }
             if (answer.equals("d") || answer.equals("D")) {
                 dzTwoDelete(port_id);
+                break;
             }
             if (answer.equals("b") || answer.equals("B")){
                 break;
