@@ -46,4 +46,23 @@ public class PostService {
         ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, boardNum);
         return joinPostDtoArrayList;
     }
+
+    // 익명게시판에 사용
+    // 상세조회 시 로그인한 유저가 쓴 글만 출력해주기
+    public ArrayList<JoinPostDto> findSameUserByPost(String user_no, String board_no){
+        Connection connection= getConnection();
+        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findSameUserByPost(connection, user_no, board_no);
+        return  joinPostDtoArrayList;
+    }
+
+    // 익명게시판에서의 게시글번호를 통해 게시글의 user_id 추출
+    public ArrayList<PostDto> findIdByPost(String boardNUm, String postId){
+        Connection connection = getConnection();
+        ArrayList<PostDto> PostDtoArrayList = postDao.findIdByPost(connection, boardNUm, postId);
+        return PostDtoArrayList;
+    }
+
+
+
+
 }

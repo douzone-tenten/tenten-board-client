@@ -7,7 +7,6 @@ import com.douzonetenten.tentenboardclient.view.boards.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
@@ -17,7 +16,6 @@ public class CategoriesView {
     ClassOneVIew classOneVIew = new ClassOneVIew();
     ClassTwoView douZoneTwoView = new ClassTwoView();
     AnonymousView anonymousView = new AnonymousView();
-
     EmpBoardView empBoardView = new EmpBoardView();
     BoardController boardController = new BoardController();
 
@@ -55,7 +53,7 @@ public class CategoriesView {
                 empBoardView.start("7");
             }
             if (selectNum.equals("9")) {
-                System.out.println("뒤로가기");
+                logInfo("이전 메뉴로 돌아갑니다.");
                 break;
             }
         }
