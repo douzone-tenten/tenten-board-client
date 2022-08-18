@@ -155,7 +155,7 @@ public class QnAView {
         System.out.print("QnA 제목을 입력하세요 : ");
         String qnaTitle = scanner.nextLine();
 
-        System.out.print("글 내용을 입력하세요 : ");
+        System.out.print("QnA 글 내용을 입력하세요 : ");
         String qnaBody = scanner.nextLine();
 
         postDto.setPostTitle(qnaTitle);
@@ -173,7 +173,14 @@ public class QnAView {
         Long userId = loginUserContext.get(0).getUserNo();
 
         if(select.equals("Y")){
-            qnAController.insertQnA(postDto, userId, selectNum);
+            if(loginUserContext.get(0).getRoleNo().equals(1)){
+                postDto.setPostTitle("[질문] "+postDto.getPostTitle());
+                qnAController.insertQnA(postDto, userId, selectNum);
+            }
+            if(loginUserContext.get(0).getRoleNo().equals(2)){
+                postDto.setPostTitle("[답변] "+postDto.getPostTitle());
+                qnAController.insertQnA(postDto, userId, selectNum);
+            }
         }
         if(select.equals("B")){
             logInfo("글 작성을 취소합니다.");
@@ -244,7 +251,14 @@ public class QnAView {
         Long userId = loginUserContext.get(0).getUserNo();
 
         if(select.equals("Y")){
-            qnAController.updateQnA(postDto, selectDetailNum);
+            if(loginUserContext.get(0).getRoleNo().equals(1)){
+                postDto.setPostTitle("[질문] "+postDto.getPostTitle());
+                qnAController.updateQnA(postDto, selectDetailNum);
+            }
+            if(loginUserContext.get(0).getRoleNo().equals(2)) {
+                postDto.setPostTitle("[답변] " + postDto.getPostTitle());
+                qnAController.updateQnA(postDto, selectDetailNum);
+            }
         }
         if(select.equals("B")){
             logInfo("글 작성을 취소합니다.");
