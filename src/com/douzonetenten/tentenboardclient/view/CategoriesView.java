@@ -34,28 +34,26 @@ public class CategoriesView {
                 boardView.start("1");
             }
             if (selectNum.equals("2")) {
-
+                NoticeView nmv = new NoticeView();
+                nmv.start("2");
             }
             if (selectNum.equals("3")) {
-                NoticeView nmv = new NoticeView();
-                nmv.start("3");
+                QnAView.start("3");
             }
             if (selectNum.equals("4")) { //1반 게시판
                 classOneVIew.start("4");
             }
             if (selectNum.equals("5")) {
                 douZoneTwoView.dztwostart(selectNum);
-
             }
             if (selectNum.equals("6")) {
-                // FIXME
-                boardView.start("6");
+                anonymousView.start(selectNum);
             }
             if (selectNum.equals("7")) {
                 // empboard
             }
             if (selectNum.equals("9")) {
-                logInfo("이전 메뉴로 돌아갑니다.");
+                System.out.println("뒤로가기");
                 break;
             }
         }

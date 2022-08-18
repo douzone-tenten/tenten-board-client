@@ -1,33 +1,27 @@
 package com.douzonetenten.tentenboardclient.controller;
 
-import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
+import com.douzonetenten.tentenboardclient.dto.Notice_JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
-import com.douzonetenten.tentenboardclient.service.PostService;
+import com.douzonetenten.tentenboardclient.service.NoticeService;
 
 import java.util.ArrayList;
 
 public class NoticeController {
 
-    private static final PostService postService = new PostService();
+    private static final NoticeService noticeService = new NoticeService();
 
-    public void insertPost(PostDto postDto, String boardNumber){
+    public static ArrayList<Notice_JoinPostDto> FindByAll(long post_id){
+        ArrayList<Notice_JoinPostDto> notice_list = noticeService.FindByAll(post_id);
+        return notice_list;
+    }
+    public void insertPost(PostDto postDto, String boardNumber) {
 
-        postService.insertPost(postDto, boardNumber);
+        noticeService.insertPost(postDto, boardNumber);
     }
 
-    public static void deletePost(String post_id){
+    public static void deletePost(String post_id) {
 
-        postService.deletePost(post_id);
-    }
-
-    public ArrayList<PostDto> findAllByPost() {
-        ArrayList<PostDto> postDtoArrayList = postService.findAllByPost();
-        return postDtoArrayList;
-    }
-
-    public ArrayList<JoinPostDto> findByPost(String boardNum){
-        ArrayList<JoinPostDto> notice_JoinPostDtoArrayList = postService.findByPost(boardNum);
-        return notice_JoinPostDtoArrayList;
+        NoticeService.deletePost(post_id);
     }
 }
 

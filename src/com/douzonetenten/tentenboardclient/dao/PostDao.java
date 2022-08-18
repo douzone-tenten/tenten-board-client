@@ -73,6 +73,8 @@ public class PostDao {
         ArrayList<JoinPostDto> joinPostDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
+
+
         try {
             /**
              * Board 테이블도 join 해서, 보드의 이름도 가지고 오면 좋을듯.

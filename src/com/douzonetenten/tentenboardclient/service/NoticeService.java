@@ -2,6 +2,8 @@ package com.douzonetenten.tentenboardclient.service;
 
 
 import com.douzonetenten.tentenboardclient.dao.PostDao;
+import com.douzonetenten.tentenboardclient.dao.Notice_postDao;
+import com.douzonetenten.tentenboardclient.dto.Notice_JoinPostDto;
 import com.douzonetenten.tentenboardclient.dao.NoticePostDao;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
@@ -13,6 +15,13 @@ import static com.douzonetenten.tentenboardclient.common.DBConnector.*;
 
 public class NoticeService {
     private final PostDao postDao = new PostDao();
+    //private final Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
+
+    public ArrayList<Notice_JoinPostDto> FindByAll(long post_id){
+        Connection connection = getConnection();
+        ArrayList<Notice_JoinPostDto> notice_list = Notice_postDao.FindByAll(connection, post_id);
+        return notice_list;
+    }
 
     public int insertPost(PostDto postDto, String boardNumber) {
         Connection connection = getConnection();
@@ -23,9 +32,9 @@ public class NoticeService {
         return result;
     }
 
-    public int deletePost(String post_id){
+    public static int deletePost(String post_id){
         Connection connection = getConnection();
-        int result = NoticePostDao.deletePost(connection, post_id);
+        int result = Notice_postDao.deletePost(connection, post_id);
         if(result > 0){
             commit(connection);
         }else {
@@ -34,15 +43,5 @@ public class NoticeService {
         return result;
     }
 
-    public ArrayList<PostDto> findAllByPost(){
-        Connection connection = getConnection();
-        ArrayList<PostDto> postDtoArrayList = postDao.findAllByPost(connection);
-        return postDtoArrayList;
-    }
 
-    public ArrayList<JoinPostDto> findByPost(String boardNum){
-        Connection connection = getConnection();
-        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, boardNum);
-        return joinPostDtoArrayList;
-    }
 }
