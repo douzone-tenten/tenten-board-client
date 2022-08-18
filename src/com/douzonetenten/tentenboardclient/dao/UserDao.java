@@ -27,7 +27,7 @@ public class UserDao {
     }
 
 
-    public int insertUser(Connection connection, UserDto userDto) {
+    public int insertUser(Connection connection, UserDto userDto) throws SQLException {
         try {
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement("INSERT INTO user(username,password,department,name,created_at) values (?,?,?,?,?)");
@@ -65,7 +65,7 @@ public class UserDao {
 
             return resultSet;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new SQLException(e);
         }
     }
 }

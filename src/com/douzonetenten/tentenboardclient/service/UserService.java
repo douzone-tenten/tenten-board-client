@@ -6,6 +6,7 @@ import com.douzonetenten.tentenboardclient.dao.UserDao;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class UserService {
      * @author : 김민준
      * @return : 쿼리 성공여부
      */
-    public int insertUser(UserDto userDto){
+    public int insertUser(UserDto userDto) throws SQLException {
         Connection connection = getConnection();
         int result = userDao.insertUser(connection, userDto);
         if (result > 0) {
