@@ -24,7 +24,7 @@ public class QnAView {
 
         while(true) {
             ArrayList<JoinPostDto> getPostList = qnAController.findAllByQnA(selectNum);
-
+            clearConsole();
             uiTitle("QnA 게시판");
             System.out.printf("-------------------------------------------\n" +
                               "게시글 번호\t\t제목\t\t작성자\t\t작성시간\n" +
@@ -60,8 +60,16 @@ public class QnAView {
 
             //상세보기
             if(selectPost.equals("d") || selectPost.equals("D")){
+
                 System.out.print("상세보기할 게시판의 번호를 입력해주세요. : ");
                 String selectDetailNum = scanner.next();
+
+                String loginID = loginUserContext.get(0).getUsername();
+                String ComLoginId = qnAController.detailQnA(selectDetailNum).get(0).getUsername();
+                System.out.println(loginID);
+                System.out.println(ComLoginId);
+
+                clearConsole();
                 detailQnA(selectDetailNum);
                 while(true) {
                     System.out.println("b. 뒤로가기\t\tu. 수정하기\t\te. 삭제하기");
@@ -69,12 +77,35 @@ public class QnAView {
                     String selectUENum = scanner.next();
 
                     if(selectUENum.equals("u") || selectUENum.equals("U")) {
-                        updateQnA(selectDetailNum);
-                        break;
+                        if(loginID.equals(ComLoginId)) {
+                            updateQnA(selectDetailNum);
+                            clearConsole();
+                            logInfo("해당 QnA 게시글을 수정했습니다.\n");
+                            detailQnA(selectDetailNum);
+                            continue;
+                        }
+                        else {
+                            clearConsole();
+                            logInfo("게시글 작성자만 수정가능합니다.\n");
+                            detailQnA(selectDetailNum);
+                            continue;
+                        }
                     }
+
+
                     if(selectUENum.equals("e") || selectUENum.equals("E")) {
-                        deleteQnA(selectDetailNum);
-                        break;
+                        if(loginID.equals(ComLoginId)) {
+                            deleteQnA(selectDetailNum);
+                            clearConsole();
+                            logInfo("해당 QnA 게시글을 삭제했습니다.\n");
+                            break;
+                        }
+                        else {
+                            clearConsole();
+                            logInfo("게시글 작성자만 삭제가능합니다.\n");
+                            detailQnA(selectDetailNum);
+                            continue;
+                        }
                     }
 
                     if(selectUENum.equals("b") || selectUENum.equals("B")) {
@@ -125,12 +156,11 @@ public class QnAView {
     //글제목 작성자 작성시간 글내용
     //QnA 게시글 상세조회
     public static void detailQnA(String selectDetailNum) {
-        clearConsole();
         System.out.printf("--------------------------------------------------------------------------\n" +
                         "[제\t\t목]\t" + qnAController.detailQnA(selectDetailNum).get(0).getPostTitle() + "\n" +
-                        "[작\t성\t자]\t" + qnAController.detailQnA(selectDetailNum).get(0).getUsername() + "\n" +
-                        //"[작성시간]\t" + qnAController.detailQnA(selectDetailNum).get(0).getCreatedAt() + "\n" +
-                        "[내\t\t용]\n" + qnAController.detailQnA(selectDetailNum).get(0).getPostBody() + "\n" +
+                        "[작\t\t성\t\t자]\t" + qnAController.detailQnA(selectDetailNum).get(0).getUsername() + "\n" +
+                        "[작\t성\t시\t간]\t" + qnAController.detailQnA(selectDetailNum).get(0).getCreatedAt() + "\n" +
+                        "[내\t\t\t용]\n" + qnAController.detailQnA(selectDetailNum).get(0).getPostBody() + "\n" +
                         "----------------------------------------------------------------------------\n\n");
     }
 
@@ -167,6 +197,7 @@ public class QnAView {
         System.out.println("Y : 등록하기");
         System.out.println("B : 취소하기");
         String select = scanner.next();
+
         Long userId = loginUserContext.get(0).getUserNo();
 
         if(select.equals("Y")){
