@@ -262,7 +262,22 @@ public class PostDao {
 
     // 익명게시판 게시글 수정
     // 로그인한 유저가 본인글만 수정 가능
+    public int updateIdByPost(Connection connection, String boardNo, String userNo, String postNo, String postTitle, String postBody){
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("UPDATE post SET post_title=? ,post_body=?   WHERE board_board_no = ? AND user_member_no = ? AND post_id = ?");
 
+            preparedStatement.setString(1,postTitle);
+            preparedStatement.setString(2,postBody);
+            preparedStatement.setString(3,boardNo);
+            preparedStatement.setString(4,userNo);
+            preparedStatement.setString(5,postNo);
+            int resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

@@ -157,7 +157,14 @@ public class AnonymousView {
                 // 수정기능
                 if(login_user_no.equals(user_member_no)){
 
+                    scanner.nextLine();  // 메뉴 선택후 개행문자가 수정할 제목으로 들어가는 것을 방지
+                    System.out.println("수정하실 글 제목을 입력하세요 : ");
+                    String postTitle=scanner.nextLine();
+                    System.out.println("수정하실 글 내용을 입력하세요 : ");
+                    String postBody=scanner.nextLine();
+                    postController.updateIdByPost(selectNum, login_user_no ,post_id,postTitle,postBody);
                     logInfo("해당 게시글이 수정되었습니다.");
+                    break;
                 }else{
                     logWarn("본인이 작성한 게시글만 수정 가능합니다.");
                 }
@@ -169,8 +176,6 @@ public class AnonymousView {
                     postController.deleteIdByPost(selectNum,login_user_no,post_id);
                     logInfo("해당 게시글이 삭제되었습니다.");
                     break;  //java.lang.IndexOutOfBoundsException: Index: 0, Size: 0 에러 해결
-
-
 
                 }else{
                     logWarn("본인이 작성한 게시글만 삭제 가능합니다.");
