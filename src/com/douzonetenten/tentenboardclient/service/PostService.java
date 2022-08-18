@@ -63,6 +63,26 @@ public class PostService {
     }
 
 
+//    public static int deletePost(String postNo){
+//        Connection connection = getConnection();
+//        int result = PostDao.deletePost(connection,postNo);
+//        if (result > 0) {
+//            commit(connection);
+//        } else rollback(connection);
+//        return result;
+//    }
+
+
+
+    public int deleteIdByPost(String boardNo, String userNo, String postNo){
+        Connection connection = getConnection();
+        int result = postDao.deleteIdByPost(connection, boardNo, userNo, postNo);
+        if (result > 0) {
+            commit(connection);
+        } else rollback(connection);
+        return result;
+    }
+
 
 
 }

@@ -166,11 +166,12 @@ public class AnonymousView {
             if (selectPostMenu2.equals("d")||selectPostMenu2.equals("D")){
                 // 삭제기능
                 if(login_user_no.equals(user_member_no)){
-
-
-
-
+                    postController.deleteIdByPost(selectNum,login_user_no,post_id);
                     logInfo("해당 게시글이 삭제되었습니다.");
+                    break;  //java.lang.IndexOutOfBoundsException: Index: 0, Size: 0 에러 해결
+
+
+
                 }else{
                     logWarn("본인이 작성한 게시글만 삭제 가능합니다.");
                 }

@@ -243,7 +243,7 @@ public class PostDao {
 
     // 익명게시판 게시글 삭제
     // 로그인한 유저가 본인글만 삭제 가능
-    public int deleteIdByPost(Connection connection, String boardNo ,String userNo,String postNo){
+    public int deleteIdByPost(Connection connection, String boardNo, String userNo, String postNo){
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM post WHERE board_board_no = ? AND user_member_no = ? AND post_id = ?");

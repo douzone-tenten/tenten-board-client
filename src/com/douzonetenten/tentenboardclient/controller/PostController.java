@@ -44,7 +44,10 @@ public class PostController {
         return  PostDtoArrayList;
     }
 
-
+    //익명게시판 삭제기능
+    public int deleteIdByPost(String boardNo, String userNo, String postNo){
+       return postService.deleteIdByPost(boardNo,userNo,postNo);
+    }
 
 
 }
