@@ -13,4 +13,14 @@ public class UserInterfaceUtils {
     public static void uiSelectMenu() {
         System.out.print("메뉴를 선택하세요 : ");
     }
+    public static void uiPostCatagory(){
+        System.out.print("--------------------------------------------\n"
+                + "게시글 번호      제목        작성자      작성시간\n"
+                + "--------------------------------------------\n");
+    }
+
+
+
+
+
 }

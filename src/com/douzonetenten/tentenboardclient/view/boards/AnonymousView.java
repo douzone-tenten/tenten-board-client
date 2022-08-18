@@ -13,8 +13,7 @@ import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.*;
-import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSelectMenu;
-import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.*;
 
 /**
  * 익명 게시판 클래스입니다.
@@ -38,6 +37,9 @@ public class AnonymousView {
 
             // 로그인한 객체에서 user_id 추출
             String login_user_no = loginUserContext.get(0).getUserNo().toString();
+
+
+
             // 로그인한 유저의 게시글만 보일 수 있도록 출력
             // login_user_no = 로그인 한 객체의 user_no ,  selectNum = 접속한 게시판 번호
             // getPostList2
@@ -45,10 +47,8 @@ public class AnonymousView {
 
             uiTitle("익명게시판");
 
-            // TODO : 게시판 목차 공통 메소드 작성
-            System.out.print("--------------------------------------------\n"
-                    + "게시글 번호      제목        작성자      작성시간\n"
-                    + "--------------------------------------------\n");
+
+            uiPostCatagory();
 
             // 게시글 목록 조회
             // 접속한 게시판번호와 일치하는 게시글이 없을 시
@@ -64,11 +64,10 @@ public class AnonymousView {
             System.out.println("");
             System.out.println("====================================================");
 
-            System.out.print("--------------------------------------------\n"
-                    + "게시글 번호      제목        작성자      작성시간\n"
-                    + "--------------------------------------------\n");
 
+            uiPostCatagory();
 
+            // 로그인한 객체에서 username 추출
             String login_userName = loginUserContext.get(0).getUsername().toString();
 
             if (getPostList2.isEmpty()) {
@@ -122,25 +121,36 @@ public class AnonymousView {
          * 로그인한 객체정보와 상세조회할 게시글의 작성자 일치여부 & 권한 여부 체크
          * */
 
+        // 관리자권한과 일반유저권한에 따른 기능접근제한 구현
+        // 관리자 - 게시글 작성여부에 상관없이 상세조회, 수정, 삭제 기능 접근가능
+        // 일반 유저 - 본인이 작성한 게시글에 한하여 상세조회, 수정, 삭제 접근 가능
+        String login_userName= loginUserContext.get(0).getUsername().toString();
+        String login_user_role= loginUserContext.get(0).getRoleNo().toString();
+        String userRole=(login_user_role.equals("1"))? "일반유저" : "관리자";
+        System.out.println(login_userName+"의 권한 :"+userRole);
+
         System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
         String post_id = scanner.next();
         // 익명 게시판의 게시글들
         ArrayList<JoinPostDto> getArrayList =  postController.findByPost(selectNum);
 
         //String post_user_id= getArrayList.get(0). ;
-
+        // 게시글 번호를 통해 상세조회할 게시물조회
         ArrayList<PostDto> Id_list= postController.findIdByPost(selectNum, post_id);
-
+        // 상세조회한 게시글의 user_no 추출
         String user_member_no = String.valueOf(Id_list.get(0).getMemberNo());
+
+        boolean flag =true;
 
         while (true) {
             //게시글 조회자가 게시글 작성자이면 상세조회가능
-            if (login_user_no.equals(user_member_no)) {
+            if (login_user_no.equals(user_member_no)||login_user_role.equals("2")) {
                 // 상세조회
                 ArrayList<JoinPostDto> getPostList3 = anonymousController.findDetailByPost(selectNum, post_id, login_user_no);
                 System.out.println(getPostList3.get(0).DetailPostToString());
-            } else {
+            } else if(!(login_user_no.equals(user_member_no)&& flag))  {
                 logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
+                flag=!flag;   // flag 뒤집기
             }
 
             System.out.println("\n u.게시글 수정  d.게시글 삭제" +
@@ -155,7 +165,7 @@ public class AnonymousView {
             //게시글 조회자가 게시글 작성자이면 수정가능
             if (selectPostMenu2.equals("u")||selectPostMenu2.equals("U")){
                 // 수정기능
-                if(login_user_no.equals(user_member_no)){
+                if((login_user_no.equals(user_member_no))||(login_user_role.equals("2"))){
 
                     scanner.nextLine();  // 메뉴 선택후 개행문자가 수정할 제목으로 들어가는 것을 방지
                     System.out.println("수정하실 글 제목을 입력하세요 : ");
@@ -172,7 +182,7 @@ public class AnonymousView {
             //게시글 조회자가 게시글 작성자이면 상세조회가능
             if (selectPostMenu2.equals("d")||selectPostMenu2.equals("D")){
                 // 삭제기능
-                if(login_user_no.equals(user_member_no)){
+                if(login_user_no.equals(user_member_no)||login_user_role.equals("2")){
                     postController.deleteIdByPost(selectNum,login_user_no,post_id);
                     logInfo("해당 게시글이 삭제되었습니다.");
                     break;  //java.lang.IndexOutOfBoundsException: Index: 0, Size: 0 에러 해결
