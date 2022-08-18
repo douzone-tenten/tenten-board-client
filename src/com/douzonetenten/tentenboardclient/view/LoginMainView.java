@@ -17,7 +17,6 @@ public class LoginMainView {
         while (true){
             uiTitle("텐텐보드 메인");
             System.out.print("\n\n안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
-
             System.out.println("1. 게시판 목록조회");
             System.out.println("8. 로그아웃");
             System.out.println("9. 프로그램 종료");

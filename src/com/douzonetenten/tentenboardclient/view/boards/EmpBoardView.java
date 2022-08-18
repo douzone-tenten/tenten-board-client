@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.*;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSelectMenu;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 import static com.douzonetenten.tentenboardclient.view.boards.QnAView.qnAController;
@@ -26,12 +25,18 @@ public class EmpBoardView {
 
     public static void start(String selectNum) {
         Scanner scanner = new Scanner(System.in);
+        Long getUserRoles = loginUserContext.get(0).getRoleNo();
+
 
         while (true) {
+            if (getUserRoles != 2){
+                logWarn("해당 게시판은 담당자만 접근하실 수 있습니다.");
+                break;
+            }
 
             ArrayList<JoinPostDto> getPostList = postController.findByPost(selectNum);
             clearConsole();
-            uiTitle("직원용 게시판");
+            uiTitle("담당자 게시판");
             System.out.printf("--------------------------------\n"
                     + "게시글 번호      제목        작성자      작성시간\n"
                     + "--------------------------------\n");

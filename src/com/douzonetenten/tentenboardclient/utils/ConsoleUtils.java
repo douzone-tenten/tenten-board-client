@@ -55,7 +55,7 @@ public class ConsoleUtils {
      * 콘솔 화면 리셋
      */
     public static void clearConsole() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("");
         }
     }
