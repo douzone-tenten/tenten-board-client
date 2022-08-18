@@ -18,19 +18,42 @@ import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsol
  */
 public class NoticeView {
     private PostView postwiew = new PostView();
+
+    /**
+     * 스케너를 선언하는 메서드
+     * @author 김승혁
+     */
     private Scanner sc = new Scanner(System.in);
+
+
+    /**
+     * @param  String login_user_role= loginUserContext.get(0).getRoleNo().toString();
+     *        -글쓰기 권한 제어(관리자만 글쓰기 가능)
+     * @author 김승혁
+     */
+//    String login_user_role= loginUserContext.get(0).getRoleNo().toString();
+
+
 
     public void start(String selectNum) {
         Scanner sc = new Scanner(System.in);
         ArrayList<JoinPostDto> getPostList = PostController.findByPost(selectNum);
 
+        /**
+         * @param  while문 사용
+         *        -break;를 만날 때 까지 무한으로 반복(System.out.println()의 내용을 반복해서 출력함)
+         * @author 김승혁
+         */
         while (true) {
             System.out.println("공지사항 게시판");
             System.out.printf("-----------------------------------------------\n" +
                     "게시글 번호       제목          작성자        작성시간\n" +
                     "-----------------------------------------------\n");
 
-            // 게시글 목록 조회
+            /**
+             * 게시글 목록 조회
+             * @author 김승혁
+             */
             if (getPostList.isEmpty()) {
                 System.out.println("조회할 포스트가 없습니다.");
             }
@@ -41,8 +64,12 @@ public class NoticeView {
                 }
             }
 
-            //메뉴 선택
-            System.out.println("b.뒤로가기  n.다음 페이지  f.이전 페이지   s.공지사항 상세 조회    w.글쓰기");
+            /**
+             * 메뉴 선택(b, s, w 중 선택하여 입력하면 그에 맞는 if문이 실행되는 알고리즘
+             * ||(OR)을 사용하여 둘 중 하나라도 입력되면 if문이 실행되도록 설계
+             * @author 김승혁
+             */
+            System.out.println("b.뒤로가기   s.공지사항 상세 조회    w.글쓰기");
 
             char a = sc.next().charAt(0);
 
@@ -61,8 +88,9 @@ public class NoticeView {
     }
 
 
-    // TODO: 2022-08-17 게시글 상세 조회
 
+
+    //상세 조회 기능 구현
     public void detail(String selectNum) {
         NoticeController noticeController = new NoticeController();
         System.out.println("상세조회할 게시글 번호를 입력하세요 : ");
@@ -84,7 +112,9 @@ public class NoticeView {
         if (ch == 'd' || ch == 'D'){
             SubDelete(select);
         }
- /*           if (answer2 == 'u' || answer2 == 'U'){
+
+ /*             여러 가지 방법으로 시대(실패)
+                if (answer2 == 'u' || answer2 == 'U'){
 
                 Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
 
@@ -137,7 +167,10 @@ public class NoticeView {
 
         }
 
-
+    /**
+     * 스케너를 이용하여 공지사항의 제목과 내용을 입력받아 출력하고 DB에 저장하는 메서드
+     * @author 김승혁
+     */
         //글쓰기 기능 구현
         public void insertPost () {
 
@@ -168,6 +201,11 @@ public class NoticeView {
 
         }
 
+
+    /**
+     * 스케너를 이용하여 공지사항을 상세 조회한 게시글을 또 한번 스케너를 이용해 게시글을 삭제하는 메서드
+     * @author 김승혁
+     */
         public void SubDelete(int postId){
             NoticeController noticeController = new NoticeController();
             System.out.println("선택한 게시글을 삭제하겠습니까? (y/n)");
@@ -187,6 +225,11 @@ public class NoticeView {
             }
         }
 
+
+    /**
+     * 스케너를 이용하여 상세 조회한 게시글을 또 한번 스캐너를 이용해 공지사항을 수정하는 메서드
+     * @author 김승혁
+     */
         public void update(int postId) {
             NoticeController noticeController = new NoticeController();
             String up = sc.nextLine();

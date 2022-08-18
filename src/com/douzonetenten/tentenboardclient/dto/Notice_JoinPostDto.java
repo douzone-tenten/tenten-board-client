@@ -9,16 +9,25 @@ public class Notice_JoinPostDto {
     private String username;
     private Timestamp created_at;
 
+    /**
+     * 기본 생성자를 생성
+     * @author 김승혁
+     */
     public Notice_JoinPostDto() {
 
     }
 
+    /**
+     * 매개 변수를 가지고 있는 기본 생성자를 생성
+     * @author 김승혁
+     */
     public Notice_JoinPostDto(Long post_id, String post_title, String username, Timestamp created_at) {
         this.post_id = post_id;
         this.post_title = post_title;
         this.username = username;
         this.created_at = created_at;
     }
+
 
     public Notice_JoinPostDto(Long post_id, String post_title, String post_body, String username, Timestamp created_at) {
         this.post_id = post_id;
@@ -28,6 +37,10 @@ public class Notice_JoinPostDto {
         this.created_at = created_at;
     }
 
+    /**
+     * getter/setter 생성
+     * @author 김승혁
+     */
     public long getPost_id() {
         return post_id;
     }
@@ -69,6 +82,10 @@ public class Notice_JoinPostDto {
     }
 
 
+    /**
+     * toString 생성, 나중에 view 클래스에서 사용할 예정
+     * @author 김승혁
+     */
     public String toString() {
         return  "제목 : '" + post_title + '\n' +
                 " 작성자 : '" + username + '\n' +

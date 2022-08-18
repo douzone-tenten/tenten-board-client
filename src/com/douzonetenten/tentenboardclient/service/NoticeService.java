@@ -13,13 +13,20 @@ public class NoticeService {
     private final Notice_postDao notice_postDao = new Notice_postDao();
 
 
-    //상세 조회
+    /**
+     * 공지사항 게시판 상세 조회 메서드
+     * @author 김승혁
+     */
     public ArrayList<Notice_JoinPostDto> FindByAll(long postId){
         Connection connection = getConnection();
         ArrayList<Notice_JoinPostDto> noticeList = Notice_postDao.FindByAll(connection, postId);
         return noticeList;
     }
-    //글쓰기
+
+    /**
+     * 공지사항 게시판 작성 메서드
+     * @author 김승혁
+     */
     public int insertPost(Notice_JoinPostDto noticeJoinPostDto, String boardNumber) {
         Connection connection = getConnection();
         Notice_postDao notice_postDao = new Notice_postDao();
@@ -30,11 +37,19 @@ public class NoticeService {
         return result;
     }
 
+    /**
+     * 상세 조회한 공지사항 게시글 삭제 메서드
+     * @author 김승혁
+     */
     public  int SubDelete(int postId) {
         Connection connection = getConnection();
         return notice_postDao.SubDelete(connection, postId);
     }
 
+    /**
+     * 상세 조회한 공지사항 게시글 수정 메서드
+     * @author 김승혁
+     */
     public int update(int  postId,String test, String body) {
         Connection connection = getConnection();
         Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
@@ -49,3 +64,5 @@ public class NoticeService {
 
 
 }
+// post id 개시글 번호
+//

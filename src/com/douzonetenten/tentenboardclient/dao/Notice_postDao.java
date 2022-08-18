@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 
 public class Notice_postDao {
-
+    /**
+     * insertPost : 공지사항 게시판 게시글 작성하는 메서드
+     * @param  connection : sql과 java를 연결해주는 매개변수
+     * @author 김승혁
+     * */
     public static int insertPost(Connection connection, Notice_JoinPostDto noticeJoinPostDto, String boardNumber) {
         PreparedStatement preparedStatement = null;
         try {
@@ -25,6 +29,12 @@ public class Notice_postDao {
         }
 
     }
+
+    /**
+     * deletePost : 공지사항 게시판 게시글을 삭제하는 메서드
+     * @param  post_id : 게시글 번호 매개변수
+     * @author 김승혁
+     * */
     public static int deletePost(Connection connection, String post_id) {
         PreparedStatement preparedStatement = null;
 
@@ -38,7 +48,11 @@ public class Notice_postDao {
         }
     }
 
-    //DB에서 상세 조회에 필요한 컬럼 뽑아오기
+    /**
+     * FindByAll : 공지사항 게시판의 전체 게시글을 조회하는 메서드 / DB에서 상세 조회에 필요한 컬럼 뽑아오기 위해 사용하는 메서드
+     * @param  post_id : 게시글 번호 매개변수
+     * @author 김승혁
+     * */
     public static ArrayList<Notice_JoinPostDto> FindByAll(Connection connection, long post_id) {
         ArrayList<Notice_JoinPostDto> List = null;
         PreparedStatement preparedStatement = null;
@@ -67,6 +81,12 @@ public class Notice_postDao {
             return List;
     }
 
+    /**
+     * SubDelete : 상세 조회한 게시글을 삭제하기 위해 사용하는 메서드,
+     * loginUserContext.get(0).getUsername()을 이용하여 게시글의 작성자의 아이디와 비교하여 같은 아이디여야만 게시글을 삭제할 수 있록 하는 메서드
+     * @param  postId : post_id와 같은 게시글 번호 매개변수
+     * @author 김승혁
+     * */
     public static int SubDelete(Connection connection, int postId) {
         ArrayList<Notice_JoinPostDto> List = null;
         PreparedStatement preparedStatement = null;
@@ -86,6 +106,15 @@ public class Notice_postDao {
         }
     }
 
+    /**
+     * update : 상세 조회한 게시글을 수정하는 메서드,
+     * loginUserContext.get(0).getUsername()를 사용하여 게시글 작성자 아이디를 비교하여 같은 아이디가 아니라면
+     * 공지사항 게시글을 수정하지 못하게 하는 메서드
+     * @param  postId : 게시글 번호 매개변수
+     * @param  title : 게시글의 제목 매개변수
+     * @param  body : 게시글의 내용 매개변수
+     * @author 김승혁
+     * */
     public int update(Connection connection,int postId,String title, String body) {
         int result = 0;
 
