@@ -14,7 +14,7 @@ public class ClassOneService {
     private static final PostDao postDao = new PostDao();
     public static ArrayList<JoinPostDto> findByPost(String selectNum) {
         Connection connection = getConnection();
-        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, "2");
+        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPost(connection, selectNum);
         return joinPostDtoArrayList;
     }
 
@@ -40,5 +40,14 @@ public class ClassOneService {
         Connection connection = getConnection();
         ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findByPostDetail(connection, selectPost);
         return joinPostDtoArrayList;
+    }
+
+    public int editPost(PostDto postDto, String boardNumber) {//선택된 게시글 수정
+        Connection connection = getConnection();
+        int result = postDao.editPost(connection, postDto, boardNumber);
+        if (result > 0) {
+            commit(connection);
+        } else rollback(connection);
+        return result;
     }
 }

@@ -73,8 +73,6 @@ public class PostDao {
         ArrayList<JoinPostDto> joinPostDtoArrayList = null;
         PreparedStatement preparedStatement = null;
 
-
-
         try {
             /**
              * Board 테이블도 join 해서, 보드의 이름도 가지고 오면 좋을듯.
@@ -122,5 +120,26 @@ public class PostDao {
             throw new RuntimeException(e);
         }
         return joinPostDtoArrayList;
+    }
+
+    public int editPost(Connection connection, PostDto postDto, String boardNumber) {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("UPDATE post SET post_title = ?, post_body =? WHERE board_board_no = ?");
+//            preparedStatement.setString(1,boardNumber); // 현재 내가 작성하려고 하는 보드의 PK
+//            preparedStatement.setLong(2,loginUserContext.get(0).getUserNo()); // 현재 로그인한 사용자의 PK
+//            preparedStatement.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
+//            preparedStatement.setString(4, postDto.getPostTitle());
+//            preparedStatement.setString(5, postDto.getPostBody());
+
+              preparedStatement.setString(1,postDto.getPostTitle());
+              preparedStatement.setString(2, postDto.getPostBody());
+              preparedStatement.setString(3,boardNumber);
+
+            int resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

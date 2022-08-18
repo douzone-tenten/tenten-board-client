@@ -8,24 +8,23 @@ import java.util.ArrayList;
 
 public class ClassOneController {
 
-    private static final ClassOneService class1Service = new ClassOneService();
+    private static final ClassOneService classOneService = new ClassOneService();
 
-    public void insertPost(PostDto postDto, String boardNumber)
-    {
-        class1Service.insertPost(postDto,boardNumber);
-    }
-
-    public static ArrayList<JoinPostDto> findByClass1(String selectNum) {
+    public static ArrayList<JoinPostDto> findByClassOne(String selectNum) {
         ArrayList<JoinPostDto> joinPostDtoArrayList = ClassOneService.findByPost(selectNum);
         return joinPostDtoArrayList;
     }
-
-    public static void deletePost(String selectPost) {
-        class1Service.deletePost(selectPost);
+    public void insertPost(PostDto postDto, String boardNumber)
+    {
+        classOneService.insertPost(postDto,boardNumber);
     }
 
-    public static void editPost(String selectPost) {
-       // class1Service.editPost(selectPost);
+    public static void deletePost(String selectPost) {
+        classOneService.deletePost(selectPost);
+    }
+
+    public static void editPost(PostDto postDto, String boardNumber) {
+        classOneService.editPost(postDto,boardNumber);
     }
 
     public static ArrayList<JoinPostDto> detailPost(String selectPost) {

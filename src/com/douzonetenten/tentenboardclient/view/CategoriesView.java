@@ -14,7 +14,7 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTit
 
 public class CategoriesView {
     FreeBoardView boardView = new FreeBoardView();
-    ClassOneVIew class1View = new ClassOneVIew();
+    ClassOneVIew classOneVIew = new ClassOneVIew();
     ClassTwoView douZoneTwoView = new ClassTwoView();
     AnonymousView anonymousView = new AnonymousView();
     BoardController boardController = new BoardController();
@@ -34,14 +34,14 @@ public class CategoriesView {
                 boardView.start("1");
             }
             if (selectNum.equals("2")) {
-                class1View.start("2");
+
             }
             if (selectNum.equals("3")) {
                 NoticeView nmv = new NoticeView();
                 nmv.start("3");
             }
-            if (selectNum.equals("4")) {
-                QnAView.start("4");
+            if (selectNum.equals("4")) { //1반 게시판
+                classOneVIew.start("4");
             }
             if (selectNum.equals("5")) {
                 douZoneTwoView.dztwostart(selectNum);

@@ -2,10 +2,11 @@ package com.douzonetenten.tentenboardclient.dao;
 
 import com.douzonetenten.tentenboardclient.dto.UserDto;
 
+
 import java.sql.*;
 
 public class UserDao {
-    public UserDto login(Connection connection, UserDto userDto) {
+    public UserDto login(Connection connection, UserDto userDto) throws Exception {
         UserDto loginUserDto = new UserDto();
         try {
             PreparedStatement preparedStatement;
@@ -20,7 +21,7 @@ public class UserDao {
             loginUserDto.setName(resultSet.getString("name"));
             loginUserDto.setDepartment(resultSet.getString("department"));
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
         return loginUserDto;
     }

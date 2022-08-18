@@ -1,7 +1,6 @@
 package com.douzonetenten.tentenboardclient.controller;
 
 import com.douzonetenten.tentenboardclient.dto.UserDto;
-
 import com.douzonetenten.tentenboardclient.service.UserService;
 
 public class UserController {
@@ -11,14 +10,9 @@ public class UserController {
         return userService.insertUser(userDto);
     }
 
-    public void login(UserDto userDto) {
+    public void login(UserDto userDto) throws Exception {
         userService.login(userDto);
     }
 
     public void logout() { userService.logout();}
-
-
-
-
-
 }
