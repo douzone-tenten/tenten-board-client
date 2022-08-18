@@ -5,7 +5,8 @@ import com.douzonetenten.tentenboardclient.controller.UserController;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logError;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.*;
+import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
 public class LoginMainView {
     private Scanner scanner = new Scanner(System.in);
@@ -15,7 +16,6 @@ public class LoginMainView {
     public void start(){
         while (true){
             uiTitle("텐텐보드 메인");
-
             System.out.print("\n\n안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
 
             System.out.println("1. 게시판 목록조회");

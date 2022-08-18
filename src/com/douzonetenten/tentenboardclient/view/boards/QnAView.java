@@ -22,7 +22,6 @@ public class QnAView {
      * @param selectNum - 조회할 게시판의 카테고리 넘버입니다.
      * @author 강도영
      */
-    public static void start(String selectNum) {
         Scanner scanner = new Scanner(System.in);
 
         while(true) {
