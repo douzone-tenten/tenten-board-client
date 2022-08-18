@@ -6,21 +6,20 @@ import com.douzonetenten.tentenboardclient.dto.UserDto;
 import java.sql.*;
 
 public class UserDao {
-    public UserDto login(Connection connection, UserDto userDto) throws Exception {
+    public UserDto login(Connection connection, UserDto userDto){
         UserDto loginUserDto = new UserDto();
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username = ? AND password = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM user u LEFT JOIN user_roles ur on u.user_no = ur.user_user_no WHERE u.username = ? AND u.password = ?");
             preparedStatement.setString(1, userDto.getUsername());
             preparedStatement.setString(2, userDto.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            // 로그인한 단 하나의 아이디만 들어있다.
-            // loginUserContext의 항목 구성
             loginUserDto.setUserNo(resultSet.getLong("user_no"));
             loginUserDto.setUsername(resultSet.getString("username"));
             loginUserDto.setName(resultSet.getString("name"));
             loginUserDto.setDepartment(resultSet.getString("department"));
+            loginUserDto.setRoleNo(resultSet.getLong("roles_role_no"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

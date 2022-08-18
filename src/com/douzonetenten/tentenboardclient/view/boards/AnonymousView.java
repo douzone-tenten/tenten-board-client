@@ -153,11 +153,5 @@ public class AnonymousView {
         }else{
             logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
         }
-
-
-
-
     }
-
-
 }
