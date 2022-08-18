@@ -2,6 +2,7 @@ package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
+import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.view.PostView;
 
 
@@ -9,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logError;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logWarn;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.*;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiSelectMenu;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
 
@@ -27,31 +27,50 @@ public class AnonymousView {
 
         while (true) {
             // 게시글 등록 후 게시글 목록 최신화를 위해 while문 안으로 이동함
-            //ArrayList<JoinPostDto> getPostList = postController.findByPost(selectNum);
+            // getPostList= 익명게시글 전부 조회
+            ArrayList<JoinPostDto> getPostList = postController.findByPost(selectNum);
 
             // 로그인한 객체에서 user_id 추출
             String login_user_no = loginUserContext.get(0).getUserNo().toString();
             // 로그인한 유저의 게시글만 보일 수 있도록 출력
             // login_user_no = 로그인 한 객체의 user_no ,  selectNum = 접속한 게시판 번호
-            ArrayList<JoinPostDto> getPostList =postController.findSameUserByPost(login_user_no, selectNum);
+            // getPostList2
+            ArrayList<JoinPostDto> getPostList2 =postController.findSameUserByPost(login_user_no, selectNum);
 
             uiTitle("익명게시판");
 
             // TODO : 게시판 목차 공통 메소드 작성
-            System.out.print("--------------------------------\n"
+            System.out.print("--------------------------------------------\n"
                     + "게시글 번호      제목        작성자      작성시간\n"
-                    + "--------------------------------\n");
+                    + "--------------------------------------------\n");
 
             // 게시글 목록 조회
-            // 접속한 게시판번호와 일치하는 게시글이 없을 시
-            String login_userName = loginUserContext.get(0).getUsername().toString();
-
             if (getPostList.isEmpty()) {
-                logWarn(login_userName+"님이 작성한 게시글이 없습니다.");
+                logWarn("익명게시판에 작성된 게시글이 없습니다.");
             }
             // 접속한 게시판번호와 일치하는 게시글이 있을 시
             if (!(getPostList.isEmpty())) {
                 for (JoinPostDto joinPostDto : getPostList) {
+                    System.out.println(joinPostDto.findPostToString());
+                }
+            }
+            System.out.println("");
+            System.out.println("====================================================");
+
+            System.out.print("--------------------------------------------\n"
+                    + "게시글 번호      제목        작성자      작성시간\n"
+                    + "--------------------------------------------\n");
+
+            // 접속한 게시판번호와 일치하는 게시글이 없을 시
+            String login_userName = loginUserContext.get(0).getUsername().toString();
+
+            if (getPostList2.isEmpty()) {
+                logWarn(login_userName+"님이 작성한 게시글이 없습니다.");
+            }
+            // 접속한 게시판번호와 일치하는 게시글이 있을 시
+            if (!(getPostList2.isEmpty())) {
+                logInfo(login_userName+"님이 작성한 게시글 목록입니다.");
+                for (JoinPostDto joinPostDto : getPostList2) {
                     System.out.println(joinPostDto.findPostToString());
                 }
             }
@@ -92,60 +111,34 @@ public class AnonymousView {
                 postView.insertPost(selectNum);
             }
             if (selectPost2.equals("d") || selectPost2.equals("D")) {
-                findDetailByPost();   //익명게시판 전용 상세조회
+                findDetailByPost(selectNum);   //익명게시판 전용 상세조회
             }
         }
-
-
     }
 
+
     // 익명게시판의 상세조회
-    public void findDetailByPost () {
+    public void findDetailByPost (String selectNum) {
         System.out.println("게시글 상세조회");
-
-        // 익명게시판은 자신이 작성한 게시글에 대해서만 상세조회가 가능
-        // 우선 로그인한 회원의 user_no이 post의 user_member_no과 일치하는 글들만 조회,
-        // 일치하는 글이 없으면 "~ 님이 작성하신 글은 없습니다"로 출력
-
-
-
-
-
-
-
-
         /*
+         * 익명게시판은 자신이 작성한 게시글에 대해서만 상세조회가 가능
+         * 우선 로그인한 회원의 user_no이 post의 user_member_no과 일치하는 글들만 조회,
+         * 일치하는 글이 없으면 "~ 님이 작성하신 글은 없습니다"로 출력
          * 로그인한 객체정보와 상세조회할 게시글의 작성자 일치여부 & 권한 여부 체크
          * */
 
-
         System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
-        long post_id = scanner.nextLong();
-        //test
-        System.out.println("현재 로그인한 객체 : " + loginUserContext);
+        String post_id = scanner.next();
+        // 해당 게시판의 게시글들
+        ArrayList<JoinPostDto> getArrayList =  postController.findByPost(selectNum);
 
+        //String post_user_id= getArrayList.get(0). ;
 
+        ArrayList<JoinPostDto> Id_list= postController.findIdByPost(selectNum, post_id);
         //
+        if(){
 
-
-
-
-
-
-
-
-
-//        for (int i = 0; i < loginUserContext.size(); i++) {
-//            System.out.println(loginUserContext.get(i));
-//        }
-//
-//        System.out.println("리스트 사이즈"+loginUserContext.size());
-
-
-
-
-
-
+        }
 
 
     }
