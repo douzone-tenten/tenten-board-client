@@ -1,11 +1,13 @@
 package com.douzonetenten.tentenboardclient.view.boards;
 
+import com.douzonetenten.tentenboardclient.controller.AnonymousController;
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.view.PostView;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,9 +21,13 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTit
  * Author : 김성안
  */
 public class AnonymousView {
-    PostController postController = new PostController();
-    PostView postView = new PostView();
+    private  AnonymousController anonymousController= new AnonymousController();
+    private PostController postController = new PostController();
+    private PostView postView = new PostView();
     private Scanner scanner = new Scanner(System.in);
+
+    // IndexOutOfBoundsException 오류 발생
+    //public String login_user_no = loginUserContext.get(0).getUserNo().toString();
     public void start(String selectNum) {
 
 
@@ -111,14 +117,14 @@ public class AnonymousView {
                 postView.insertPost(selectNum);
             }
             if (selectPost2.equals("d") || selectPost2.equals("D")) {
-                findDetailByPost(selectNum);   //익명게시판 전용 상세조회
+                findAnonymousByPost(selectNum, login_user_no);   //익명게시판 전용 상세조회
             }
         }
     }
 
 
     // 익명게시판의 상세조회
-    public void findDetailByPost (String selectNum) {
+    public void findAnonymousByPost (String selectNum, String login_user_no) {
         System.out.println("게시글 상세조회");
         /*
          * 익명게시판은 자신이 작성한 게시글에 대해서만 상세조회가 가능
@@ -134,11 +140,21 @@ public class AnonymousView {
 
         //String post_user_id= getArrayList.get(0). ;
 
-        ArrayList<JoinPostDto> Id_list= postController.findIdByPost(selectNum, post_id);
-        //
-        if(){
+        ArrayList<PostDto> Id_list= postController.findIdByPost(selectNum, post_id);
 
+        String user_member_no = String.valueOf(Id_list.get(0).getMemberNo());
+
+        //게시글 조회자가 게시글 작성자이면 상세조회가능
+        if(login_user_no.equals(user_member_no)){
+            // 상세조회
+            ArrayList<JoinPostDto> getPostList3 = anonymousController.findDetailByPost(selectNum, post_id, login_user_no);
+            System.out.println(getPostList3.get(0).DetailPostToString());
+
+        }else{
+            logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
         }
+
+
 
 
     }

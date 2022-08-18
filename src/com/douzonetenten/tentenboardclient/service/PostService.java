@@ -55,11 +55,14 @@ public class PostService {
         return  joinPostDtoArrayList;
     }
 
-    // 익명게시판에서의 게시글번호를 통해 게시글 조회
-    public ArrayList<JoinPostDto> findIdByPost(String boardNUm, String postId){
+    // 익명게시판에서의 게시글번호를 통해 게시글의 user_id 추출
+    public ArrayList<PostDto> findIdByPost(String boardNUm, String postId){
         Connection connection = getConnection();
-        ArrayList<JoinPostDto> joinPostDtoArrayList=postDao.findIdByPost(connection, boardNUm, postId);
-        return joinPostDtoArrayList;
+        ArrayList<PostDto> PostDtoArrayList = postDao.findIdByPost(connection, boardNUm, postId);
+        return PostDtoArrayList;
     }
+
+
+
 
 }

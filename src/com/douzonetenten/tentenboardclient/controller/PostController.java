@@ -37,11 +37,11 @@ public class PostController {
         return  joinPostDtoArrayList;
     }
 
-    // 익명게시판에서의 게시글번호를 통해 게시글 조회
-    public static ArrayList<JoinPostDto> findIdByPost(String boardNum, String postId){
+    // 익명게시판에서의 게시글번호를 통해 게시글의 user_id 추출
+    public static ArrayList<PostDto> findIdByPost(String boardNum, String postId){
 
-        ArrayList<JoinPostDto> joinPostDtoArrayList=postService.findIdByPost(boardNum, postId);
-        return  joinPostDtoArrayList;
+        ArrayList<PostDto> PostDtoArrayList=postService.findIdByPost(boardNum, postId);
+        return  PostDtoArrayList;
     }
 
 
