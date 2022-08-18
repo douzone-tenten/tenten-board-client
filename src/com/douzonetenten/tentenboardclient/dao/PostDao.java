@@ -127,7 +127,7 @@ public class PostDao {
     public int editPost(Connection connection, PostDto postDto, String boardNumber) {
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = connection.prepareStatement("UPDATE post SET post_title = ?, post_body =? WHERE board_board_no = ?");
+            preparedStatement = connection.prepareStatement("UPDATE post SET post_title = ?, post_body =? WHERE post_id = ?");
 //            preparedStatement.setString(1,boardNumber); // 현재 내가 작성하려고 하는 보드의 PK
 //            preparedStatement.setLong(2,loginUserContext.get(0).getUserNo()); // 현재 로그인한 사용자의 PK
 //            preparedStatement.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
@@ -135,8 +135,10 @@ public class PostDao {
 //            preparedStatement.setString(5, postDto.getPostBody());
 
               preparedStatement.setString(1,postDto.getPostTitle());
-              preparedStatement.setString(2, postDto.getPostBody());
+              preparedStatement.setString(2,postDto.getPostBody());
               preparedStatement.setString(3,boardNumber);
+
+            System.out.println("정보  :"+postDto.getPostTitle() + postDto.getPostBody() + boardNumber);
 
             int resultSet = preparedStatement.executeUpdate();
             return resultSet;

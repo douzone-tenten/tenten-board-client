@@ -1,15 +1,10 @@
 package com.douzonetenten.tentenboardclient.view.boards;
 
 import com.douzonetenten.tentenboardclient.controller.ClassOneController;
-import com.douzonetenten.tentenboardclient.dao.UserDao;
 import com.douzonetenten.tentenboardclient.dto.JoinPostDto;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
-import com.douzonetenten.tentenboardclient.dto.UserDto;
-import com.douzonetenten.tentenboardclient.service.UserService;
-import com.douzonetenten.tentenboardclient.view.LoginMainView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
@@ -20,13 +15,13 @@ import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTit
  * 1반 게시판 클래스
  * Author : 정수연
  */
-public class ClassOneVIew {
+public class ClassOneView {
     ClassOneController classOneController = new ClassOneController();
     public void start(String selectNum) { //목록 조회
         Scanner scanner = new Scanner(System.in);
         while (true){
             ArrayList<JoinPostDto> getClassOneList = ClassOneController.findByClassOne(selectNum);
-
+            clearConsole();
             uiTitle("더존 1반 게시판");
             System.out.printf("--------------------------------\n" +
                     "게시글 번호      제목        작성자      작성시간\n" +
@@ -44,7 +39,7 @@ public class ClassOneVIew {
 
             uiSelectMenu();
             // TODO : 메뉴 선택 공통컴포넌트
-            System.out.println("b. 뒤로가기  n. 다음페이지   f. 이전 페이지   w. 글쓰기  d: 상세조회");
+            System.out.println("b. 뒤로가기 w. 글쓰기  d: 상세조회");
             String selectPost = scanner.next();
 
             //예외처리
