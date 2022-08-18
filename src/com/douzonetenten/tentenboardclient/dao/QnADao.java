@@ -11,6 +11,13 @@ public class QnADao {
     public QnADao() {
     }
 
+    /**
+     * QnA 게시판에 게시글을 조회하는 메소드
+     *
+     * @param connection - 데이터베이스를 연결하기 위한 변수입니다.
+     * @param selectNum - 조회할 게시판의 카테고리 넘버입니다.
+     * @author 강도영
+     */
     //QnA 게시글 목록조회
     public ArrayList<JoinPostDto> findAllByQnA(Connection connection, String selectNum) {
         ArrayList<JoinPostDto> joinPostDtoArrayList = null;
@@ -40,6 +47,15 @@ public class QnADao {
     }
 
 
+    /**
+     * QnA 게시판에 게시글을 작성하는 메소드
+     *
+     * @param connection - 데이터베이스를 연결하기 위한 변수입니다.
+     * @param selectNum - 조회할 게시판의 카테고리 넘버입니다.
+     * @param postDto - 입력한 값을 저장하기 위한 변수입니다.
+     * @param userId - 로그인한 사용자의 아이디를 출력하기 위해 사용하는 변수입니다.
+     * @author 강도영
+     */
     //QnA 게시글 작성
     public int insertQnA(Connection connection, PostDto postDto, Long userId, String selectNum){
         PreparedStatement preparedStatement = null;
@@ -59,6 +75,13 @@ public class QnADao {
     }
 
 
+    /**
+     * QnA 게시판에 게시글을 상세조회 하는 메소드
+     *
+     * @param connection - 데이터베이스를 연결하기 위한 변수입니다.
+     * @param selectDetailNum - 상세조회할 게시글의 넘버입니다.
+     * @author 강도영
+     */
     //QnA 게시글 상세조회
     public ArrayList<JoinPostDto> detailQnA(Connection connection, String selectDetailNum) {
         ArrayList<JoinPostDto> joinPostDtoListDetail = null;
@@ -88,6 +111,13 @@ public class QnADao {
     }
 
 
+    /**
+     * QnA 게시판에 게시글을 삭제하는 메소드
+     *
+     * @param connection - 데이터베이스를 연결하기 위한 변수입니다.
+     * @param postNo - 삭제할 게시글의 번호 넘버입니다.
+     * @author 강도영
+     */
     //QnA 게시글 삭제
     public int deleteQnA(Connection connection, String postNo) {
         PreparedStatement preparedStatement = null;
@@ -103,6 +133,14 @@ public class QnADao {
     }
 
 
+    /**
+     * QnA 게시판에 게시글을 수정하는 메소드
+     *
+     * @param connection - 데이터베이스를 연결하기 위한 변수입니다.
+     * @param postDto - 입력한 값을 저장하기 위한 변수입니다.
+     * @param selectDetailNum - 상세조회할 게시글의 넘버입니다.
+     * @author 강도영
+     */
     //QnA 게시글 수정
     public int updateQnA(Connection connection, PostDto postDto, String selectDetailNum) {
 

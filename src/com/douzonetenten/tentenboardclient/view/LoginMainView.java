@@ -5,9 +5,7 @@ import com.douzonetenten.tentenboardclient.controller.UserController;
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
-import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logWarn;
-import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logError;
 
 public class LoginMainView {
     private Scanner scanner = new Scanner(System.in);
@@ -17,10 +15,13 @@ public class LoginMainView {
     public void start(){
         while (true){
             uiTitle("텐텐보드 메인");
-            System.out.print("안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
+
+            System.out.print("\n\n안녕하세요. " + loginUserContext.get(0).getName() + "님.\n\n");
+
             System.out.println("1. 게시판 목록조회");
             System.out.println("8. 로그아웃");
             System.out.println("9. 프로그램 종료");
+            System.out.print("\n메뉴를 입력하세요 : ");
             String selectNum = scanner.next();
 
             /**

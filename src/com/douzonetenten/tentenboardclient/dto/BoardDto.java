@@ -33,6 +33,6 @@ public class BoardDto {
     }
 
     public String toStringByAll(){
-        return "번호 : [" + boardNo + "] 게시판 이름 : " + boardName;
+        return boardNo + ".\t" + boardName;
     }
 }

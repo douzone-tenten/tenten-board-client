@@ -11,6 +11,6 @@ public class UserInterfaceUtils {
     }
 
     public static void uiSelectMenu() {
-        System.out.print("메뉴를 선택하세요\n");
+        System.out.print("메뉴를 선택하세요 : ");
     }
 }
