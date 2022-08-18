@@ -3,14 +3,16 @@ package com.douzonetenten.tentenboardclient.view;
 import com.douzonetenten.tentenboardclient.controller.PostController;
 import com.douzonetenten.tentenboardclient.dto.PostDto;
 import com.douzonetenten.tentenboardclient.service.UserService;
+import com.douzonetenten.tentenboardclient.view.boards.AnonymousView;
 
 import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logError;
 
 public class PostView {
-
+    //AnonymousView anonymousView = new AnonymousView();
    UserService userService = new UserService();
     private PostController postController = new PostController();
     private Scanner scanner = new Scanner(System.in);
@@ -18,7 +20,7 @@ public class PostView {
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // insertPost()  함수에  접속한 게시판의 번호를 전달하는 파라미터(selectNum) 추가
 
-    public void insertPost(String selecctNum){
+    public void insertPost(String selectNum){
         /**
          * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
          */
@@ -41,7 +43,7 @@ public class PostView {
         // TODO : 예외처리
         if (select.equals("Y") || select.equals("y")) {
             // TODO : 게시판 번호 조회를 어떻게 할 것인가?
-            postController.insertPost(postDto, selecctNum);
+            postController.insertPost(postDto, selectNum);
         }
         if (select.equals("B")) {
             System.out.println("글 작성을 취소합니다.");
@@ -59,22 +61,53 @@ public class PostView {
         postController.findAllByPost();
     }
 
-    public void findDetailByPost(){
-        System.out.println("게시글 상세조회");
-        System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
-        long post_id= scanner.nextLong();
 
-        System.out.println("현재 로그인한 객체 : "+loginUserContext);
+//게시판 하단 메뉴 공통 컴포넌트화
+//    public void footerMenu(String selectNum){
+//        System.out.println("b. 뒤로가기  n. 다음페이지   f. 이전 페이지   w. 글쓰기  d: 상세조회");
+//        String selectPost2 = scanner.next();
+//
+//        /**
+//         * 예외처리
+//         */
+//        if (!(selectPost2.equals("b") || selectPost2.equals("n") || selectPost2.equals("f") || selectPost2.equals("w") || selectPost2.equals("d"))) {
+//            logError("메뉴를 잘못 입력하셨습니다.");
+//        }
+//        /**
+//         * 뒤로가기
+//         */
+//        if (selectPost2.equals("b") || selectPost2.equals("B")) {
+//            break;   //
+//        }
+//        /**
+//         * 다음페이지
+//         */
+//        if (selectPost2.equals("n") || selectPost2.equals("N")) {
+//            // TODO : 다음페이지 기능구현
+//        }
+//        /**
+//         * 이전페이지
+//         */
+//        if (selectPost2.equals("f") || selectPost2.equals("F")) {
+//            // TODO : 이전페이지 기능구현
+//        }
+//        if (selectPost2.equals("w") || selectPost2.equals("W")) {
+//            insertPost(selectNum);
+//        }
+//        if (selectPost2.equals("d") || selectPost2.equals("D")) {
+//            anonymousView.findDetailByPost();   //익명게시판 전용 상세조회
+//        }
+//    }
 
-        // 로그인한 객체정보와 게시글 작성자 & 권한 여부 체크
 
-
-
-
-
-    }
 
 
 
 
 }
+
+
+
+
+
+

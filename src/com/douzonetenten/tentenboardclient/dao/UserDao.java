@@ -15,6 +15,7 @@ public class UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             // 로그인한 단 하나의 아이디만 들어있다.
+            // loginUserContext의 항목 구성
             loginUserDto.setUserNo(resultSet.getLong("user_no"));
             loginUserDto.setUsername(resultSet.getString("username"));
             loginUserDto.setName(resultSet.getString("name"));

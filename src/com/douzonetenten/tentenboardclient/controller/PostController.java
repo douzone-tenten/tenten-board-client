@@ -29,4 +29,12 @@ public class PostController {
         ArrayList<JoinPostDto> joinPostDtoArrayList = postService.findByPost(boardNum);
         return joinPostDtoArrayList;
     }
+
+    // 익명게시판에 사용
+    // 상세조회 시 로그인한 유저가 쓴 글만 출력해주기
+    public static ArrayList<JoinPostDto> findSameUserByPost(String user_no, String board_no){
+        ArrayList<JoinPostDto> joinPostDtoArrayList= postService.findSameUserByPost(user_no, board_no);
+        return  joinPostDtoArrayList;
+    }
+
 }
