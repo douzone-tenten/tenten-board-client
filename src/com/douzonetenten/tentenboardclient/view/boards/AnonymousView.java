@@ -29,7 +29,12 @@ public class AnonymousView {
     //public String login_user_no = loginUserContext.get(0).getUserNo().toString();
     public void start(String selectNum) {
 
-
+        /**
+         * Anonymous Controller 호출하여 게시글 작성, 수정, 삭제, 상세조회 기능을 실행합니다.
+         *
+         * @param 파라미터 - 의마 .
+         * @author
+         */
         while (true) {
             // 게시글 등록 후 게시글 목록 최신화를 위해 while문 안으로 이동함
             // getPostList= 익명게시글 전부 조회
@@ -37,8 +42,6 @@ public class AnonymousView {
 
             // 로그인한 객체에서 user_id 추출
             String login_user_no = loginUserContext.get(0).getUserNo().toString();
-
-
 
             // 로그인한 유저의 게시글만 보일 수 있도록 출력
             // login_user_no = 로그인 한 객체의 user_no ,  selectNum = 접속한 게시판 번호
@@ -111,6 +114,12 @@ public class AnonymousView {
     }
 
 
+    /**
+     * Anonymous Controller 호출하여 게시글 작성, 수정, 삭제, 상세조회 기능을 실행합니다.
+     *
+     * @param  -
+     * @author 김성안
+     */
     // 익명게시판의 상세조회
     public void findAnonymousByPost (String selectNum, String login_user_no) {
         System.out.println("게시글 상세조회");
@@ -121,13 +130,15 @@ public class AnonymousView {
          * 로그인한 객체정보와 상세조회할 게시글의 작성자 일치여부 & 권한 여부 체크
          * */
 
+        // 로그인한 객체정보
+        String login_userName= loginUserContext.get(0).getUsername().toString();
         // 관리자권한과 일반유저권한에 따른 기능접근제한 구현
         // 관리자 - 게시글 작성여부에 상관없이 상세조회, 수정, 삭제 기능 접근가능
         // 일반 유저 - 본인이 작성한 게시글에 한하여 상세조회, 수정, 삭제 접근 가능
-        String login_userName= loginUserContext.get(0).getUsername().toString();
         String login_user_role= loginUserContext.get(0).getRoleNo().toString();
         String userRole=(login_user_role.equals("1"))? "일반유저" : "관리자";
         System.out.println(login_userName+"의 권한 :"+userRole);
+        //System.out.println("role"+login_user_role.equals("2"));
 
         System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
         String post_id = scanner.next();
@@ -144,11 +155,16 @@ public class AnonymousView {
 
         while (true) {
             //게시글 조회자가 게시글 작성자이면 상세조회가능
-            if (login_user_no.equals(user_member_no)||login_user_role.equals("2")) {
-                // 상세조회
+
+
+            if ((login_user_no.equals(user_member_no)&&login_user_role.equals("1"))) {
+                // 상세조회   ||login_user_role.equals("2")
                 ArrayList<JoinPostDto> getPostList3 = anonymousController.findDetailByPost(selectNum, post_id, login_user_no);
                 System.out.println(getPostList3.get(0).DetailPostToString());
-            } else if(!(login_user_no.equals(user_member_no)&& flag))  {
+            }
+
+
+            if(!(login_user_no.equals(user_member_no))&& flag)  {
                 logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
                 flag=!flag;   // flag 뒤집기
             }
@@ -164,8 +180,8 @@ public class AnonymousView {
             }
             //게시글 조회자가 게시글 작성자이면 수정가능
             if (selectPostMenu2.equals("u")||selectPostMenu2.equals("U")){
-                // 수정기능
-                if((login_user_no.equals(user_member_no))||(login_user_role.equals("2"))){
+                // 수정기능      ||login_user_role.equals("2")
+                if((login_user_no.equals(user_member_no)&&login_user_role.equals("1"))){
 
                     scanner.nextLine();  // 메뉴 선택후 개행문자가 수정할 제목으로 들어가는 것을 방지
                     System.out.println("수정하실 글 제목을 입력하세요 : ");
@@ -179,10 +195,10 @@ public class AnonymousView {
                     logWarn("본인이 작성한 게시글만 수정 가능합니다.");
                 }
             }
-            //게시글 조회자가 게시글 작성자이면 상세조회가능
+            // 삭제기능      ||login_user_role.equals("2")
             if (selectPostMenu2.equals("d")||selectPostMenu2.equals("D")){
-                // 삭제기능
-                if(login_user_no.equals(user_member_no)||login_user_role.equals("2")){
+
+                if((login_user_no.equals(user_member_no)&&login_user_role.equals("1"))){
                     postController.deleteIdByPost(selectNum,login_user_no,post_id);
                     logInfo("해당 게시글이 삭제되었습니다.");
                     break;  //java.lang.IndexOutOfBoundsException: Index: 0, Size: 0 에러 해결
@@ -195,6 +211,9 @@ public class AnonymousView {
                 // 뒤로가기
                 break;
             }
+
+
+
         }
     }
 }
