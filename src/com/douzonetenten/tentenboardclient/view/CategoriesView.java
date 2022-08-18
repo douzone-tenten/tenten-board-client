@@ -10,6 +10,8 @@ import java.util.Scanner;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
+import static com.douzonetenten.tentenboardclient.view.boards.QnAView.qnaViewStart;
+
 
 public class CategoriesView {
     FreeBoardView boardView = new FreeBoardView();
@@ -18,6 +20,7 @@ public class CategoriesView {
     AnonymousView anonymousView = new AnonymousView();
     EmpBoardView empBoardView = new EmpBoardView();
     BoardController boardController = new BoardController();
+                NoticeView nmv = new NoticeView();
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -34,11 +37,10 @@ public class CategoriesView {
                 boardView.start("1");
             }
             if (selectNum.equals("2")) {
-                NoticeView nmv = new NoticeView();
                 nmv.start("2");
             }
             if (selectNum.equals("3")) {
-                QnAView.start("3");
+                qnaViewStart(selectNum);
             }
             if (selectNum.equals("4")) { //1반 게시판
                 classOneVIew.start("4");
