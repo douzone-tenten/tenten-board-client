@@ -57,7 +57,7 @@ public class AnonymousView {
             // 접속한 게시판번호와 일치하는 게시글이 있을 시
             if (!(getPostList.isEmpty())) {
                 for (JoinPostDto joinPostDto : getPostList) {
-                    System.out.println(joinPostDto.findPostToString());
+                    System.out.println(joinPostDto.findAnonymousToString());
                 }
             }
             System.out.println("");
@@ -86,13 +86,13 @@ public class AnonymousView {
             //TODO 하단 메뉴 공통 컨포넌트화
             //postView.footerMenu(selectNum);   // => 뒤로가기 기능 다시 구상 필요 break;
 
-            System.out.println("b. 뒤로가기  n. 다음페이지   f. 이전 페이지   w. 글쓰기  d: 상세조회");
+            System.out.println("b. 뒤로가기  w. 글쓰기  d: 상세조회");
             String selectPost2 = scanner.next();
 
             /**
              * 예외처리
              */
-            if (!(selectPost2.equals("b") || selectPost2.equals("n") || selectPost2.equals("f") || selectPost2.equals("w") || selectPost2.equals("d"))) {
+            if (!(selectPost2.equals("b") || selectPost2.equals("w") || selectPost2.equals("d"))) {
                 logError("메뉴를 잘못 입력하셨습니다.");
             }
             /**
@@ -101,18 +101,7 @@ public class AnonymousView {
             if (selectPost2.equals("b") || selectPost2.equals("B")) {
                 break;
             }
-            /**
-             * 다음페이지
-             */
-            if (selectPost2.equals("n") || selectPost2.equals("N")) {
-                // TODO : 다음페이지 기능구현
-            }
-            /**
-             * 이전페이지
-             */
-            if (selectPost2.equals("f") || selectPost2.equals("F")) {
-                // TODO : 이전페이지 기능구현
-            }
+
             if (selectPost2.equals("w") || selectPost2.equals("W")) {
                 postView.insertPost(selectNum);
             }
@@ -135,7 +124,7 @@ public class AnonymousView {
 
         System.out.println("상세 조회할 게시글의 번호를 입력하세요 : ");
         String post_id = scanner.next();
-        // 해당 게시판의 게시글들
+        // 익명 게시판의 게시글들
         ArrayList<JoinPostDto> getArrayList =  postController.findByPost(selectNum);
 
         //String post_user_id= getArrayList.get(0). ;
@@ -149,7 +138,6 @@ public class AnonymousView {
             // 상세조회
             ArrayList<JoinPostDto> getPostList3 = anonymousController.findDetailByPost(selectNum, post_id, login_user_no);
             System.out.println(getPostList3.get(0).DetailPostToString());
-
         }else{
             logWarn("본인이 작성한 게시글만 상세조회 가능합니다.");
         }

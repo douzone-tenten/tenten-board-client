@@ -124,4 +124,12 @@ public class JoinPostDto {
                 "\ne.게시글 수정  d.게시글 삭제" +
                 "\nb.뒤로 가기";
     }
+
+    public String findAnonymousToString() {
+        return postId + "         " + postTitle + "          " +  "익명"   + "         " + createdAt;
+    }
+
+
+
+
 }
