@@ -76,8 +76,14 @@ public class NoticeView {
         }
 
         System.out.println(" b.뒤로 가기       u.게시글 수정       d.게시글 삭제 ");
+        char ch = sc.next().charAt(0);
+        if (ch == 'u' || ch == 'U') {
+            update(select);
+        }
 
-        update(select);
+        if (ch == 'd' || ch == 'D'){
+            SubDelete(select);
+        }
  /*           if (answer2 == 'u' || answer2 == 'U'){
 
                 Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
@@ -165,8 +171,9 @@ public class NoticeView {
         public void SubDelete(int postId){
             NoticeController noticeController = new NoticeController();
             System.out.println("선택한 게시글을 삭제하겠습니까? (y/n)");
-            String a = sc.nextLine();
-            if (a.equals("y") || a.equals("Y")) {
+            char a = sc.next().charAt(0);
+
+            if (a == 'y' || a == 'Y') {
                 int result = noticeController.SubDelete(postId);
                 if (result > 0) {
                     System.out.println("선택한 게시글 삭제가 완료 되었습니다.");
@@ -175,7 +182,7 @@ public class NoticeView {
                     System.out.println("본인이 작성한 게시글만 삭제할 수 있습니다.");
                 }
 
-            } else if (a.equals("N") || a.equals("n")) {
+            } else if (a == 'N' || a == 'n') {
                 System.out.println("게시글 삭제 취소");
             }
         }
@@ -187,12 +194,12 @@ public class NoticeView {
             Notice_JoinPostDto noticeJoinPostDto = new Notice_JoinPostDto();
 
             ArrayList<Notice_JoinPostDto> notice_joinPostDtoArrayList = new ArrayList<Notice_JoinPostDto>();
-            //if (noticeJoinPostDto.getUsername().equals(loginUserContext.get(0).getUsername())) {
+
             System.out.println("제목을 수정해주세요 : ");
             String test = sc.nextLine();
             System.out.println("글 내용을 수정해주세요 : ");
             String body = sc.nextLine();
-//            notice_joinPostDtoArrayList.get(1).setPost_title(test);
+
             noticeJoinPostDto.setPost_title(test);
             noticeJoinPostDto.setPost_body(body);
             int result = noticeController.update(postId,test,body);
@@ -201,7 +208,7 @@ public class NoticeView {
             } else {
                 System.out.println("본인이 작성한 게시글만 수정할 수 있습니다.");
             }
-        //}
+
 
                 clearConsole();
                 System.out.println(noticeJoinPostDto.getPost_title());
@@ -214,8 +221,13 @@ public class NoticeView {
                 String num = sc.next();
                 // TODO : 예외처리
                 if (num.equals("Y") || num.equals("y")) {
+                    if (result > 0) {
+                        System.out.println("작성한 글이 등록되었습니다.");
 
-                    System.out.println("작성한 글이 등록되었습니다.");
+                    } else {
+                        System.out.println("본인이 작성한 게시글만 수정,삭제할 수 있습니다.");
+                    }
+
                 }
                 if (num.equals("B")) {
                     System.out.println("글 작성을 취소합니다.");

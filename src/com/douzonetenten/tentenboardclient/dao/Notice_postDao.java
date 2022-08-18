@@ -90,7 +90,7 @@ public class Notice_postDao {
         int result = 0;
 
         PreparedStatement preparedStatement = null;
-        String sql = "update post p Left Join user u on p.user_member_no = u.user_no set post_title  = ?, post_body =? where post_id = ?";
+        String sql = "update post p Left Join user u on p.user_member_no = u.user_no set post_title  = ?, post_body =? where post_id = ? and username = ?";
 
         try {
 
@@ -98,6 +98,7 @@ public class Notice_postDao {
             preparedStatement.setString(1,title);
             preparedStatement.setString(2,body);
             preparedStatement.setInt(3,postId);
+            preparedStatement.setString(4,loginUserContext.get(0).getUsername());
             result = preparedStatement.executeUpdate();
             return result;
 
