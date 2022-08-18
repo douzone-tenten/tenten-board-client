@@ -7,6 +7,7 @@ import com.douzonetenten.tentenboardclient.view.boards.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.clearConsole;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.uiTitle;
@@ -44,7 +45,9 @@ public class CategoriesView {
             }
             if (selectNum.equals("5")) {
 //                anonymousView.start(selectNum);
+                System.out.println(loginUserContext.get(0).getUsername());
                 douZoneTwoView.dztwostart(selectNum);
+
             }
             if (selectNum.equals("6")) {
 //                boardView.start("6");

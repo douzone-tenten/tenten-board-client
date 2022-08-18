@@ -18,7 +18,6 @@ public class DouZoneTwoDao {
 //        String sql = "select * from post where board_board_no = 1";
 
 
-
         String sql = "select post_id,post_title,username,u.created_at from post left join user u on post.user_member_no = u.user_no where board_board_no = ?";
 
 
@@ -26,7 +25,7 @@ public class DouZoneTwoDao {
 
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,boardNum);
+            preparedStatement.setString(1, boardNum);
             list = new ArrayList<ClassTwoJoinDto>();
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -55,7 +54,7 @@ public class DouZoneTwoDao {
         String sql = "select board_board_no, post_id, post_title, post_body, u.username, u.name, p.created_at from post p left join user u on p.user_member_no = u.user_no where p.post_id = ?";
         try {
 
-                JoinPostDto joinPostDto = new JoinPostDto();
+            JoinPostDto joinPostDto = new JoinPostDto();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, post_id);
             list = new ArrayList<JoinPostDto>();
@@ -82,23 +81,22 @@ public class DouZoneTwoDao {
     }
 
 
-
-    public int douzoneTwoInsert(Connection connection,PostDto postDto,String BoardNum) {
-        int result =0;
+    public int douzoneTwoInsert(Connection connection, PostDto postDto, String BoardNum) {
+        int result = 0;
         PreparedStatement preparedStatement = null;
         String sql = "insert into post(board_board_no, user_member_no, created_at, post_title, post_body) values (?,?,?,?,?)";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,BoardNum);
-            preparedStatement.setLong(2,loginUserContext.get(0).getUserNo());
-            preparedStatement.setTimestamp(3,new Timestamp(new java.util.Date().getTime()));
+            preparedStatement.setString(1, BoardNum);
+            preparedStatement.setLong(2, loginUserContext.get(0).getUserNo());
+            preparedStatement.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
             preparedStatement.setString(4, postDto.getPostTitle());
             preparedStatement.setString(5, postDto.getPostBody());
 
             result = preparedStatement.executeUpdate();
 
-            if (result > 0){
+            if (result > 0) {
                 System.out.println("게시글 작성 성공");
             }
             return result;
@@ -107,41 +105,69 @@ public class DouZoneTwoDao {
         }
 
     }
+
     /*
     *
     UPDATE [테이블명1] A INNER JOIN [테이블명2] B
     ON A.[조인할 컬럼명] = B.[조인할 컬럼명]
     SET [변경할 컬럼명] = 변경할값
     * */
-    public int douzoneTwoUpdate(Connection connection,PostDto postDto,String BoardNum ){
+
+
+    public int douzoneTwoDelete(Connection connection, int port_id) {
         int result = 0;
         PreparedStatement preparedStatement = null;
-        String sql = "update post set postitle = ? , post_body = ?";
+        String sql = "delete from post where post_id = ? and user_member_no=(select user_no from user where username= ?)";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,postDto.getPostTitle());
-            preparedStatement.setString(2,postDto.getPostBody());
+            preparedStatement.setInt(1,port_id);
+            preparedStatement.setString(2,loginUserContext.get(0).getUsername());
             result = preparedStatement.executeUpdate();
-            if (result > 0){
-                System.out.println("수정이 성공 되었습니다.");
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    // login index 4 = name
+
+
+
+
+
+
+
+
+    public int dzTwoUpdate(Connection connection,int port,String title, String body) {
+        int result = 0;
+
+        PreparedStatement preparedStatement = null;
+        String sql = "update post p Left Join user u on p.user_member_no = u.user_no set post_title  = ?, post_body =? where username = ? AND post_id = ?";
+
+        try {
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,title);
+            preparedStatement.setString(2,body);
+            preparedStatement.setString(3,loginUserContext.get(0).getUsername());
+            preparedStatement.setInt(4,port);
+            result = preparedStatement.executeUpdate();
+
+            if(result > 0){
+                System.out.println("성공");
             }
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
 
         return result;
+
     }
 
-    public int douzoneTwoDelete(Connection connection, String BoardNum){
-        int result = 0;
-        PreparedStatement preparedStatement = null;
-        String sql = "Delete post ";
-
-        return result;
-    }
-
-    // login index 4 = name
 
 }
