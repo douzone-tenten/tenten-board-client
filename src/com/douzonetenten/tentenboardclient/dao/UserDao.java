@@ -36,8 +36,6 @@ public class UserDao {
             preparedStatement.setString(4, userDto.getName());
             preparedStatement.setTimestamp(5, new Timestamp(new java.util.Date().getTime()));
 
-            System.out.println(userDto.getUsername());
-
             /**
              * executeQuery : SELECT
              * executeUpdate : INSERT INTO , CREATE, DELETE, DROP
