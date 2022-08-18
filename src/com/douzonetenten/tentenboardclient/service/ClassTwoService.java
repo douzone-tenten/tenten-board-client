@@ -18,13 +18,13 @@ public class ClassTwoService {
 
     public ArrayList<ClassTwoJoinDto> douzoneFindByAll(String boardNum){
         Connection connection = getConnection();
-        ArrayList<ClassTwoJoinDto> douzone_List = douZoneTwoDao.douZoneFindByAll(connection,boardNum);
-        return douzone_List;
+        ArrayList<ClassTwoJoinDto> douzoneList = douZoneTwoDao.douZoneFindByAll(connection,boardNum);
+        return douzoneList;
     }
 
-    public ArrayList<JoinPostDto> douzoneTwoDetailSelect(int post_id) {
+    public ArrayList<JoinPostDto> douzoneTwoDetailSelect(int postId) {
         Connection connection = getConnection();
-        ArrayList<JoinPostDto> douzone_List = douZoneTwoDao.dzTwoDeTailSelect(connection, post_id);
+        ArrayList<JoinPostDto> douzone_List = douZoneTwoDao.dzTwoDeTailSelect(connection, postId);
         return douzone_List;
 
     }
@@ -40,10 +40,10 @@ public class ClassTwoService {
     }
 
 
-    public int douzoneTwoUpdate(int port_id,String title, String body) {
+    public int douzoneTwoUpdate(int postId,String title, String body) {
         Connection connection = getConnection();
 
-        int result = douZoneTwoDao.dzTwoUpdate(connection, port_id,title,body);
+        int result = douZoneTwoDao.dzTwoUpdate(connection, postId,title,body);
 
         if (result > 0) {
             commit(connection);
@@ -51,8 +51,8 @@ public class ClassTwoService {
         return result;
     }
 
-    public int douzoneTwoDelete(int port_id) {
+    public int douzoneTwoDelete(int postId) {
         Connection connection = getConnection();
-        return douZoneTwoDao.douzoneTwoDelete(connection,port_id);
+        return douZoneTwoDao.douzoneTwoDelete(connection,postId);
     }
 }
