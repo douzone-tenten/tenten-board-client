@@ -3,6 +3,8 @@ package com.douzonetenten.tentenboardclient.controller;
 import com.douzonetenten.tentenboardclient.dto.UserDto;
 import com.douzonetenten.tentenboardclient.service.UserService;
 
+import java.sql.SQLException;
+
 /**
  * UserDto를 전달하기 위한 UserController 입니다.
  * @author : 김민준
@@ -10,7 +12,7 @@ import com.douzonetenten.tentenboardclient.service.UserService;
 public class UserController {
     private UserService userService = new UserService();
 
-    public int insertUser(UserDto userDto){
+    public int insertUser(UserDto userDto) throws SQLException {
         return userService.insertUser(userDto);
     }
 
