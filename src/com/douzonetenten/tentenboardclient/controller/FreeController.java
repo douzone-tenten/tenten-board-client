@@ -22,7 +22,7 @@ public class FreeController {
 
     }
 
-    public ArrayList<JoinPostDto> FindDetailByPost(String boardNum, String postId, String userNo ){
+    public ArrayList<JoinPostDto> FindDetailByPost(String boardNum, String postId, String userNo){
 
         ArrayList<JoinPostDto> joinPostDtoArrayList=freeService.FindDetailByPost(boardNum, postId, userNo);
         return joinPostDtoArrayList;

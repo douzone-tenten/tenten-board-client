@@ -34,7 +34,7 @@ public class FreeService {
 
     public ArrayList<JoinPostDto> FindDetailByPost(String boardNum, String postId, String userNo){
         Connection connection = getConnection();
-        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.findDetailByPost(connection, boardNum, postId, userNo);
+        ArrayList<JoinPostDto> joinPostDtoArrayList = postDao.FindDetailByPost(connection, boardNum, postId, userNo);
         return joinPostDtoArrayList;
     }
 

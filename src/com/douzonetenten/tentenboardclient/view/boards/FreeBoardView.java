@@ -97,6 +97,7 @@ public class FreeBoardView {
             ArrayList<PostDto> Id_list= postController.findIdByPost(selectBoardNum, selectPostNum);
             String user_member_no = String.valueOf(Id_list.get(0).getMemberNo());
 
+            scanner.nextLine(); // 메뉴선택 전에 개행문자 입력 방지
             /*
             * 하단메뉴 기능입니다
             * 하단메뉴는 삭제기능,수정기능,뒤로가기 기능을 호출합니다
@@ -104,6 +105,7 @@ public class FreeBoardView {
             System.out.println("\n u.게시글 수정  d.게시글 삭제" +
                     "\n b.뒤로 가기");
             uiSelectMenu();
+
 
             // 상세조회의 메뉴 선택
             String selectDetailMenu = scanner.nextLine();
@@ -120,7 +122,7 @@ public class FreeBoardView {
             **/
             if (selectDetailMenu.equals("u") || selectDetailMenu.equals("U")) {
 
-                if ((login_user_no.equals(user_member_no) && login_user_role.equals("1"))) {
+                if (login_user_no.equals(user_member_no)) {
 
                     scanner.nextLine();  // 메뉴 선택후 개행문자가 수정할 제목으로 들어가는 것을 방지
                     System.out.println("수정하실 글 제목을 입력하세요 : ");
@@ -141,7 +143,7 @@ public class FreeBoardView {
              **/
             if (selectDetailMenu.equals("d")||selectDetailMenu.equals("D")){
 
-                if((login_user_no.equals(user_member_no)&&login_user_role.equals("1"))){
+                if(login_user_no.equals(user_member_no)){
                     freeController.deleteIdByPost(selectBoardNum,login_user_no,selectPostNum);
                     logInfo("해당 게시글이 삭제되었습니다.");
                     break;  //java.lang.IndexOutOfBoundsException: Index: 0, Size: 0 에러 해결
