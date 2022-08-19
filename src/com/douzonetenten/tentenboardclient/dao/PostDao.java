@@ -279,6 +279,38 @@ public class PostDao {
         }
     }
 
+    // 자유게시판의 상세조회
+    public ArrayList<JoinPostDto> FindDetailByPost(Connection connection, String boardNum, String postId, String userNo){
+        ArrayList<JoinPostDto> joinPostDtoArrayList= null;
+        PreparedStatement preparedStatement =null;
+
+
+        try {
+            preparedStatement=connection.prepareStatement("select p.user_member_no, board_board_no, post_id, post_title, post_body, u.username, u.name, p.created_at from post p left join user u on p.user_member_no = u.user_no where p.board_board_no = ? and p.post_id=?and user_member_no=?");
+            preparedStatement.setString(1,boardNum);
+            preparedStatement.setString(2,postId);
+            preparedStatement.setString(3,userNo);
+
+            joinPostDtoArrayList=new ArrayList<JoinPostDto>();
+            ResultSet resultSet =preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                JoinPostDto joinPostDto =new JoinPostDto();
+                joinPostDto.setPostId(resultSet.getLong("post_id"));
+                joinPostDto.setPostBody(resultSet.getString("post_body"));
+                joinPostDto.setPostTitle(resultSet.getString("post_title"));
+                joinPostDto.setCreatedAt(resultSet.getTimestamp("created_at"));
+                joinPostDto.setUsername(resultSet.getString("username"));
+
+                joinPostDtoArrayList.add(joinPostDto);
+
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return joinPostDtoArrayList;
+    }
 
 
 

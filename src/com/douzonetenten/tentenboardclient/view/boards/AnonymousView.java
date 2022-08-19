@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import static com.douzonetenten.tentenboardclient.service.UserService.loginUserContext;
 import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.*;
+import static com.douzonetenten.tentenboardclient.utils.ConsoleUtils.logInfo;
 import static com.douzonetenten.tentenboardclient.utils.UserInterfaceUtils.*;
 
 /**
@@ -122,7 +123,7 @@ public class AnonymousView {
      */
     // 익명게시판의 상세조회
     public void findAnonymousByPost (String selectNum, String login_user_no) {
-        System.out.println("게시글 상세조회");
+        logInfo("익명게시글 상세조회");
         /*
          * 익명게시판은 자신이 작성한 게시글에 대해서만 상세조회가 가능
          * 우선 로그인한 회원의 user_no이 post의 user_member_no과 일치하는 글들만 조회,
@@ -145,7 +146,7 @@ public class AnonymousView {
         // 익명 게시판의 게시글들
         ArrayList<JoinPostDto> getArrayList =  postController.findByPost(selectNum);
 
-        //String post_user_id= getArrayList.get(0). ;
+
         // 게시글 번호를 통해 상세조회할 게시물조회
         ArrayList<PostDto> Id_list= postController.findIdByPost(selectNum, post_id);
         // 상세조회한 게시글의 user_no 추출
