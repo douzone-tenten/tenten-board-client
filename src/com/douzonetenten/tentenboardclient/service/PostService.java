@@ -62,17 +62,8 @@ public class PostService {
         return PostDtoArrayList;
     }
 
-
-//    public static int deletePost(String postNo){
-//        Connection connection = getConnection();
-//        int result = PostDao.deletePost(connection,postNo);
-//        if (result > 0) {
-//            commit(connection);
-//        } else rollback(connection);
-//        return result;
-//    }
-
-
+    // 익명게시판 게시글 삭제
+    // 로그인한 유저가 본인글만 삭제 가능
 
     public int deleteIdByPost(String boardNo, String userNo, String postNo){
         Connection connection = getConnection();
@@ -83,6 +74,13 @@ public class PostService {
         return result;
     }
 
-
+    public int updateIdByPost(String boardNo, String userNo, String postNo, String postTitle, String postBody){
+        Connection connection =getConnection();
+        int result = postDao.updateIdByPost(connection, boardNo,  userNo,  postNo,  postTitle,  postBody);
+        if(result>0){
+            commit(connection);
+        }else rollback(connection);
+        return result;
+    }
 
 }

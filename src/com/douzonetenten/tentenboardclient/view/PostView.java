@@ -24,6 +24,39 @@ public class PostView {
         /**
          * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
          */
+
+
+        //clearConsole();  // 제목이 자동입력되는 오류 추측
+        PostDto postDto = new PostDto();
+        System.out.println("제목을 입력하세요 : ");
+        String postTitle = scanner.nextLine();
+        System.out.println("글 내용을 입력하세요.");
+        String postBody = scanner.nextLine();
+        postDto.setPostTitle(postTitle);
+        postDto.setPostBody(postBody);
+        clearConsole();
+        System.out.println(postDto.getPostTitle());
+        System.out.println(postDto.getPostBody());
+        System.out.println("위 내용이 맞나요?");
+        System.out.println("Y : 등록하기");
+        System.out.println("B : 취소하기");
+
+        String select = scanner.next();
+        // TODO : 예외처리
+        if (select.equals("Y") || select.equals("y")) {
+            // TODO : 게시판 번호 조회를 어떻게 할 것인가?
+            postController.insertPost(postDto, selectNum);
+        }
+        if (select.equals("B")) {
+            System.out.println("글 작성을 취소합니다.");
+        }
+    }
+
+    // 익명게시판 글 등록
+    public void InsertPost(String selectNum){
+        /**
+         * next()와 nextLine()의 차이 : 공백 처리가 가능한가.
+         */
         // 글쓰기를 연속으로 진행 시 메뉴 선택 후 엔터가 제목으로 입력되는 것 방지
         scanner.nextLine();
 

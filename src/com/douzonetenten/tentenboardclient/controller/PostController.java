@@ -49,5 +49,9 @@ public class PostController {
        return postService.deleteIdByPost(boardNo,userNo,postNo);
     }
 
+    public int updateIdByPost(String boardNo, String userNo, String postNo, String postTitle, String postBody){
+        return postService.updateIdByPost( boardNo,  userNo,  postNo,  postTitle,  postBody);
+
+    }
 
 }
