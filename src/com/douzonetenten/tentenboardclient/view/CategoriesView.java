@@ -26,6 +26,7 @@ public class CategoriesView {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         clearConsole();
+
         uiTitle("전체 게시판 목록");
         ArrayList<BoardDto> boardDtoArrayList = boardController.findAllByBoard();
 
@@ -88,7 +89,6 @@ public class CategoriesView {
                     break;
                 }
             }
-
         }
     }
 }
